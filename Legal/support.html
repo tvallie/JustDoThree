@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support – Just Do Three</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:     #28B5C8;
+      --text:     #1c1c1e;
+      --secondary:#6e6e73;
+      --tertiary: #aeaeb2;
+      --border:   #e5e5ea;
+      --bg:       #f2f2f7;
+      --card:     #ffffff;
+      --radius:   14px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+      padding: 40px 16px 80px;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Header card */
+    .header-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      margin-bottom: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .brand img {
+      width: 60px;
+      height: 60px;
+      border-radius: 13px;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    .brand-tagline {
+      font-size: 13px;
+      color: var(--secondary);
+      margin-top: 3px;
+    }
+
+    .doc-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.4px;
+    }
+
+    .doc-subtitle {
+      font-size: 13px;
+      color: var(--secondary);
+      margin-top: 4px;
+    }
+
+    /* Section cards */
+    .section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 10px;
+    }
+
+    .section h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .section p {
+      font-size: 14px;
+      color: var(--secondary);
+    }
+
+    .section p + p {
+      margin-top: 10px;
+    }
+
+    .section a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+    .section a:hover { text-decoration: underline; }
+
+    /* FAQ items */
+    .faq-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .faq-item:first-child {
+      padding-top: 0;
+    }
+
+    .faq-q {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .faq-a {
+      font-size: 14px;
+      color: var(--secondary);
+    }
+
+    /* Contact button */
+    .contact-btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 20px;
+      background: var(--teal);
+      color: #fff;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .contact-btn:hover { opacity: 0.9; text-decoration: none; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding-top: 32px;
+      font-size: 13px;
+      color: var(--tertiary);
+    }
+
+    footer a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 480px) {
+      .header-card, .section { padding: 18px 16px; }
+      .doc-title { font-size: 19px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="header-card">
+      <div class="brand">
+        <img src="appicon.png" alt="Just Do Three" />
+        <div>
+          <div class="brand-name">Just Do Three</div>
+          <div class="brand-tagline">Focus on what matters most.</div>
+        </div>
+      </div>
+      <div class="doc-title">Support</div>
+      <div class="doc-subtitle">We're here to help.</div>
+    </div>
+
+    <div class="section">
+      <h2>Contact Support</h2>
+      <p>Have a question or ran into an issue? Reach out through the App Store and we'll get back to you as soon as we can.</p>
+      <a class="contact-btn" href="https://apps.apple.com/app/id[YOUR_APP_ID]">Contact via App Store</a>
+    </div>
+
+    <div class="section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">What happens to unfinished tasks at the end of the day?</div>
+        <div class="faq-a">When you open the app on a new day, you'll be prompted to roll over any uncompleted tasks. You can keep them on your list, send them back to the backlog, or dismiss them. Each rollover is tracked so you can spot tasks you keep avoiding.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How do I restore my Premium purchase on a new device?</div>
+        <div class="faq-a">Go to Settings → Premium → Restore purchase. Make sure you're signed into the same Apple ID used for the original purchase. Premium is a one-time purchase tied to your Apple ID — no subscription needed.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Is my data backed up?</div>
+        <div class="faq-a">All data is stored locally on your device. If you have iCloud Drive enabled for Just Do Three in your device Settings, your tasks and history will sync automatically across your devices via iCloud.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How do I set up morning and evening reminders?</div>
+        <div class="faq-a">Go to Settings → Reminders. Toggle on Morning reminder or Evening check-in, then tap the time to choose when you'd like to be reminded. Notifications are scheduled locally — no account needed.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What's included in Premium?</div>
+        <div class="faq-a">Premium is a one-time purchase that unlocks: 7-day advance planning, day/week/month/year analytics, weekly and monthly recurring tasks, stretch goal tracking, bulk task import from .txt or .csv files, and the most-avoided tasks report.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How do I delete a task permanently?</div>
+        <div class="faq-a">In the Backlog tab, tap the trash icon next to any task and confirm deletion. Tasks can also be removed from today's list using the ··· menu on each task card — this returns them to the backlog rather than deleting them.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I import a list of tasks all at once?</div>
+        <div class="faq-a">Yes — with Premium. Tap the import icon in the Backlog tab (or use the Add Task sheet) to upload a .txt or .csv file. Each line becomes a task. For CSV files, only the first column is used.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Does Just Do Three collect any of my data?</div>
+        <div class="faq-a">No. The app collects no personal information, analytics, or usage data. See our <a href="privacy-policy.html">Privacy Policy</a> for full details.</div>
+      </div>
+
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Todd Vallie. All rights reserved. &nbsp;·&nbsp; <a href="privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="terms-of-use.html">Terms of Use</a></p>
+    </footer>
+
+  </div>
+</body>
+</html>
