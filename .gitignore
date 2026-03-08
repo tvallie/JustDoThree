@@ -1,0 +1,28 @@
+# Xcode build artifacts
+build/
+DerivedData/
+*.xcarchive
+*.ipa
+
+# Xcode user-specific settings
+*.xcuserstate
+xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+*.resolved
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Xcode generated
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# CocoaPods (not used, but just in case)
+Pods/
