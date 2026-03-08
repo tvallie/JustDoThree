@@ -66,7 +66,6 @@ struct TodayView: View {
                 .padding(.vertical, 24)
             }
             .background(Color(.systemBackground))
-            .navigationTitle("Just Do Three")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { toolbar }
         }
@@ -257,6 +256,13 @@ struct TodayView: View {
 
     @ToolbarContentBuilder
     private var toolbar: some ToolbarContent {
+        ToolbarItem(placement: .principal) {
+            HStack(spacing: 6) {
+                AppLogoView(size: 26)
+                Text("Just Do Three")
+                    .font(.headline)
+            }
+        }
         ToolbarItem(placement: .topBarTrailing) {
             if slotsLeft > 0 && !allPrimaryDone {
                 Button {
