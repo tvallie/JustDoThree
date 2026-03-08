@@ -70,7 +70,7 @@ struct SettingsView: View {
                                     .foregroundStyle(.secondary)
                             }
                             Spacer()
-                            Button(premium.displayPrice) {
+                            Button("Unlock") {
                                 showUpgrade = true
                             }
                             .buttonStyle(.borderedProminent)
@@ -142,12 +142,10 @@ struct UpgradeSheet: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 28) {
-                    Image(systemName: "sparkles")
-                        .font(.system(size: 52))
-                        .foregroundStyle(.yellow)
-                        .padding(.top, 12)
-
-                    VStack(spacing: 8) {
+                    // App logo header
+                    VStack(spacing: 12) {
+                        AppLogoView(size: 72)
+                            .padding(.top, 12)
                         Text("Just Do Three Premium")
                             .font(.title2.bold())
                         Text("One-time purchase · No subscription")
@@ -164,27 +162,36 @@ struct UpgradeSheet: View {
                     }
                     .padding(.horizontal)
 
-                    Button {
-                        purchasing = true
-                        Task {
-                            await premium.purchase()
-                            purchasing = false
-                            dismiss()
-                        }
-                    } label: {
-                        Group {
-                            if purchasing {
-                                ProgressView()
-                            } else {
-                                Text("Unlock for \(premium.displayPrice)")
+                    VStack(spacing: 8) {
+                        Button {
+                            purchasing = true
+                            Task {
+                                await premium.purchase()
+                                purchasing = false
+                                dismiss()
                             }
+                        } label: {
+                            Group {
+                                if purchasing {
+                                    ProgressView()
+                                } else {
+                                    Text("Unlock Premium Features")
+                                }
+                            }
+                            .frame(maxWidth: .infinity)
                         }
-                        .frame(maxWidth: .infinity)
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.large)
+                        .disabled(purchasing)
+                        .padding(.horizontal)
+
+                        // Show price from App Store Connect once loaded
+                        if !premium.displayPrice.isEmpty {
+                            Text(premium.displayPrice)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
                     }
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.large)
-                    .disabled(purchasing)
-                    .padding(.horizontal)
 
                     Button("Restore purchase") {
                         Task {

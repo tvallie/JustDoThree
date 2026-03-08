@@ -121,7 +121,7 @@ struct LegalBrandedHeader: View {
 
             // ── Brand strip ──────────────────────────────────
             HStack(spacing: 14) {
-                LegalAppLogo()
+                AppLogoView(size: 60)
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Just Do Three")
                         .font(.title2.bold())
@@ -150,35 +150,6 @@ struct LegalBrandedHeader: View {
     }
 }
 
-/// App logo: loads "AppLogo" from the asset catalog; falls back to an SF Symbol.
-/// To use your own icon: drag your image into Assets.xcassets and name it "AppLogo".
-struct LegalAppLogo: View {
-    var body: some View {
-        Group {
-            if UIImage(named: "AppLogo") != nil {
-                Image("AppLogo")
-                    .resizable()
-                    .scaledToFit()
-            } else {
-                Image(systemName: "lightbulb.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .padding(14)
-                    .foregroundStyle(.white)
-                    .background(
-                        LinearGradient(
-                            colors: [Color.teal, Color.green],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-            }
-        }
-        .frame(width: 60, height: 60)
-        .clipShape(RoundedRectangle(cornerRadius: 13))
-        .shadow(color: .black.opacity(0.12), radius: 4, x: 0, y: 2)
-    }
-}
 
 /// Section block with a bold heading and body text.
 struct LegalSection: View {

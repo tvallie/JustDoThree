@@ -23,7 +23,7 @@ struct PremiumGateView: View {
             }
 
             Button(action: onUpgrade) {
-                Label("Unlock for \(premium.displayPrice)", systemImage: "sparkles")
+                Label("Unlock Premium Features", systemImage: "sparkles")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)

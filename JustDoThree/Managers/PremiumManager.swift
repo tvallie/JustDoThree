@@ -15,8 +15,8 @@ final class PremiumManager {
     }
 
     /// Localised price string fetched from App Store Connect (e.g. "$2.99", "€2,99").
-    /// Defaults to "Unlock Premium" until the StoreKit product loads.
-    var displayPrice: String = "Unlock Premium"
+    /// Empty until loadProducts() succeeds — UI should treat empty as "price loading".
+    var displayPrice: String = ""
 
     init() {
         self.isPremium = UserDefaults.standard.bool(forKey: premiumKey)
