@@ -59,6 +59,11 @@ struct WeekPlannerView: View {
         return plan.taskIDs.compactMap { id in allTasks.first { $0.id == id } }
     }
 
+    private var selectedPlanStretchTasks: [JDTask] {
+        guard let plan = selectedPlan else { return [] }
+        return plan.stretchTaskIDs.compactMap { id in allTasks.first { $0.id == id } }
+    }
+
     private var backlogTasks: [JDTask] {
         let scheduledIDs = Set(plans.flatMap { $0.taskIDs })
         return allTasks.filter { !$0.isCompleted && !scheduledIDs.contains($0.id) }
@@ -111,6 +116,41 @@ struct WeekPlannerView: View {
                             showBacklogPicker = true
                         } label: {
                             Label("Add task", systemImage: "plus")
+                                .foregroundStyle(Color.accentColor)
+                        }
+                    }
+                }
+
+                // Stretch goals — only shown if any exist for this day
+                if !selectedPlanStretchTasks.isEmpty, let plan = selectedPlan {
+                    Section {
+                        ForEach(selectedPlanStretchTasks) { task in
+                            let isComplete = plan.completedStretchIDs.contains(task.id)
+                            HStack(spacing: 12) {
+                                Image(systemName: isComplete ? "checkmark.circle.fill" : "circle")
+                                    .foregroundStyle(isComplete ? .green : Color(.tertiaryLabel))
+                                Text(task.title)
+                                    .strikethrough(isComplete, color: .secondary)
+                                    .foregroundStyle(isComplete ? .secondary : .primary)
+                                Spacer()
+                                if isComplete {
+                                    Image(systemName: "star.fill")
+                                        .font(.caption)
+                                        .foregroundStyle(Color.accentColor)
+                                }
+                            }
+                            .padding(.vertical, 2)
+                            .listRowBackground(
+                                isComplete
+                                    ? Color.accentColor.opacity(0.07)
+                                    : Color(.secondarySystemGroupedBackground)
+                            )
+                        }
+                    } header: {
+                        HStack(spacing: 4) {
+                            Text("Stretch Goals")
+                            Image(systemName: "star.fill")
+                                .font(.caption2)
                                 .foregroundStyle(Color.accentColor)
                         }
                     }
