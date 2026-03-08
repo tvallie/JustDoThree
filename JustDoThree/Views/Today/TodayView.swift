@@ -4,12 +4,14 @@ import SwiftData
 struct TodayView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(AppState.self) private var appState
+    @Environment(PremiumManager.self) private var premium
     @Environment(\.scenePhase) private var scenePhase
 
     @Query(sort: \DailyPlan.date) private var plans: [DailyPlan]
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
 
     @State private var showBacklogPicker = false
+    @State private var showTomorrowPicker = false
     @State private var addingStretch = false
     @State private var taskToDelete: UUID? = nil
     @State private var showDeleteConfirm = false
@@ -82,6 +84,9 @@ struct TodayView: View {
         }
         .sheet(item: $showEditSheet) { task in
             AddTaskSheet(existingTask: task)
+        }
+        .sheet(isPresented: $showTomorrowPicker) {
+            TomorrowPickerSheet(onSelect: addStretch)
         }
         .sheet(isPresented: $state.showRolloverSheet) {
             RolloverSheet()
@@ -197,7 +202,21 @@ struct TodayView: View {
                 Text("Stretch goals")
                     .font(.headline)
                 Spacer()
-                if !backlogTasks.isEmpty {
+                if premium.isPremium {
+                    // Premium: choose source — backlog or tomorrow's plan
+                    Menu {
+                        Button("From Backlog", systemImage: "tray") {
+                            addingStretch = true
+                            showBacklogPicker = true
+                        }
+                        Button("From Tomorrow's Plan", systemImage: "calendar") {
+                            showTomorrowPicker = true
+                        }
+                    } label: {
+                        Label("Add", systemImage: "plus")
+                            .font(.subheadline)
+                    }
+                } else if !backlogTasks.isEmpty {
                     Button {
                         addingStretch = true
                         showBacklogPicker = true
@@ -209,7 +228,9 @@ struct TodayView: View {
             }
 
             if stretchTasks.isEmpty {
-                Text("Want to keep going? Pick a bonus task from your backlog.")
+                Text(premium.isPremium
+                     ? "Want to keep going? Add a bonus task from your backlog or get a head start on tomorrow."
+                     : "Want to keep going? Pick a bonus task from your backlog.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             } else {
@@ -529,8 +550,98 @@ struct BacklogPickerSheet: View {
     }
 }
 
+// MARK: - TomorrowPickerSheet
+
+/// Lets a premium user pull a task from tomorrow's plan into today as a stretch goal.
+/// The task is NOT removed from tomorrow's plan — it simply gets an early start today.
+struct TomorrowPickerSheet: View {
+    @Environment(\.dismiss) private var dismiss
+
+    @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
+    @Query(sort: \DailyPlan.date) private var plans: [DailyPlan]
+
+    let onSelect: (JDTask) -> Void
+
+    private var tomorrow: Date {
+        Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
+    }
+
+    private var todayExcludedIDs: Set<UUID> {
+        let plan = plans.first { $0.date.isSameDay(as: Date()) }
+        return Set((plan?.taskIDs ?? []) + (plan?.stretchTaskIDs ?? []))
+    }
+
+    /// Tasks in tomorrow's plan that aren't already in today's list and aren't completed.
+    private var tomorrowTasks: [JDTask] {
+        guard let plan = plans.first(where: { $0.date.isSameDay(as: tomorrow) }) else { return [] }
+        return plan.taskIDs.compactMap { id -> JDTask? in
+            guard let task = allTasks.first(where: { $0.id == id }) else { return nil }
+            guard !todayExcludedIDs.contains(id) else { return nil }
+            guard !task.isCompleted || task.recurringRule != nil else { return nil }
+            return task
+        }
+    }
+
+    var body: some View {
+        NavigationStack {
+            Group {
+                if tomorrowTasks.isEmpty {
+                    VStack(spacing: 16) {
+                        Image(systemName: "calendar.badge.clock")
+                            .font(.system(size: 44))
+                            .foregroundStyle(.secondary)
+                        Text("Nothing on tomorrow's plan")
+                            .font(.headline)
+                        Text("Plan your next day in the week view to see tasks here.")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 40)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    List {
+                        Section {
+                            ForEach(tomorrowTasks) { task in
+                                Button {
+                                    onSelect(task)
+                                    dismiss()
+                                } label: {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(task.title)
+                                            .foregroundStyle(.primary)
+                                        if task.rolloverCount > 0 {
+                                            Text("Rolled over \(task.rolloverCount)×")
+                                                .font(.caption2)
+                                                .foregroundStyle(.tertiary)
+                                        }
+                                    }
+                                }
+                            }
+                        } header: {
+                            Text("Tomorrow's plan")
+                        } footer: {
+                            Text("Adding a task here won't remove it from tomorrow's plan.")
+                        }
+                    }
+                    .listStyle(.insetGrouped)
+                }
+            }
+            .navigationTitle("From Tomorrow's Plan")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                }
+            }
+        }
+        .presentationDetents([.medium, .large])
+    }
+}
+
 #Preview {
     TodayView()
         .environment(AppState())
+        .environment(PremiumManager())
         .modelContainer(previewContainer)
 }
