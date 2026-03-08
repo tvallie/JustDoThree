@@ -167,16 +167,18 @@ struct UpgradeSheet: View {
                         Button {
                             purchasing = true
                             Task {
-                                await premium.purchase()
+                                let success = await premium.purchase()
                                 purchasing = false
-                                dismiss()
+                                if success { dismiss() }
                             }
                         } label: {
                             Group {
                                 if purchasing {
                                     ProgressView()
+                                } else if premium.displayPrice.isEmpty {
+                                    Text("Unlock Premium")
                                 } else {
-                                    Text("Unlock Premium Features")
+                                    Text("Unlock — \(premium.displayPrice)")
                                 }
                             }
                             .frame(maxWidth: .infinity)
@@ -185,13 +187,6 @@ struct UpgradeSheet: View {
                         .controlSize(.large)
                         .disabled(purchasing)
                         .padding(.horizontal)
-
-                        // Show price from App Store Connect once loaded
-                        if !premium.displayPrice.isEmpty {
-                            Text(premium.displayPrice)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
                     }
 
                     Button("Restore purchase") {

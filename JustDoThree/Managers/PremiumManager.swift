@@ -50,19 +50,26 @@ final class PremiumManager {
 
     // MARK: - StoreKit transactions
 
-    func purchase() async {
+    /// Returns true only if the purchase completed and was verified.
+    @discardableResult
+    func purchase() async -> Bool {
         do {
             let products = try await Product.products(for: [Self.productID])
-            guard let product = products.first else { return }
+            guard let product = products.first else { return false }
             let result = try await product.purchase()
             switch result {
             case .success(let verification):
-                if case .verified = verification { grantPremium() }
+                if case .verified = verification {
+                    grantPremium()
+                    return true
+                }
+                return false
             default:
-                break
+                return false
             }
         } catch {
             // Purchase cancelled or failed — no-op.
+            return false
         }
     }
 
