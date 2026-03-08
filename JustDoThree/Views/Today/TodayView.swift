@@ -478,13 +478,6 @@ struct BacklogPickerSheet: View {
                             }
                         }
                     }
-                } else if !trimmed.isEmpty && filteredTasks.isEmpty && scheduledElsewhere.isEmpty {
-                    Section {
-                        Button { createAndAdd() } label: {
-                            Label("Create \"\(trimmed)\"", systemImage: "plus")
-                                .foregroundStyle(Color.accentColor)
-                        }
-                    }
                 }
 
                 // ── Already scheduled on other days (disabled, week-planner only) ──

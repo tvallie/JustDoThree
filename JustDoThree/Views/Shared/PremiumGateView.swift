@@ -2,6 +2,8 @@ import SwiftUI
 
 /// A teaser banner shown in place of premium features.
 struct PremiumGateView: View {
+    @Environment(PremiumManager.self) private var premium
+
     let featureName: String
     var onUpgrade: () -> Void
 
@@ -21,7 +23,7 @@ struct PremiumGateView: View {
             }
 
             Button(action: onUpgrade) {
-                Label("Unlock for $2.99", systemImage: "sparkles")
+                Label("Unlock for \(premium.displayPrice)", systemImage: "sparkles")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
@@ -34,4 +36,5 @@ struct PremiumGateView: View {
 
 #Preview {
     PremiumGateView(featureName: "Weekly Planning", onUpgrade: {})
+        .environment(PremiumManager())
 }

@@ -1,53 +1,80 @@
 import Foundation
 import Observation
+import StoreKit
 
-/// Manages premium access state.
-/// v1: Uses UserDefaults as backing store. Replace the purchase/restore
-/// bodies with real StoreKit 2 transactions before shipping.
 @Observable
 final class PremiumManager {
 
+    static let productID = "com.todd.justdothree.premium"
+
     private let premiumKey = "jdt_isPremium"
 
-    // Stored property so @Observable tracks changes and updates the UI.
-    // didSet keeps UserDefaults in sync so state survives restarts.
+    /// Whether the user owns premium. Stored property so @Observable tracks changes.
     var isPremium: Bool {
         didSet { UserDefaults.standard.set(isPremium, forKey: premiumKey) }
     }
 
+    /// Localised price string fetched from App Store Connect (e.g. "$2.99", "€2,99").
+    /// Defaults to "Unlock Premium" until the StoreKit product loads.
+    var displayPrice: String = "Unlock Premium"
+
     init() {
-        self.isPremium = UserDefaults.standard.bool(forKey: "jdt_isPremium")
+        self.isPremium = UserDefaults.standard.bool(forKey: premiumKey)
     }
 
-    /// Call this from your StoreKit purchase result handler.
-    func grantPremium() {
-        isPremium = true
+    // MARK: - Product loading
+
+    /// Fetches the premium product from App Store Connect and updates displayPrice.
+    /// Call once at app launch — safe to call multiple times.
+    func loadProducts() async {
+        do {
+            let products = try await Product.products(for: [Self.productID])
+            if let product = products.first {
+                displayPrice = product.displayPrice
+            }
+        } catch {
+            // Network unavailable or product not configured yet — keep fallback text.
+        }
     }
 
-    /// Revoke premium (for DEBUG testing only).
-    func revokePremium() {
-        isPremium = false
-    }
+    // MARK: - Access control
 
-    /// Simulates a successful purchase. Remove before App Store submission.
-    func simulatePurchase() {
-        isPremium = true
-    }
+    func grantPremium() { isPremium = true }
 
-    // MARK: - StoreKit stubs (replace with real implementation)
+    /// DEBUG only — remove before App Store submission.
+    func simulatePurchase() { isPremium = true }
+    func revokePremium()    { isPremium = false }
+
+    // MARK: - StoreKit transactions
     //
-    // To wire up real purchases:
-    // 1. Create a StoreKit Configuration file in Xcode (File > New > StoreKit Config)
+    // Setup checklist:
+    // 1. File > New > StoreKit Configuration File in Xcode
     // 2. Add a Non-Consumable product with ID "com.todd.justdothree.premium"
-    // 3. Replace the bodies below with StoreKit 2 Product.purchase() calls
+    // 3. Replace the purchase/restore bodies below with StoreKit 2 calls
     // 4. On .verified transaction, call grantPremium()
 
     func purchase() async {
-        // TODO: implement StoreKit 2 purchase
-        simulatePurchase()
+        do {
+            let products = try await Product.products(for: [Self.productID])
+            guard let product = products.first else { return }
+            let result = try await product.purchase()
+            switch result {
+            case .success(let verification):
+                if case .verified = verification { grantPremium() }
+            default:
+                break
+            }
+        } catch {
+            // Purchase cancelled or failed — no-op.
+        }
     }
 
     func restorePurchases() async {
-        // TODO: implement StoreKit 2 restore (iterate Transaction.currentEntitlements)
+        for await result in Transaction.currentEntitlements {
+            if case .verified(let transaction) = result,
+               transaction.productID == Self.productID {
+                grantPremium()
+            }
+        }
     }
 }

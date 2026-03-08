@@ -70,7 +70,7 @@ struct SettingsView: View {
                                     .foregroundStyle(.secondary)
                             }
                             Spacer()
-                            Button("$2.99") {
+                            Button(premium.displayPrice) {
                                 showUpgrade = true
                             }
                             .buttonStyle(.borderedProminent)
@@ -176,7 +176,7 @@ struct UpgradeSheet: View {
                             if purchasing {
                                 ProgressView()
                             } else {
-                                Text("Unlock for $2.99")
+                                Text("Unlock for \(premium.displayPrice)")
                             }
                         }
                         .frame(maxWidth: .infinity)
