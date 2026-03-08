@@ -389,9 +389,6 @@ struct BacklogPickerSheet: View {
     /// Which day this picker is adding tasks to (defaults to today).
     var forDate: Date = Date()
     var title: String = "Add to Today"
-    /// When true, tasks already scheduled on OTHER days are shown (disabled) rather than hidden.
-    /// Enable this in the week planner to prevent double-booking across days.
-    var showScheduledElsewhere: Bool = false
     let onSelect: (JDTask) -> Void
 
     @State private var newTaskTitle = ""
@@ -399,23 +396,26 @@ struct BacklogPickerSheet: View {
 
     // MARK: - Derived sets
 
-    /// Tasks already in the target day's plan — hidden entirely from the picker.
-    private var excludedIDs: Set<UUID> {
-        let plan = plans.first { $0.date.isSameDay(as: forDate) }
-        return Set((plan?.taskIDs ?? []) + (plan?.stretchTaskIDs ?? []))
+    /// Tasks already in the target day's plan — shown disabled, not selectable.
+    private var inTargetPlanItems: [JDTask] {
+        guard let plan = plans.first(where: { $0.date.isSameDay(as: forDate) }) else { return [] }
+        let ids = Set(plan.taskIDs + plan.stretchTaskIDs)
+        return allTasks.filter { ids.contains($0.id) }
     }
 
-    /// Tasks that live in any OTHER plan — shown but disabled (only when showScheduledElsewhere).
+    private var inTargetPlanIDs: Set<UUID> {
+        Set(inTargetPlanItems.map { $0.id })
+    }
+
+    /// Tasks scheduled on any OTHER day — shown disabled with the day name.
     private var scheduledElsewhere: [(task: JDTask, dayLabel: String)] {
-        guard showScheduledElsewhere else { return [] }
-        return allTasks.compactMap { task -> (JDTask, String)? in
-            // Completed non-recurring tasks can never be re-scheduled
+        allTasks.compactMap { task -> (JDTask, String)? in
             guard !task.isCompleted || task.recurringRule != nil else { return nil }
-            guard !excludedIDs.contains(task.id) else { return nil }
-            for plan in plans {
-                guard !plan.date.isSameDay(as: forDate) else { continue }
+            guard !inTargetPlanIDs.contains(task.id) else { return nil }
+            for plan in plans where !plan.date.isSameDay(as: forDate) {
                 if plan.taskIDs.contains(task.id) || plan.stretchTaskIDs.contains(task.id) {
-                    return (task, plan.date.shortDayString)
+                    let label = plan.date.isSameDay(as: Date()) ? "Today" : plan.date.shortDayString
+                    return (task, label)
                 }
             }
             return nil
@@ -428,15 +428,15 @@ struct BacklogPickerSheet: View {
 
     // MARK: - Available backlog
 
+    /// Tasks free to be scheduled — not already in any plan, not completed (unless recurring).
     private var backlogTasks: [JDTask] {
-        let hide = excludedIDs.union(scheduledElsewhereIDs)
-        // Completed non-recurring tasks are permanently off the table
+        let busy = inTargetPlanIDs.union(scheduledElsewhereIDs)
         return allTasks.filter { task in
-            !hide.contains(task.id) && (!task.isCompleted || task.recurringRule != nil)
+            !busy.contains(task.id) && (!task.isCompleted || task.recurringRule != nil)
         }
     }
 
-    /// Backlog filtered by what the user is typing (search + create dual-purpose).
+    /// Backlog filtered by the user's search text.
     private var filteredTasks: [JDTask] {
         let q = newTaskTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !q.isEmpty else { return backlogTasks }
@@ -444,6 +444,10 @@ struct BacklogPickerSheet: View {
     }
 
     private var trimmed: String { newTaskTitle.trimmingCharacters(in: .whitespacesAndNewlines) }
+
+    private var targetDayLabel: String {
+        forDate.isSameDay(as: Date()) ? "today's plan" : "this day's plan"
+    }
 
     // MARK: - Body
 
@@ -501,20 +505,36 @@ struct BacklogPickerSheet: View {
                     }
                 }
 
-                // ── Already scheduled on other days (disabled, week-planner only) ──
+                // ── Already in this day's plan (disabled) ──
+                if !inTargetPlanItems.isEmpty {
+                    Section("Already in \(targetDayLabel)") {
+                        ForEach(inTargetPlanItems) { task in
+                            HStack {
+                                Text(task.title)
+                                    .foregroundStyle(.secondary)
+                                Spacer()
+                                Image(systemName: "checkmark.circle.fill")
+                                    .font(.caption)
+                                    .foregroundStyle(.tertiary)
+                            }
+                        }
+                    }
+                }
+
+                // ── Scheduled on a different day (disabled) ──
                 if !scheduledElsewhere.isEmpty {
-                    Section("Already scheduled") {
+                    Section("Scheduled on another day") {
                         ForEach(scheduledElsewhere, id: \.task.id) { item in
                             HStack(spacing: 12) {
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text(item.task.title)
                                         .foregroundStyle(.secondary)
-                                    Text("Added \(item.dayLabel)")
+                                    Text("Planned for \(item.dayLabel)")
                                         .font(.caption2)
                                         .foregroundStyle(.tertiary)
                                 }
                                 Spacer()
-                                Image(systemName: "calendar.badge.checkmark")
+                                Image(systemName: "calendar")
                                     .font(.caption)
                                     .foregroundStyle(.tertiary)
                             }

@@ -113,7 +113,6 @@ struct WeekPlannerView: View {
             BacklogPickerSheet(
                 forDate: selectedDay,
                 title: "Add to \(selectedDay.shortDayString)",
-                showScheduledElsewhere: true,
                 onSelect: { task in
                     let plan = PlannerEngine.fetchOrCreatePlan(for: selectedDay, context: modelContext)
                     PlannerEngine.addToToday(task: task, plan: plan, context: modelContext)
