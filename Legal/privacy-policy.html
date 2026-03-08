@@ -1,59 +1,225 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.4">
-  <style type="text/css">
-    body {background-color: #efeef5}
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 28.0px '.Apple Color Emoji UI'; color: #151517; -webkit-text-stroke: #151517}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #5b5b60; -webkit-text-stroke: #5b5b60}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px 'Helvetica Neue'; color: #6d6d6d; -webkit-text-stroke: #6d6d6d; min-height: 18.0px}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #5b5b60; -webkit-text-stroke: #5b5b60}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #5b5b60; -webkit-text-stroke: #5b5b60; background-color: #ffffff}
-    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #5b5b60; -webkit-text-stroke: #5b5b60; background-color: #ffffff; min-height: 17.0px}
-    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 13.0px 'Helvetica Neue'; color: #9e9ea3; -webkit-text-stroke: #9e9ea3}
-    span.s1 {font-kerning: none; background-color: #ffffff}
-    span.s2 {font-kerning: none}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy – Just Do Three</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:     #28B5C8;
+      --text:     #1c1c1e;
+      --secondary:#6e6e73;
+      --tertiary: #aeaeb2;
+      --border:   #e5e5ea;
+      --bg:       #f2f2f7;
+      --card:     #ffffff;
+      --radius:   14px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+      padding: 40px 16px 80px;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Header card */
+    .header-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      margin-bottom: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .brand img {
+      width: 60px;
+      height: 60px;
+      border-radius: 13px;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    .brand-tagline {
+      font-size: 13px;
+      color: var(--secondary);
+      margin-top: 3px;
+    }
+
+    .doc-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.4px;
+    }
+
+    .doc-date {
+      font-size: 13px;
+      color: var(--secondary);
+      margin-top: 4px;
+    }
+
+    /* Section cards */
+    .section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 10px;
+    }
+
+    .section h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .section p {
+      font-size: 14px;
+      color: var(--secondary);
+    }
+
+    .section ul {
+      font-size: 14px;
+      color: var(--secondary);
+      padding-left: 0;
+      list-style: none;
+      margin-top: 6px;
+    }
+
+    .section ul li::before {
+      content: "•  ";
+      color: var(--teal);
+    }
+
+    .section ul li {
+      margin-bottom: 4px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding-top: 32px;
+      font-size: 13px;
+      color: var(--tertiary);
+    }
+
+    footer a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 480px) {
+      .header-card, .section { padding: 18px 16px; }
+      .doc-title { font-size: 19px; }
+    }
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1">💡</span></p>
-<h1 style="margin: 0.0px 0.0px 0.0px 0.0px; font: 20.0px 'Helvetica Neue'; color: #151517; -webkit-text-stroke: #151517"><span class="s1"><b>Just Do Three</b><b></b></span></h1>
-<p class="p3"><span class="s1">The simplest to-do app.</span></p>
-<p class="p4"><span class="s2"></span><br></p>
-<h2 style="margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px 'Helvetica Neue'; color: #151517; -webkit-text-stroke: #151517"><span class="s1"><b>Privacy Policy</b><b></b></span></h2>
-<p class="p3"><span class="s1">Effective March 7, 2026</span></p>
-<h3 style="margin: 0.0px 0.0px 8.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #151517; -webkit-text-stroke: #151517"><span class="s1"><b>Overview</b><b></b></span></h3>
-<p class="p7"><span class="s1">Just Do Three is designed with your privacy in mind. The app stores all of your data locally on your device. We do not collect, transmit, or share any personal information.</span></p>
-<h3 style="margin: 0.0px 0.0px 8.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #151517; -webkit-text-stroke: #151517"><span class="s1"><b>Data We Do Not Collect</b><b></b></span></h3>
-<p class="p8"><span class="s2">We do not collect:</span></p>
-<p class="p8"><span class="s2">• Your name, email address, or any contact information</span></p>
-<p class="p8"><span class="s2">• Your tasks, plans, or completion history</span></p>
-<p class="p8"><span class="s2">• Location data</span></p>
-<p class="p8"><span class="s2">• Device identifiers or advertising identifiers</span></p>
-<p class="p8"><span class="s2">• Crash reports or analytics (beyond what Apple provides to all developers)</span></p>
-<p class="p7"><span class="s1">• Any usage telemetry</span></p>
-<h3 style="margin: 0.0px 0.0px 8.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #151517; -webkit-text-stroke: #151517"><span class="s1"><b>Data Stored on Your Device</b><b></b></span></h3>
-<p class="p7"><span class="s1">All app data — including tasks, daily plans, and completion history — is stored exclusively on your device using Apple's SwiftData framework. This data never leaves your device unless you explicitly enable iCloud sync in your device Settings.</span></p>
-<h3 style="margin: 0.0px 0.0px 8.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #151517; -webkit-text-stroke: #151517"><span class="s1"><b>iCloud Sync (Optional)</b><b></b></span></h3>
-<p class="p7"><span class="s1">If you have iCloud Drive enabled for Just Do Three in your device Settings, Apple may sync your data across your devices via iCloud. This sync is governed by Apple's iCloud Terms and Conditions and Privacy Policy. We do not have access to data stored in your iCloud account.</span></p>
-<h3 style="margin: 0.0px 0.0px 8.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #151517; -webkit-text-stroke: #151517"><span class="s1"><b>Notifications</b><b></b></span></h3>
-<p class="p8"><span class="s2">Just Do Three offers optional morning and evening reminders. Notifications are scheduled locally on your device using Apple's notification framework. No notification content is sent to or stored on any external server.</span></p>
-<p class="p9"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1">You can disable notifications at any time in your device Settings or within the app.</span></p>
-<h3 style="margin: 0.0px 0.0px 8.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #151517; -webkit-text-stroke: #151517"><span class="s1"><b>In-App Purchases</b><b></b></span></h3>
-<p class="p7"><span class="s1">Just Do Three offers a one-time premium unlock via Apple's App Store. All payment processing is handled entirely by Apple. We never see or store your payment information. Your purchase receipt is verified through Apple's StoreKit framework on-device.</span></p>
-<h3 style="margin: 0.0px 0.0px 8.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #151517; -webkit-text-stroke: #151517"><span class="s1"><b>Third-Party Services</b><b></b></span></h3>
-<p class="p7"><span class="s1">Just Do Three does not integrate with any third-party analytics, advertising, or data-collection services.</span></p>
-<h3 style="margin: 0.0px 0.0px 8.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #151517; -webkit-text-stroke: #151517"><span class="s1"><b>Children's Privacy</b><b></b></span></h3>
-<p class="p7"><span class="s1">Just Do Three does not knowingly collect any personal information from anyone, including children under the age of 13. Because no data is collected, the app is suitable for all ages.</span></p>
-<h3 style="margin: 0.0px 0.0px 8.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #151517; -webkit-text-stroke: #151517"><span class="s1"><b>Changes to This Policy</b><b></b></span></h3>
-<p class="p7"><span class="s1">If we update this Privacy Policy, the new version will be included in an app update and reflected here with a new effective date. Continued use of the app after an update constitutes acceptance of the revised policy.</span></p>
-<h3 style="margin: 0.0px 0.0px 8.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #151517; -webkit-text-stroke: #151517"><span class="s1"><b>Contact</b><b></b></span></h3>
-<p class="p7"><span class="s1">If you have questions about this Privacy Policy, please reach out via the App Store support link on the Just Do Three product page.</span></p>
-<p class="p10"><span class="s2">© 2026 Todd Vallie. All rights reserved.</span></p>
+  <div class="container">
+
+    <div class="header-card">
+      <div class="brand">
+        <img src="appicon.png" alt="Just Do Three" />
+        <div>
+          <div class="brand-name">Just Do Three</div>
+          <div class="brand-tagline">Focus on what matters most.</div>
+        </div>
+      </div>
+      <div class="doc-title">Privacy Policy</div>
+      <div class="doc-date">Effective March 7, 2026</div>
+    </div>
+
+    <div class="section">
+      <h2>Overview</h2>
+      <p>Just Do Three is designed with your privacy in mind. The app stores all of your data locally on your device. We do not collect, transmit, or share any personal information.</p>
+    </div>
+
+    <div class="section">
+      <h2>Data We Do Not Collect</h2>
+      <p>We do not collect:</p>
+      <ul>
+        <li>Your name, email address, or any contact information</li>
+        <li>Your tasks, plans, or completion history</li>
+        <li>Location data</li>
+        <li>Device identifiers or advertising identifiers</li>
+        <li>Crash reports or analytics (beyond what Apple provides to all developers)</li>
+        <li>Any usage telemetry</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Data Stored on Your Device</h2>
+      <p>All app data — including tasks, daily plans, and completion history — is stored exclusively on your device using Apple's SwiftData framework. This data never leaves your device unless you explicitly enable iCloud sync in your device Settings.</p>
+    </div>
+
+    <div class="section">
+      <h2>iCloud Sync (Optional)</h2>
+      <p>If you have iCloud Drive enabled for Just Do Three in your device Settings, Apple may sync your data across your devices via iCloud. This sync is governed by Apple's iCloud Terms and Conditions and Privacy Policy. We do not have access to data stored in your iCloud account.</p>
+    </div>
+
+    <div class="section">
+      <h2>Notifications</h2>
+      <p>Just Do Three offers optional morning and evening reminders. Notifications are scheduled locally on your device using Apple's notification framework. No notification content is sent to or stored on any external server.</p>
+      <p style="margin-top: 10px;">You can disable notifications at any time in your device Settings or within the app.</p>
+    </div>
+
+    <div class="section">
+      <h2>In-App Purchases</h2>
+      <p>Just Do Three offers a one-time premium unlock via Apple's App Store. All payment processing is handled entirely by Apple. We never see or store your payment information. Your purchase receipt is verified through Apple's StoreKit framework on-device.</p>
+    </div>
+
+    <div class="section">
+      <h2>Third-Party Services</h2>
+      <p>Just Do Three does not integrate with any third-party analytics, advertising, or data-collection services.</p>
+    </div>
+
+    <div class="section">
+      <h2>Children's Privacy</h2>
+      <p>Just Do Three does not knowingly collect any personal information from anyone, including children under the age of 13. Because no data is collected, the app is suitable for all ages.</p>
+    </div>
+
+    <div class="section">
+      <h2>Changes to This Policy</h2>
+      <p>If we update this Privacy Policy, the new version will be included in an app update and reflected here with a new effective date. Continued use of the app after an update constitutes acceptance of the revised policy.</p>
+    </div>
+
+    <div class="section">
+      <h2>Contact</h2>
+      <p>If you have questions about this Privacy Policy, please reach out via the App Store support link on the Just Do Three product page.</p>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Todd Vallie. All rights reserved. &nbsp;·&nbsp; <a href="terms-of-use.html">Terms of Use</a></p>
+    </footer>
+
+  </div>
 </body>
 </html>
