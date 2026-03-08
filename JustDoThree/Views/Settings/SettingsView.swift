@@ -125,8 +125,8 @@ struct SettingsView: View {
 
     private func requestNotifAuth() {
         Task {
-            _ = await NotificationManager.shared.requestAuthorization()
-            NotificationManager.shared.reschedule()
+            let granted = await NotificationManager.shared.requestAuthorization()
+            if granted { NotificationManager.shared.reschedule() }
         }
     }
 }

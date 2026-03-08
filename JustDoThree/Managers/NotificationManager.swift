@@ -65,23 +65,28 @@ final class NotificationManager {
         let center = UNUserNotificationCenter.current()
         center.removePendingNotificationRequests(withIdentifiers: ["jdt_morning", "jdt_evening"])
 
-        if morningEnabled {
-            schedule(
-                id: "jdt_morning",
-                title: "Just Do Three",
-                body: "What are your three today?",
-                hour: morningHour,
-                minute: morningMinute
-            )
-        }
-        if eveningEnabled {
-            schedule(
-                id: "jdt_evening",
-                title: "Just Do Three",
-                body: "Did you finish your three?",
-                hour: eveningHour,
-                minute: eveningMinute
-            )
+        // Check authorization status before attempting to schedule
+        center.getNotificationSettings { settings in
+            guard settings.authorizationStatus == .authorized else { return }
+
+            if self.morningEnabled {
+                self.schedule(
+                    id: "jdt_morning",
+                    title: "Just Do Three",
+                    body: "What are your three today?",
+                    hour: self.morningHour,
+                    minute: self.morningMinute
+                )
+            }
+            if self.eveningEnabled {
+                self.schedule(
+                    id: "jdt_evening",
+                    title: "Just Do Three",
+                    body: "Did you finish your three?",
+                    hour: self.eveningHour,
+                    minute: self.eveningMinute
+                )
+            }
         }
     }
 

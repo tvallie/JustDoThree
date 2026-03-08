@@ -3,6 +3,7 @@ import SwiftData
 import Observation
 
 /// Central in-memory UI state. Persisted data lives in SwiftData.
+@MainActor
 @Observable
 final class AppState {
 
