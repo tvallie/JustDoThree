@@ -579,9 +579,10 @@ struct BacklogPickerSheet: View {
 // MARK: - TomorrowPickerSheet
 
 /// Lets a premium user pull a task from tomorrow's plan into today as a stretch goal.
-/// The task is NOT removed from tomorrow's plan — it simply gets an early start today.
+/// The task is removed from tomorrow's plan when added to today.
 struct TomorrowPickerSheet: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
 
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
     @Query(sort: \DailyPlan.date) private var plans: [DailyPlan]
@@ -630,6 +631,9 @@ struct TomorrowPickerSheet: View {
                         Section {
                             ForEach(tomorrowTasks) { task in
                                 Button {
+                                    if let tomorrowPlan = plans.first(where: { $0.date.isSameDay(as: tomorrow) }) {
+                                        PlannerEngine.removeFromToday(taskID: task.id, plan: tomorrowPlan, context: modelContext)
+                                    }
                                     onSelect(task)
                                     dismiss()
                                 } label: {
@@ -647,7 +651,7 @@ struct TomorrowPickerSheet: View {
                         } header: {
                             Text("Tomorrow's plan")
                         } footer: {
-                            Text("Adding a task here won't remove it from tomorrow's plan.")
+                            Text("The task will move to today and be removed from tomorrow's plan.")
                         }
                     }
                     .listStyle(.insetGrouped)
