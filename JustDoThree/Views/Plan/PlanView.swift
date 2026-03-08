@@ -17,7 +17,16 @@ struct PlanView: View {
                     .frame(maxHeight: .infinity)
                 }
             }
-            .navigationTitle("Plan")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack(spacing: 6) {
+                        AppLogoView(size: 26)
+                        Text("Just Do Three")
+                            .font(.headline)
+                    }
+                }
+            }
         }
         .sheet(isPresented: $showUpgrade) {
             UpgradeSheet()

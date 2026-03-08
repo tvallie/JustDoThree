@@ -53,7 +53,7 @@ struct BacklogView: View {
                     .environment(\.editMode, .constant(.active))
                 }
             }
-            .navigationTitle("Backlog")
+            .navigationBarTitleDisplayMode(.inline)
             .safeAreaInset(edge: .bottom) {
                 if !premium.isPremium {
                     HStack(spacing: 6) {
@@ -69,6 +69,13 @@ struct BacklogView: View {
                 }
             }
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack(spacing: 6) {
+                        AppLogoView(size: 26)
+                        Text("Just Do Three")
+                            .font(.headline)
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack(spacing: 16) {
                         if premium.isPremium {
