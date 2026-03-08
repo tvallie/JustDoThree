@@ -18,8 +18,16 @@ final class PremiumManager {
     /// Empty until loadProducts() succeeds — UI should treat empty as "price loading".
     var displayPrice: String = ""
 
+    /// Keeps the Transaction.updates listener alive for the app's lifetime.
+    private var updatesTask: Task<Void, Never>?
+
     init() {
         self.isPremium = UserDefaults.standard.bool(forKey: premiumKey)
+        updatesTask = Task { await self.listenForTransactionUpdates() }
+    }
+
+    deinit {
+        updatesTask?.cancel()
     }
 
     // MARK: - Product loading
@@ -50,6 +58,19 @@ final class PremiumManager {
 
     // MARK: - StoreKit transactions
 
+    /// Long-running listener for transactions that arrive outside the normal purchase flow
+    /// (Ask to Buy approvals, interrupted purchases resuming, family sharing, etc.).
+    /// Started in init() and kept alive for the app's lifetime.
+    private func listenForTransactionUpdates() async {
+        for await result in Transaction.updates {
+            if case .verified(let transaction) = result,
+               transaction.productID == Self.productID {
+                grantPremium()
+                await transaction.finish()
+            }
+        }
+    }
+
     /// Returns true only if the purchase completed and was verified.
     @discardableResult
     func purchase() async -> Bool {
@@ -59,8 +80,9 @@ final class PremiumManager {
             let result = try await product.purchase()
             switch result {
             case .success(let verification):
-                if case .verified = verification {
+                if case .verified(let transaction) = verification {
                     grantPremium()
+                    await transaction.finish()
                     return true
                 }
                 return false
@@ -78,6 +100,7 @@ final class PremiumManager {
             if case .verified(let transaction) = result,
                transaction.productID == Self.productID {
                 grantPremium()
+                await transaction.finish()
             }
         }
     }
