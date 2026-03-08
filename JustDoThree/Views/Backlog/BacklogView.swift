@@ -54,6 +54,20 @@ struct BacklogView: View {
                 }
             }
             .navigationTitle("Backlog")
+            .safeAreaInset(edge: .bottom) {
+                if !premium.isPremium {
+                    HStack(spacing: 6) {
+                        Image(systemName: "doc.badge.plus")
+                            .font(.caption2)
+                        Text("Upload a whole list of tasks at once — available with Premium.")
+                            .font(.caption)
+                    }
+                    .foregroundStyle(.tertiary)
+                    .padding(.vertical, 10)
+                    .frame(maxWidth: .infinity)
+                    .background(.background)
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack(spacing: 16) {

@@ -158,6 +158,7 @@ struct UpgradeSheet: View {
                         FeatureRow(icon: "chart.bar.xaxis", text: "Day, week, month & year analytics")
                         FeatureRow(icon: "arrow.triangle.2.circlepath", text: "Weekly & monthly recurring tasks")
                         FeatureRow(icon: "star.fill", text: "Stretch goal tracking & insights")
+                        FeatureRow(icon: "doc.badge.plus", text: "Import tasks from a .txt or .csv file")
                         FeatureRow(icon: "exclamationmark.triangle", text: "Most avoided tasks report")
                     }
                     .padding(.horizontal)
