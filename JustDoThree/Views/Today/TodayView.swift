@@ -177,6 +177,25 @@ struct TodayView: View {
                         }
                     )
                 }
+
+                if slotsLeft > 0 && !allPrimaryDone {
+                    Button {
+                        addingStretch = false
+                        showBacklogPicker = true
+                    } label: {
+                        HStack(spacing: 6) {
+                            Image(systemName: "plus.circle")
+                            Text("Add a task")
+                                .font(.subheadline)
+                        }
+                        .foregroundStyle(.tertiary)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                        .background(Color(.tertiarySystemFill))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                    .buttonStyle(.plain)
+                }
             }
         }
     }
