@@ -41,17 +41,14 @@ final class PremiumManager {
 
     func grantPremium() { isPremium = true }
 
-    /// DEBUG only — remove before App Store submission.
+    #if DEBUG
+    /// Simulates a successful purchase without hitting StoreKit. DEBUG builds only.
     func simulatePurchase() { isPremium = true }
+    /// Revokes premium to test non-premium state. DEBUG builds only.
     func revokePremium()    { isPremium = false }
+    #endif
 
     // MARK: - StoreKit transactions
-    //
-    // Setup checklist:
-    // 1. File > New > StoreKit Configuration File in Xcode
-    // 2. Add a Non-Consumable product with ID "com.todd.justdothree.premium"
-    // 3. Replace the purchase/restore bodies below with StoreKit 2 calls
-    // 4. On .verified transaction, call grantPremium()
 
     func purchase() async {
         do {

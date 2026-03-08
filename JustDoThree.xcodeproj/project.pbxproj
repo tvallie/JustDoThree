@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1BB9E08C8CB03731223D7B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */; };
 		102BDFA9DD64CAF27D61BD8F /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A50918BD04B398D5D467190 /* Date+Helpers.swift */; };
 		25137B0337ECB10CDA0CFA3F /* PremiumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA9F455A8F4B8CE66CCE8E1 /* PremiumManager.swift */; };
 		33829380BFE55FA51B44124C /* BacklogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CCAFC9BADC343232127109 /* BacklogView.swift */; };
@@ -39,7 +40,8 @@
 		084EB54D11EE6B0F1D53B735 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0907822FE5FC342A97C4C987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E5DFC01F2DB0F3EA9D97F15 /* RolloverEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolloverEngine.swift; sourceTree = "<group>"; };
-		3854F531D88F2596847BE463 /* JustDoThree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustDoThree.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		3854F531D88F2596847BE463 /* JustDoThree.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = JustDoThree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD3A97212AC99E4DB48E549 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
 		4809D5B4FDF66DB78EDF82F9 /* AppLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogoView.swift; sourceTree = "<group>"; };
 		48B577A258EF0DBDD29DAC2A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				0907822FE5FC342A97C4C987 /* Assets.xcassets */,
 				66B12D5E74B9E9EC21C72282 /* Info.plist */,
 				7FE5D6690047093E4F38B2ED /* JustDoThreeApp.swift */,
+				200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */,
 				63F44908A86AD512B6113950 /* Engines */,
 				75B1A75FB58FA02AAFD989FD /* Extensions */,
 				24AD9CC2272CFB85324116FB /* Managers */,
@@ -266,6 +269,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 38260BA30AA8639687667FFA /* Build configuration list for PBXProject "JustDoThree" */;
 			developmentRegion = en;
@@ -292,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2918E9C78BA897EC9CB9066 /* Assets.xcassets in Resources */,
+				0A1BB9E08C8CB03731223D7B /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,7 +470,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 3ZAS78KQUH;
 				INFOPLIST_FILE = JustDoThree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -474,9 +479,6 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.todd.justdothree;
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -491,7 +493,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 3ZAS78KQUH;
 				INFOPLIST_FILE = JustDoThree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -501,9 +502,6 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.todd.justdothree;
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.9;
