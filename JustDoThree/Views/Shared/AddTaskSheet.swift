@@ -39,7 +39,7 @@ struct AddTaskSheet: View {
                             Button {
                                 showImportInfo = true
                             } label: {
-                                Label("Import from .txt or .csv", systemImage: "square.and.arrow.down")
+                                Label("Import from .txt or .csv", systemImage: "doc.badge.plus")
                                     .font(.subheadline)
                             }
                         } footer: {
@@ -51,7 +51,7 @@ struct AddTaskSheet: View {
                                 showUpgrade = true
                             } label: {
                                 HStack(spacing: 10) {
-                                    Image(systemName: "square.and.arrow.down")
+                                    Image(systemName: "doc.badge.plus")
                                         .font(.subheadline)
                                         .foregroundStyle(.secondary)
                                     Text("Import tasks from a file")

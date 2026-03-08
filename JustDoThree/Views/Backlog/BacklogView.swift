@@ -61,7 +61,7 @@ struct BacklogView: View {
                             Button {
                                 showFileImporter = true
                             } label: {
-                                Image(systemName: "square.and.arrow.down")
+                                Image(systemName: "doc.badge.plus")
                             }
                         }
                         Button { showAddSheet = true } label: {
