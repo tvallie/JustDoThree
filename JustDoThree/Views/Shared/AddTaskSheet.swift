@@ -24,6 +24,12 @@ struct AddTaskSheet: View {
 
     var isEditing: Bool { existingTask != nil }
 
+    private let ordinalFormatter: NumberFormatter = {
+        let f = NumberFormatter()
+        f.numberStyle = .ordinal
+        return f
+    }()
+
     var body: some View {
         NavigationStack {
             Form {
@@ -102,16 +108,14 @@ struct AddTaskSheet: View {
                         if recurringPattern == .monthly {
                             Picker("Day of month", selection: $recurringDayOfMonth) {
                                 ForEach(1...31, id: \.self) { day in
-                                    let formatter = NumberFormatter()
-                                    let _ = { formatter.numberStyle = .ordinal }()
-                                    Text(formatter.string(from: NSNumber(value: day)) ?? "\(day)").tag(day)
+                                    Text(ordinalFormatter.string(from: NSNumber(value: day)) ?? "\(day)").tag(day)
                                 }
                             }
                         }
                     } header: {
                         Text("Recurrence")
                     } footer: {
-                        Text("Premium feature. Recurring tasks reset after completion.")
+                        Text("Recurring tasks reset automatically after completion.")
                     }
                 } else {
                     Section {
@@ -151,7 +155,7 @@ struct AddTaskSheet: View {
                 }
             }
         }
-        .presentationDetents(recurringPattern != nil ? [.medium] : [.height(isEditing ? 200 : 340)])
+        .presentationDetents(recurringPattern != nil ? [.medium] : [.height(isEditing ? 300 : 340)])
         .sheet(isPresented: $showImportInfo) {
             ImportInstructionsSheet()
         }
