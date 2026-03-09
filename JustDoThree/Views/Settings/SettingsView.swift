@@ -101,7 +101,7 @@ struct SettingsView: View {
                 } header: {
                     Text("About")
                 } footer: {
-                    Text("© \(currentYear) Todd Vallie. All rights reserved.")
+                    Text("© \(String(currentYear)) Todd Vallie. All rights reserved.")
                         .frame(maxWidth: .infinity)
                         .multilineTextAlignment(.center)
                         .padding(.top, 4)
