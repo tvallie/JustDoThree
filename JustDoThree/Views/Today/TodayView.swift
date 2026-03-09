@@ -430,7 +430,8 @@ struct BacklogPickerSheet: View {
         allTasks.compactMap { task -> (JDTask, String)? in
             guard !task.isCompleted || task.recurringRule != nil else { return nil }
             guard !inTargetPlanIDs.contains(task.id) else { return nil }
-            for plan in plans where !plan.date.isSameDay(as: forDate) {
+            let today = Date().startOfDay
+            for plan in plans where !plan.date.isSameDay(as: forDate) && plan.date >= today {
                 if plan.taskIDs.contains(task.id) || plan.stretchTaskIDs.contains(task.id) {
                     let label = plan.date.isSameDay(as: Date()) ? "Today" : plan.date.shortDayString
                     return (task, label)
