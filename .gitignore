@@ -26,3 +26,7 @@ Thumbs.db
 
 # CocoaPods (not used, but just in case)
 Pods/
+
+# SSH keys
+tk421
+tk421.pub
