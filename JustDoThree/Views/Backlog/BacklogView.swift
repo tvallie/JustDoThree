@@ -248,6 +248,11 @@ struct BacklogRow: View {
                                 .font(.caption)
                                 .foregroundStyle(.orange)
                         }
+                        if let rule = task.recurringRule {
+                            Label("recurring · \(rule.displayString)", systemImage: "repeat")
+                                .font(.caption)
+                                .foregroundStyle(.teal)
+                        }
                     }
                 }
             }
