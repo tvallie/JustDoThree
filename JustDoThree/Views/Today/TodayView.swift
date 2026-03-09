@@ -329,16 +329,7 @@ struct TodayView: View {
 
     private func uncompleteStretch(_ task: JDTask) {
         guard let plan = todayPlan else { return }
-        plan.completedStretchIDs.removeAll { $0 == task.id }
-        if task.recurringRule == nil {
-            task.isCompleted = false
-            task.completionDate = nil
-        }
-        let logs = (try? modelContext.fetch(FetchDescriptor<CompletionLog>())) ?? []
-        if let log = logs.first(where: { $0.taskID == task.id && $0.planDate.isSameDay(as: plan.date) }) {
-            modelContext.delete(log)
-        }
-        try? modelContext.save()
+        PlannerEngine.uncomplete(task: task, plan: plan, context: modelContext)
     }
 }
 

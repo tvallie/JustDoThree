@@ -2,6 +2,12 @@ import SwiftUI
 import SwiftData
 import UniformTypeIdentifiers
 
+private let addTaskSheetOrdinalFormatter: NumberFormatter = {
+    let f = NumberFormatter()
+    f.numberStyle = .ordinal
+    return f
+}()
+
 /// Sheet for creating a new task or editing an existing task title.
 struct AddTaskSheet: View {
     @Environment(\.modelContext) private var modelContext
@@ -23,12 +29,6 @@ struct AddTaskSheet: View {
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
 
     var isEditing: Bool { existingTask != nil }
-
-    private let ordinalFormatter: NumberFormatter = {
-        let f = NumberFormatter()
-        f.numberStyle = .ordinal
-        return f
-    }()
 
     var body: some View {
         NavigationStack {
@@ -108,7 +108,7 @@ struct AddTaskSheet: View {
                         if recurringPattern == .monthly {
                             Picker("Day of month", selection: $recurringDayOfMonth) {
                                 ForEach(1...31, id: \.self) { day in
-                                    Text(ordinalFormatter.string(from: NSNumber(value: day)) ?? "\(day)").tag(day)
+                                    Text(addTaskSheetOrdinalFormatter.string(from: NSNumber(value: day)) ?? "\(day)").tag(day)
                                 }
                             }
                         }

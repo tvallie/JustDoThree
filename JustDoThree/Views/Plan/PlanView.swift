@@ -65,8 +65,15 @@ struct WeekPlannerView: View {
     }
 
     private var backlogTasks: [JDTask] {
-        let scheduledIDs = Set(plans.flatMap { $0.taskIDs })
-        return allTasks.filter { ($0.recurringRule != nil || !$0.isCompleted) && !scheduledIDs.contains($0.id) }
+        let allScheduledIDs = Set(plans.flatMap { $0.taskIDs })
+        let selectedDayIDs = Set(selectedPlan?.taskIDs ?? [])
+        return allTasks.filter { task in
+            let notCompleted = task.recurringRule != nil || !task.isCompleted
+            let notScheduled = task.recurringRule != nil
+                ? !selectedDayIDs.contains(task.id)
+                : !allScheduledIDs.contains(task.id)
+            return notCompleted && notScheduled
+        }
     }
 
     var body: some View {
