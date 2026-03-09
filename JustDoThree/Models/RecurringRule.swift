@@ -34,13 +34,17 @@ struct RecurringRule: Codable, Hashable {
             return "every \(name)"
         case .monthly:
             let d = dayOfMonth ?? 1
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .ordinal
-            let ordinal = formatter.string(from: NSNumber(value: d)) ?? "\(d)"
+            let ordinal = ordinalFormatter.string(from: NSNumber(value: d)) ?? "\(d)"
             return "\(ordinal) of every month"
         }
     }
 }
+
+private let ordinalFormatter: NumberFormatter = {
+    let f = NumberFormatter()
+    f.numberStyle = .ordinal
+    return f
+}()
 
 private extension Array {
     subscript(safe index: Int) -> Element? {
