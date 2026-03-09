@@ -82,12 +82,15 @@ enum PlannerEngine {
     static func complete(task: JDTask, plan: DailyPlan, context: ModelContext) {
         guard !plan.completedTaskIDs.contains(task.id) else { return }
         plan.completedTaskIDs.append(task.id)
-        task.isCompleted = true
-        task.completionDate = Date()
         let isStretch = plan.stretchTaskIDs.contains(task.id)
         let log = CompletionLog(taskID: task.id, taskTitle: task.title,
                                  planDate: plan.date, isStretchGoal: isStretch)
         context.insert(log)
+        // Recurring tasks reset immediately — do not mark permanently complete
+        if task.recurringRule == nil {
+            task.isCompleted = true
+            task.completionDate = Date()
+        }
         try? context.save()
     }
 
@@ -126,11 +129,14 @@ enum PlannerEngine {
         guard plan.stretchTaskIDs.contains(task.id),
               !plan.completedStretchIDs.contains(task.id) else { return }
         plan.completedStretchIDs.append(task.id)
-        task.isCompleted = true
-        task.completionDate = Date()
         let log = CompletionLog(taskID: task.id, taskTitle: task.title,
                                  planDate: plan.date, isStretchGoal: true)
         context.insert(log)
+        // Recurring tasks reset immediately — do not mark permanently complete
+        if task.recurringRule == nil {
+            task.isCompleted = true
+            task.completionDate = Date()
+        }
         try? context.save()
     }
 }
