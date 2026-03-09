@@ -247,11 +247,13 @@ struct BacklogRow: View {
                                   systemImage: "arrow.triangle.2.circlepath")
                                 .font(.caption)
                                 .foregroundStyle(.orange)
+                                .lineLimit(1)
                         }
                         if let rule = task.recurringRule {
                             Label("recurring · \(rule.displayString)", systemImage: "repeat")
                                 .font(.caption)
                                 .foregroundStyle(.teal)
+                                .lineLimit(1)
                         }
                     }
                 }
