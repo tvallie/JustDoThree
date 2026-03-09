@@ -17,6 +17,9 @@ struct AddTaskSheet: View {
     @State private var title: String = ""
     @State private var showImportInfo = false
     @State private var showUpgrade = false
+    @State private var recurringPattern: RecurringRule.Pattern? = nil
+    @State private var recurringWeekday: Int = 2   // Monday (Calendar weekday 2)
+    @State private var recurringDayOfMonth: Int = 1
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
 
     var isEditing: Bool { existingTask != nil }
@@ -28,7 +31,14 @@ struct AddTaskSheet: View {
                     TextField("What do you need to do?", text: $title, axis: .vertical)
                         .lineLimit(1...4)
                         .onAppear {
-                            if let existing = existingTask { title = existing.title }
+                            if let existing = existingTask {
+                                title = existing.title
+                                if let rule = existing.recurringRule {
+                                    recurringPattern = rule.pattern
+                                    if let wd = rule.weekday { recurringWeekday = wd }
+                                    if let d = rule.dayOfMonth { recurringDayOfMonth = d }
+                                }
+                            }
                         }
                 }
 
@@ -71,6 +81,63 @@ struct AddTaskSheet: View {
                         }
                     }
                 }
+
+                // Recurrence section
+                if premium.isPremium {
+                    Section {
+                        Picker("Repeat", selection: $recurringPattern) {
+                            Text("None").tag(Optional<RecurringRule.Pattern>.none)
+                            Text("Weekly").tag(Optional(RecurringRule.Pattern.weekly))
+                            Text("Monthly").tag(Optional(RecurringRule.Pattern.monthly))
+                        }
+
+                        if recurringPattern == .weekly {
+                            Picker("Day", selection: $recurringWeekday) {
+                                ForEach(1...7, id: \.self) { day in
+                                    Text(Calendar.current.weekdaySymbols[day - 1]).tag(day)
+                                }
+                            }
+                        }
+
+                        if recurringPattern == .monthly {
+                            Picker("Day of month", selection: $recurringDayOfMonth) {
+                                ForEach(1...31, id: \.self) { day in
+                                    let formatter = NumberFormatter()
+                                    let _ = { formatter.numberStyle = .ordinal }()
+                                    Text(formatter.string(from: NSNumber(value: day)) ?? "\(day)").tag(day)
+                                }
+                            }
+                        }
+                    } header: {
+                        Text("Recurrence")
+                    } footer: {
+                        Text("Premium feature. Recurring tasks reset after completion.")
+                    }
+                } else {
+                    Section {
+                        Button {
+                            showUpgrade = true
+                        } label: {
+                            HStack(spacing: 10) {
+                                Image(systemName: "repeat")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                                Text("Recurring tasks")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                                Spacer()
+                                Text("Premium")
+                                    .font(.caption.bold())
+                                    .foregroundStyle(.teal)
+                                    .padding(.horizontal, 7)
+                                    .padding(.vertical, 3)
+                                    .background(.teal.opacity(0.12))
+                                    .clipShape(Capsule())
+                            }
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
             }
             .navigationTitle(isEditing ? "Edit Task" : "New Task")
             .navigationBarTitleDisplayMode(.inline)
@@ -84,7 +151,7 @@ struct AddTaskSheet: View {
                 }
             }
         }
-        .presentationDetents([.height(isEditing ? 200 : 265)])
+        .presentationDetents(recurringPattern != nil ? [.medium] : [.height(isEditing ? 200 : 340)])
         .sheet(isPresented: $showImportInfo) {
             ImportInstructionsSheet()
         }
@@ -95,14 +162,24 @@ struct AddTaskSheet: View {
 
     private var trimmedTitle: String { title.trimmingCharacters(in: .whitespacesAndNewlines) }
 
+    private var builtRecurringRule: RecurringRule? {
+        switch recurringPattern {
+        case .weekly:  return .weekly(weekday: recurringWeekday)
+        case .monthly: return .monthly(dayOfMonth: recurringDayOfMonth)
+        case .none:    return nil
+        }
+    }
+
     private func save() {
         guard !trimmedTitle.isEmpty else { return }
         if let task = existingTask {
             task.title = trimmedTitle
+            task.recurringRule = builtRecurringRule
             try? modelContext.save()
         } else {
             let nextOrder = (allTasks.map(\.sortOrder).max() ?? -1) + 1
             let task = JDTask(title: trimmedTitle, sortOrder: nextOrder)
+            task.recurringRule = builtRecurringRule
             modelContext.insert(task)
             try? modelContext.save()
             onCreated?(task)
