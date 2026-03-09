@@ -21,7 +21,7 @@ struct BacklogView: View {
     }
 
     private var backlogTasks: [JDTask] {
-        allTasks.filter { !$0.isCompleted && !todayTaskIDs.contains($0.id) }
+        allTasks.filter { ($0.recurringRule != nil || !$0.isCompleted) && !todayTaskIDs.contains($0.id) }
     }
 
     var body: some View {

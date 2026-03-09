@@ -97,8 +97,10 @@ enum PlannerEngine {
     static func uncomplete(task: JDTask, plan: DailyPlan, context: ModelContext) {
         plan.completedTaskIDs.removeAll { $0 == task.id }
         plan.completedStretchIDs.removeAll { $0 == task.id }
-        task.isCompleted = false
-        task.completionDate = nil
+        if task.recurringRule == nil {
+            task.isCompleted = false
+            task.completionDate = nil
+        }
         // Remove matching completion log
         let logs = (try? context.fetch(FetchDescriptor<CompletionLog>())) ?? []
         if let log = logs.first(where: {
