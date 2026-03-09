@@ -22,4 +22,28 @@ struct RecurringRule: Codable, Hashable {
     static func monthly(dayOfMonth: Int) -> RecurringRule {
         RecurringRule(pattern: .monthly, weekday: nil, dayOfMonth: dayOfMonth)
     }
+
+    /// Human-readable schedule string, e.g. "every Monday" or "3rd of every month".
+    var displayString: String {
+        switch pattern {
+        case .weekly:
+            let day = weekday ?? 1
+            // Calendar weekday: 1 = Sunday, 2 = Monday … 7 = Saturday
+            let symbols = Calendar.current.weekdaySymbols // ["Sunday", "Monday", …]
+            let name = symbols[safe: day - 1] ?? "day \(day)"
+            return "every \(name)"
+        case .monthly:
+            let d = dayOfMonth ?? 1
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .ordinal
+            let ordinal = formatter.string(from: NSNumber(value: d)) ?? "\(d)"
+            return "\(ordinal) of every month"
+        }
+    }
+}
+
+private extension Array {
+    subscript(safe index: Int) -> Element? {
+        indices.contains(index) ? self[index] : nil
+    }
 }
