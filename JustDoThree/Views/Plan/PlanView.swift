@@ -43,6 +43,7 @@ struct WeekPlannerView: View {
 
     @State private var selectedDay: Date = Date().startOfDay
     @State private var showBacklogPicker = false
+    @AppStorage("jdt_autoScheduleRecurring") private var autoScheduleRecurring = false
 
     private var upcomingDays: [Date] {
         (0..<7).compactMap {
@@ -174,6 +175,25 @@ struct WeekPlannerView: View {
                     PlannerEngine.addToToday(task: task, plan: plan, context: modelContext)
                 }
             )
+        }
+        .onAppear {
+            if autoScheduleRecurring {
+                for day in upcomingDays {
+                    PlannerEngine.autoScheduleRecurring(for: day, context: modelContext)
+                }
+            }
+        }
+        .onChange(of: selectedDay) { _, day in
+            if autoScheduleRecurring {
+                PlannerEngine.autoScheduleRecurring(for: day, context: modelContext)
+            }
+        }
+        .onChange(of: autoScheduleRecurring) { _, enabled in
+            if enabled {
+                for day in upcomingDays {
+                    PlannerEngine.autoScheduleRecurring(for: day, context: modelContext)
+                }
+            }
         }
     }
 }

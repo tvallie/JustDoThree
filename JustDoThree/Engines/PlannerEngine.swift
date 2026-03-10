@@ -127,6 +127,35 @@ enum PlannerEngine {
         try? context.save()
     }
 
+    // MARK: - Recurring auto-schedule
+
+    /// Adds any recurring tasks whose rule matches the given date into that day's plan.
+    /// Respects the 3-task primary limit. Safe to call multiple times (idempotent).
+    static func autoScheduleRecurring(for date: Date, context: ModelContext) {
+        let plan = fetchOrCreatePlan(for: date, context: context)
+        let tasks = allTasks(context: context)
+        let cal = Calendar.current
+        let weekday = cal.component(.weekday, from: date)
+        let dayOfMonth = cal.component(.day, from: date)
+
+        var changed = false
+        for task in tasks {
+            guard let rule = task.recurringRule else { continue }
+            guard plan.taskIDs.count < 3 else { break }
+            guard !plan.taskIDs.contains(task.id) else { continue }
+
+            let matches: Bool
+            switch rule.pattern {
+            case .weekly:  matches = rule.weekday == weekday
+            case .monthly: matches = rule.dayOfMonth == dayOfMonth
+            }
+            guard matches else { continue }
+            plan.taskIDs.append(task.id)
+            changed = true
+        }
+        if changed { try? context.save() }
+    }
+
     static func completeStretch(task: JDTask, plan: DailyPlan, context: ModelContext) {
         guard plan.stretchTaskIDs.contains(task.id),
               !plan.completedStretchIDs.contains(task.id) else { return }

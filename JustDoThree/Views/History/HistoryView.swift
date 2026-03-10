@@ -64,20 +64,8 @@ struct HistoryView: View {
                 .listStyle(.insetGrouped)
             }
 
-            // Premium teaser strip
-            Button {
+            PremiumGateView(featureName: "History & Analytics") {
                 showUpgrade = true
-            } label: {
-                HStack {
-                    Image(systemName: "chart.bar")
-                    Text("Unlock analytics & insights")
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                }
-                .font(.subheadline)
-                .foregroundStyle(.white)
-                .padding()
-                .background(Color.accentColor)
             }
         }
     }

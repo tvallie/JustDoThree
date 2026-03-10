@@ -16,6 +16,7 @@ struct TodayView: View {
     @State private var taskToDelete: UUID? = nil
     @State private var showDeleteConfirm = false
     @State private var showEditSheet: JDTask? = nil
+    @AppStorage("jdt_autoScheduleRecurring") private var autoScheduleRecurring = false
 
     // MARK: - Computed
 
@@ -111,6 +112,11 @@ struct TodayView: View {
         .onChange(of: scenePhase) { _, phase in
             if phase == .active {
                 appState.checkDayTransition(context: modelContext)
+            }
+        }
+        .onChange(of: autoScheduleRecurring) { _, enabled in
+            if enabled {
+                PlannerEngine.autoScheduleRecurring(for: Date(), context: modelContext)
             }
         }
     }
@@ -371,6 +377,12 @@ struct TaskCard: View {
                 }
             }
             .buttonStyle(.plain)
+
+            if task.recurringRule != nil {
+                Image(systemName: "repeat")
+                    .font(.caption)
+                    .foregroundStyle(.teal)
+            }
 
             // ··· action menu — always visible
             Menu {

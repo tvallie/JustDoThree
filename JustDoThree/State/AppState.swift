@@ -12,6 +12,13 @@ final class AppState {
     var showRolloverSheet: Bool = false
     var rolloverItems: [RolloverItem] = []
 
+    // MARK: - Settings
+
+    var autoScheduleRecurring: Bool {
+        get { UserDefaults.standard.bool(forKey: "jdt_autoScheduleRecurring") }
+        set { UserDefaults.standard.set(newValue, forKey: "jdt_autoScheduleRecurring") }
+    }
+
     // MARK: - Day transition
 
     /// Prevents duplicate rollover checks within a single app session day.
@@ -28,6 +35,11 @@ final class AppState {
 
         // Ensure today's plan exists
         let todayPlan = PlannerEngine.fetchOrCreateTodayPlan(context: context)
+
+        // Auto-schedule recurring tasks if enabled
+        if autoScheduleRecurring {
+            PlannerEngine.autoScheduleRecurring(for: Date(), context: context)
+        }
 
         // Guard: rollover already resolved today (persisted across sessions)
         let resolvedKey = "jdt_rolloverResolved"
