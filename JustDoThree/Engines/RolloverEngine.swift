@@ -72,8 +72,11 @@ enum RolloverEngine {
                     planDate: item.fromPlan.date
                 )
                 context.insert(log)
-                item.task.isCompleted = true
-                item.task.completionDate = Date()
+                // Recurring tasks reset immediately — do not mark permanently complete
+                if item.task.recurringRule == nil {
+                    item.task.isCompleted = true
+                    item.task.completionDate = Date()
+                }
 
             case .addToToday:
                 if todayPlan.taskIDs.count < 3,

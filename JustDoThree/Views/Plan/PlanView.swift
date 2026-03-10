@@ -43,6 +43,7 @@ struct WeekPlannerView: View {
 
     @State private var selectedDay: Date = Date().startOfDay
     @State private var showBacklogPicker = false
+    @AppStorage("jdt_autoScheduleRecurring") private var autoScheduleRecurring = false
 
     private var upcomingDays: [Date] {
         (0..<7).compactMap {
@@ -65,8 +66,15 @@ struct WeekPlannerView: View {
     }
 
     private var backlogTasks: [JDTask] {
-        let scheduledIDs = Set(plans.flatMap { $0.taskIDs })
-        return allTasks.filter { !$0.isCompleted && !scheduledIDs.contains($0.id) }
+        let allScheduledIDs = Set(plans.flatMap { $0.taskIDs })
+        let selectedDayIDs = Set(selectedPlan?.taskIDs ?? [])
+        return allTasks.filter { task in
+            let notCompleted = task.recurringRule != nil || !task.isCompleted
+            let notScheduled = task.recurringRule != nil
+                ? !selectedDayIDs.contains(task.id)
+                : !allScheduledIDs.contains(task.id)
+            return notCompleted && notScheduled
+        }
     }
 
     var body: some View {
@@ -167,6 +175,25 @@ struct WeekPlannerView: View {
                     PlannerEngine.addToToday(task: task, plan: plan, context: modelContext)
                 }
             )
+        }
+        .onAppear {
+            if autoScheduleRecurring {
+                for day in upcomingDays {
+                    PlannerEngine.autoScheduleRecurring(for: day, context: modelContext)
+                }
+            }
+        }
+        .onChange(of: selectedDay) { _, day in
+            if autoScheduleRecurring {
+                PlannerEngine.autoScheduleRecurring(for: day, context: modelContext)
+            }
+        }
+        .onChange(of: autoScheduleRecurring) { _, enabled in
+            if enabled {
+                for day in upcomingDays {
+                    PlannerEngine.autoScheduleRecurring(for: day, context: modelContext)
+                }
+            }
         }
     }
 }

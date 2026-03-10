@@ -82,20 +82,25 @@ enum PlannerEngine {
     static func complete(task: JDTask, plan: DailyPlan, context: ModelContext) {
         guard !plan.completedTaskIDs.contains(task.id) else { return }
         plan.completedTaskIDs.append(task.id)
-        task.isCompleted = true
-        task.completionDate = Date()
         let isStretch = plan.stretchTaskIDs.contains(task.id)
         let log = CompletionLog(taskID: task.id, taskTitle: task.title,
                                  planDate: plan.date, isStretchGoal: isStretch)
         context.insert(log)
+        // Recurring tasks reset immediately — do not mark permanently complete
+        if task.recurringRule == nil {
+            task.isCompleted = true
+            task.completionDate = Date()
+        }
         try? context.save()
     }
 
     static func uncomplete(task: JDTask, plan: DailyPlan, context: ModelContext) {
         plan.completedTaskIDs.removeAll { $0 == task.id }
         plan.completedStretchIDs.removeAll { $0 == task.id }
-        task.isCompleted = false
-        task.completionDate = nil
+        if task.recurringRule == nil {
+            task.isCompleted = false
+            task.completionDate = nil
+        }
         // Remove matching completion log
         let logs = (try? context.fetch(FetchDescriptor<CompletionLog>())) ?? []
         if let log = logs.first(where: {
@@ -122,15 +127,47 @@ enum PlannerEngine {
         try? context.save()
     }
 
+    // MARK: - Recurring auto-schedule
+
+    /// Adds any recurring tasks whose rule matches the given date into that day's plan.
+    /// Respects the 3-task primary limit. Safe to call multiple times (idempotent).
+    static func autoScheduleRecurring(for date: Date, context: ModelContext) {
+        let plan = fetchOrCreatePlan(for: date, context: context)
+        let tasks = allTasks(context: context)
+        let cal = Calendar.current
+        let weekday = cal.component(.weekday, from: date)
+        let dayOfMonth = cal.component(.day, from: date)
+
+        var changed = false
+        for task in tasks {
+            guard let rule = task.recurringRule else { continue }
+            guard plan.taskIDs.count < 3 else { break }
+            guard !plan.taskIDs.contains(task.id) else { continue }
+
+            let matches: Bool
+            switch rule.pattern {
+            case .weekly:  matches = rule.weekday == weekday
+            case .monthly: matches = rule.dayOfMonth == dayOfMonth
+            }
+            guard matches else { continue }
+            plan.taskIDs.append(task.id)
+            changed = true
+        }
+        if changed { try? context.save() }
+    }
+
     static func completeStretch(task: JDTask, plan: DailyPlan, context: ModelContext) {
         guard plan.stretchTaskIDs.contains(task.id),
               !plan.completedStretchIDs.contains(task.id) else { return }
         plan.completedStretchIDs.append(task.id)
-        task.isCompleted = true
-        task.completionDate = Date()
         let log = CompletionLog(taskID: task.id, taskTitle: task.title,
                                  planDate: plan.date, isStretchGoal: true)
         context.insert(log)
+        // Recurring tasks reset immediately — do not mark permanently complete
+        if task.recurringRule == nil {
+            task.isCompleted = true
+            task.completionDate = Date()
+        }
         try? context.save()
     }
 }

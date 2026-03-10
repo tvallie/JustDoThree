@@ -182,7 +182,7 @@ struct LegalFooter: View {
     var body: some View {
         VStack(spacing: 12) {
             Divider()
-            Text("© \(copyrightYear) Todd Vallie. All rights reserved.")
+            Text("© \(String(copyrightYear)) Todd Vallie. All rights reserved.")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
                 .multilineTextAlignment(.center)

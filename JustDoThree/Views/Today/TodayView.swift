@@ -16,6 +16,7 @@ struct TodayView: View {
     @State private var taskToDelete: UUID? = nil
     @State private var showDeleteConfirm = false
     @State private var showEditSheet: JDTask? = nil
+    @AppStorage("jdt_autoScheduleRecurring") private var autoScheduleRecurring = false
 
     // MARK: - Computed
 
@@ -111,6 +112,11 @@ struct TodayView: View {
         .onChange(of: scenePhase) { _, phase in
             if phase == .active {
                 appState.checkDayTransition(context: modelContext)
+            }
+        }
+        .onChange(of: autoScheduleRecurring) { _, enabled in
+            if enabled {
+                PlannerEngine.autoScheduleRecurring(for: Date(), context: modelContext)
             }
         }
     }
@@ -329,14 +335,7 @@ struct TodayView: View {
 
     private func uncompleteStretch(_ task: JDTask) {
         guard let plan = todayPlan else { return }
-        plan.completedStretchIDs.removeAll { $0 == task.id }
-        task.isCompleted = false
-        task.completionDate = nil
-        let logs = (try? modelContext.fetch(FetchDescriptor<CompletionLog>())) ?? []
-        if let log = logs.first(where: { $0.taskID == task.id && $0.planDate.isSameDay(as: plan.date) }) {
-            modelContext.delete(log)
-        }
-        try? modelContext.save()
+        PlannerEngine.uncomplete(task: task, plan: plan, context: modelContext)
     }
 }
 
@@ -378,6 +377,12 @@ struct TaskCard: View {
                 }
             }
             .buttonStyle(.plain)
+
+            if task.recurringRule != nil {
+                Image(systemName: "repeat")
+                    .font(.caption)
+                    .foregroundStyle(.teal)
+            }
 
             // ··· action menu — always visible
             Menu {
@@ -437,7 +442,8 @@ struct BacklogPickerSheet: View {
         allTasks.compactMap { task -> (JDTask, String)? in
             guard !task.isCompleted || task.recurringRule != nil else { return nil }
             guard !inTargetPlanIDs.contains(task.id) else { return nil }
-            for plan in plans where !plan.date.isSameDay(as: forDate) {
+            let today = Date().startOfDay
+            for plan in plans where !plan.date.isSameDay(as: forDate) && plan.date >= today {
                 if plan.taskIDs.contains(task.id) || plan.stretchTaskIDs.contains(task.id) {
                     let label = plan.date.isSameDay(as: Date()) ? "Today" : plan.date.shortDayString
                     return (task, label)
