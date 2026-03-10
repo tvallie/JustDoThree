@@ -27,7 +27,7 @@ struct RecurringRule: Codable, Hashable {
     var displayString: String {
         switch pattern {
         case .weekly:
-            let day = weekday ?? 1
+            let day = max(1, min(7, weekday ?? 1))
             // Calendar weekday: 1 = Sunday, 2 = Monday … 7 = Saturday
             let symbols = Calendar.current.weekdaySymbols // ["Sunday", "Monday", …]
             let name = symbols[safe: day - 1] ?? "day \(day)"
