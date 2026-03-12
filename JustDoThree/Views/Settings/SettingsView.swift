@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Environment(AppState.self) private var appState
     @Environment(PremiumManager.self) private var premium
     @State private var showUpgrade = false
     @State private var notifManager = NotificationManager.shared
@@ -129,6 +131,9 @@ struct SettingsView: View {
                 Section("Debug") {
                     Button("Toggle Premium") {
                         premium.isPremium ? premium.revokePremium() : premium.simulatePurchase()
+                    }
+                    Button("Preview Rollover Sheet") {
+                        appState.previewRolloverSheet(context: modelContext)
                     }
                 }
                 #endif

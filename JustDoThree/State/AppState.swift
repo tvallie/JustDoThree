@@ -74,4 +74,34 @@ final class AppState {
     private func markRolloverResolved() {
         UserDefaults.standard.set(Date(), forKey: "jdt_rolloverResolved")
     }
+
+    #if DEBUG
+    /// Forces the rollover sheet open for testing. Uses real pending items if any exist;
+    /// otherwise seeds yesterday's plan with up to 2 backlog tasks to create test data.
+    func previewRolloverSheet(context: ModelContext) {
+        let todayPlan = PlannerEngine.fetchOrCreateTodayPlan(context: context)
+        var items = RolloverEngine.findPendingItems(todayPlan: todayPlan, context: context)
+
+        if items.isEmpty {
+            let allTasks = PlannerEngine.allTasks(context: context)
+            let todayIDs = Set(todayPlan.taskIDs)
+            let candidates = allTasks
+                .filter { !$0.isCompleted && !todayIDs.contains($0.id) }
+                .prefix(2)
+            guard !candidates.isEmpty else { return }
+
+            let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+            let yesterdayPlan = PlannerEngine.fetchOrCreatePlan(for: yesterday, context: context)
+            for task in candidates where !yesterdayPlan.taskIDs.contains(task.id) {
+                yesterdayPlan.taskIDs.append(task.id)
+            }
+            try? context.save()
+            items = RolloverEngine.findPendingItems(todayPlan: todayPlan, context: context)
+            guard !items.isEmpty else { return }
+        }
+
+        rolloverItems = items
+        showRolloverSheet = true
+    }
+    #endif
 }

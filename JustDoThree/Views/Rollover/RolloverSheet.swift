@@ -14,7 +14,6 @@ struct RolloverSheet: View {
     }
 
     var body: some View {
-        @Bindable var state = appState
         NavigationStack {
             VStack(spacing: 0) {
                 // Header callout
@@ -30,8 +29,10 @@ struct RolloverSheet: View {
                 .background(Color(.secondarySystemBackground))
 
                 List {
-                    ForEach($state.rolloverItems) { $item in
-                        RolloverItemRow(item: $item, slotsAvailable: todaySlotsFree)
+                    ForEach(Array(appState.rolloverItems.enumerated()), id: \.element.id) { index, item in
+                        RolloverItemRow(item: item, slotsAvailable: todaySlotsFree) { choice in
+                            appState.rolloverItems[index].choice = choice
+                        }
                     }
                 }
                 .listStyle(.plain)
@@ -66,8 +67,9 @@ struct RolloverSheet: View {
 // MARK: - Row
 
 private struct RolloverItemRow: View {
-    @Binding var item: RolloverItem
+    let item: RolloverItem
     let slotsAvailable: Int
+    let onChoiceChange: (RolloverItem.Choice) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -89,7 +91,7 @@ private struct RolloverItemRow: View {
         icon: String, disabled: Bool = false
     ) -> some View {
         Button {
-            item.choice = choice
+            onChoiceChange(choice)
         } label: {
             Label(label, systemImage: icon)
                 .font(.caption)
