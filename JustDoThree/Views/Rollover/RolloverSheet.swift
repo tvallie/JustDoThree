@@ -15,18 +15,8 @@ struct RolloverSheet: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(Array(appState.rolloverItems.enumerated()), id: \.element.id) { index, item in
-                    RolloverItemRow(item: item, slotsAvailable: todaySlotsFree) { choice in
-                        var updated = appState.rolloverItems
-                        updated[index].choice = choice
-                        appState.rolloverItems = updated
-                    }
-                }
-            }
-            .listStyle(.plain)
-            .safeAreaInset(edge: .top, spacing: 0) {
-                // Header callout
+            VStack(spacing: 0) {
+                // Header
                 VStack(spacing: 6) {
                     Text("A few things carried over")
                         .font(.headline)
@@ -37,8 +27,32 @@ struct RolloverSheet: View {
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(Color(.secondarySystemBackground))
-            }
-            .safeAreaInset(edge: .bottom, spacing: 0) {
+
+                Divider()
+
+                // Item rows — ScrollView avoids all List hit-testing issues
+                ScrollView {
+                    VStack(spacing: 0) {
+                        ForEach(Array(appState.rolloverItems.enumerated()), id: \.element.id) { index, item in
+                            RolloverItemRow(item: item, slotsAvailable: todaySlotsFree) { choice in
+                                var updated = appState.rolloverItems
+                                updated[index].choice = choice
+                                appState.rolloverItems = updated
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 14)
+
+                            if index < appState.rolloverItems.count - 1 {
+                                Divider()
+                                    .padding(.horizontal, 20)
+                            }
+                        }
+                    }
+                    .padding(.vertical, 8)
+                }
+
+                Divider()
+
                 // Footer
                 VStack(spacing: 12) {
                     Button {
@@ -85,7 +99,6 @@ private struct RolloverItemRow: View {
                 choiceButton("Backlog", choice: .backlog, icon: "tray")
             }
         }
-        .padding(.vertical, 8)
     }
 
     private func choiceButton(
@@ -103,6 +116,7 @@ private struct RolloverItemRow: View {
                 .foregroundStyle(item.choice == choice ? .white : (disabled ? .secondary : .primary))
                 .clipShape(Capsule())
         }
+        .buttonStyle(.plain)
         .disabled(disabled)
     }
 }
