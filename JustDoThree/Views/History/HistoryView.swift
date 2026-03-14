@@ -4,11 +4,16 @@ import SwiftData
 struct HistoryView: View {
     @Environment(PremiumManager.self) private var premium
 
-    @Query(sort: \CompletionLog.completionDate, order: .reverse)
-    private var logs: [CompletionLog]
+    @Query private var logs: [CompletionLog]
+    @Query(sort: \JDTask.rolloverCount, order: .reverse) private var tasks: [JDTask]
 
-    @Query(sort: \JDTask.rolloverCount, order: .reverse)
-    private var tasks: [JDTask]
+    init() {
+        var descriptor = FetchDescriptor<CompletionLog>(
+            sortBy: [SortDescriptor(\.completionDate, order: .reverse)]
+        )
+        descriptor.fetchLimit = 200
+        _logs = Query(descriptor)
+    }
 
     var body: some View {
         NavigationStack {

@@ -28,13 +28,20 @@ final class JDTask {
         self.recurringRuleData = nil
     }
 
+    /// Transient cache so `recurringRule` doesn't allocate a JSONDecoder on every access.
+    /// `nil` (outer) = not yet decoded; `.some(nil)` = decoded, no rule; `.some(rule)` = decoded rule.
+    @Transient private var _cachedRule: RecurringRule?? = nil
+
     var recurringRule: RecurringRule? {
         get {
-            guard let data = recurringRuleData else { return nil }
-            return try? JSONDecoder().decode(RecurringRule.self, from: data)
+            if let cached = _cachedRule { return cached }
+            let decoded = recurringRuleData.flatMap { try? JSONDecoder().decode(RecurringRule.self, from: $0) }
+            _cachedRule = decoded
+            return decoded
         }
         set {
             recurringRuleData = try? JSONEncoder().encode(newValue)
+            _cachedRule = newValue
         }
     }
 }
