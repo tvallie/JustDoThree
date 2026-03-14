@@ -3,8 +3,6 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(AppState.self) private var appState
-    @Environment(PremiumManager.self) private var premium
-    @State private var showUpgrade = false
     @State private var notifManager = NotificationManager.shared
     @AppStorage("jdt_autoScheduleRecurring") private var autoScheduleRecurring = false
 
@@ -58,49 +56,18 @@ struct SettingsView: View {
                     Text("Reminders are optional and never guilt-driven.")
                 }
 
-                // MARK: - Premium
-                Section("Premium") {
-                    if premium.isPremium {
-                        Label("Just Do Three Premium — unlocked", systemImage: "checkmark.seal.fill")
-                            .foregroundStyle(.green)
-                    } else {
-                        HStack {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("Just Do Three Premium")
-                                    .font(.body)
-                                Text("7-day planning · analytics · recurring tasks")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
-                            Spacer()
-                            Button("Unlock") {
-                                showUpgrade = true
-                            }
-                            .buttonStyle(.borderedProminent)
-                            .controlSize(.small)
+                // MARK: - Features
+                Section {
+                    Toggle(isOn: $autoScheduleRecurring) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Auto-schedule recurring tasks")
+                            Text("Adds recurring tasks to your plan automatically on their scheduled day")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
                         }
-
-                        Button("Restore purchase") {
-                            Task { await premium.restorePurchases() }
-                        }
-                        .foregroundStyle(Color.accentColor)
                     }
-                }
-
-                // MARK: - Premium Features
-                if premium.isPremium {
-                    Section {
-                        Toggle(isOn: $autoScheduleRecurring) {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("Auto-schedule recurring tasks")
-                                Text("Adds recurring tasks to your plan automatically on their scheduled day")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
-                        }
-                    } header: {
-                        Text("Premium Features")
-                    }
+                } header: {
+                    Text("Features")
                 }
 
                 // MARK: - About
@@ -129,9 +96,6 @@ struct SettingsView: View {
                 // DEBUG (remove before release)
                 #if DEBUG
                 Section("Debug") {
-                    Button("Toggle Premium") {
-                        premium.isPremium ? premium.revokePremium() : premium.simulatePurchase()
-                    }
                     Button("Preview Rollover Sheet") {
                         appState.previewRolloverSheet(context: modelContext)
                     }
@@ -140,108 +104,12 @@ struct SettingsView: View {
             }
             .navigationTitle("Settings")
         }
-        .sheet(isPresented: $showUpgrade) {
-            UpgradeSheet()
-        }
     }
 
     private func requestNotifAuth() {
         Task {
             let granted = await NotificationManager.shared.requestAuthorization()
             if granted { NotificationManager.shared.reschedule() }
-        }
-    }
-}
-
-// MARK: - Upgrade sheet
-
-struct UpgradeSheet: View {
-    @Environment(PremiumManager.self) private var premium
-    @Environment(\.dismiss) private var dismiss
-    @State private var purchasing = false
-
-    var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 28) {
-                    // App logo header
-                    VStack(spacing: 12) {
-                        AppLogoView(size: 72)
-                            .padding(.top, 12)
-                        Text("Just Do Three Premium")
-                            .font(.title2.bold())
-                        Text("One-time purchase · No subscription")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
-
-                    VStack(alignment: .leading, spacing: 16) {
-                        FeatureRow(icon: "calendar.badge.clock", text: "Plan tasks up to 7 days ahead")
-                        FeatureRow(icon: "chart.bar.xaxis", text: "Day, week, month & year analytics")
-                        FeatureRow(icon: "arrow.triangle.2.circlepath", text: "Weekly & monthly recurring tasks")
-                        FeatureRow(icon: "star.fill", text: "Stretch goal tracking & insights")
-                        FeatureRow(icon: "doc.badge.plus", text: "Import tasks from a .txt or .csv file")
-                        FeatureRow(icon: "exclamationmark.triangle", text: "Most avoided tasks report")
-                    }
-                    .padding(.horizontal)
-
-                    VStack(spacing: 8) {
-                        Button {
-                            purchasing = true
-                            Task {
-                                let success = await premium.purchase()
-                                purchasing = false
-                                if success { dismiss() }
-                            }
-                        } label: {
-                            Group {
-                                if purchasing {
-                                    ProgressView()
-                                } else if premium.displayPrice.isEmpty {
-                                    Text("Unlock Premium")
-                                } else {
-                                    Text("Unlock — \(premium.displayPrice)")
-                                }
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .controlSize(.large)
-                        .disabled(purchasing)
-                        .padding(.horizontal)
-                    }
-
-                    Button("Restore purchase") {
-                        Task {
-                            await premium.restorePurchases()
-                            dismiss()
-                        }
-                    }
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Close") { dismiss() }
-                }
-            }
-        }
-    }
-}
-
-private struct FeatureRow: View {
-    let icon: String
-    let text: String
-
-    var body: some View {
-        HStack(spacing: 12) {
-            Image(systemName: icon)
-                .frame(width: 24)
-                .foregroundStyle(Color.accentColor)
-            Text(text)
-                .font(.subheadline)
         }
     }
 }
@@ -262,5 +130,7 @@ extension Bundle {
 
 #Preview {
     SettingsView()
+        .environment(AppState())
         .environment(PremiumManager())
+        .modelContainer(previewContainer)
 }

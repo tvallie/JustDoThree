@@ -12,7 +12,6 @@ struct JustDoThreeApp: App {
                 .environment(appState)
                 .environment(premium)
                 .tint(.teal)
-                .task { await premium.loadProducts() }
         }
         .modelContainer(for: [JDTask.self, DailyPlan.self, CompletionLog.self])
     }
