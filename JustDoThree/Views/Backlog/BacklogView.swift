@@ -4,7 +4,6 @@ import UniformTypeIdentifiers
 
 struct BacklogView: View {
     @Environment(\.modelContext) private var modelContext
-    @Environment(PremiumManager.self) private var premium
 
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
     @Query(sort: \DailyPlan.date) private var plans: [DailyPlan]
@@ -55,18 +54,28 @@ struct BacklogView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .safeAreaInset(edge: .bottom) {
-                if !premium.isPremium {
-                    HStack(spacing: 6) {
-                        Image(systemName: "doc.badge.plus")
-                            .font(.caption2)
-                        Text("Upload a whole list of tasks at once — available with Premium.")
-                            .font(.caption)
+                HStack(spacing: 12) {
+                    Button {
+                        showFileImporter = true
+                    } label: {
+                        Label("Import File", systemImage: "doc.badge.plus")
+                            .frame(maxWidth: .infinity)
                     }
-                    .foregroundStyle(.tertiary)
-                    .padding(.vertical, 10)
-                    .frame(maxWidth: .infinity)
-                    .background(.background)
+                    .buttonStyle(.bordered)
+                    .controlSize(.large)
+
+                    Button {
+                        showAddSheet = true
+                    } label: {
+                        Label("Add Task", systemImage: "plus")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
                 }
+                .padding(.horizontal)
+                .padding(.vertical, 12)
+                .background(.regularMaterial)
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -74,20 +83,6 @@ struct BacklogView: View {
                         AppLogoView(size: 26)
                         Text("Just Do Three")
                             .font(.headline)
-                    }
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    HStack(spacing: 16) {
-                        if premium.isPremium {
-                            Button {
-                                showFileImporter = true
-                            } label: {
-                                Image(systemName: "doc.badge.plus")
-                            }
-                        }
-                        Button { showAddSheet = true } label: {
-                            Image(systemName: "plus")
-                        }
                     }
                 }
             }
@@ -276,5 +271,4 @@ struct BacklogRow: View {
 #Preview {
     BacklogView()
         .modelContainer(previewContainer)
-        .environment(PremiumManager())
 }
