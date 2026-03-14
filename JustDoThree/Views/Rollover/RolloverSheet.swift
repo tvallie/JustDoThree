@@ -15,7 +15,17 @@ struct RolloverSheet: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
+            List {
+                ForEach(Array(appState.rolloverItems.enumerated()), id: \.element.id) { index, item in
+                    RolloverItemRow(item: item, slotsAvailable: todaySlotsFree) { choice in
+                        var updated = appState.rolloverItems
+                        updated[index].choice = choice
+                        appState.rolloverItems = updated
+                    }
+                }
+            }
+            .listStyle(.plain)
+            .safeAreaInset(edge: .top, spacing: 0) {
                 // Header callout
                 VStack(spacing: 6) {
                     Text("A few things carried over")
@@ -27,22 +37,14 @@ struct RolloverSheet: View {
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(Color(.secondarySystemBackground))
-
-                List {
-                    ForEach(Array(appState.rolloverItems.enumerated()), id: \.element.id) { index, item in
-                        RolloverItemRow(item: item, slotsAvailable: todaySlotsFree) { choice in
-                            appState.rolloverItems[index].choice = choice
-                        }
-                    }
-                }
-                .listStyle(.plain)
-
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
                 // Footer
                 VStack(spacing: 12) {
                     Button {
                         appState.applyRolloverChoices(context: modelContext)
                     } label: {
-                        Text("Done")
+                        Text("Confirm")
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.borderedProminent)

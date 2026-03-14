@@ -58,7 +58,7 @@ final class AppState {
 
     /// Applies user's choices from the rollover sheet and dismisses it.
     func applyRolloverChoices(context: ModelContext) {
-        guard let todayPlan = PlannerEngine.plan(for: Date(), context: context) else { return }
+        let todayPlan = PlannerEngine.fetchOrCreateTodayPlan(context: context)
         RolloverEngine.applyChoices(rolloverItems, todayPlan: todayPlan, context: context)
         rolloverItems = []
         showRolloverSheet = false
