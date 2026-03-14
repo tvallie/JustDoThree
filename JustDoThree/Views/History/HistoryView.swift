@@ -10,67 +10,23 @@ struct HistoryView: View {
     @Query(sort: \JDTask.rolloverCount, order: .reverse)
     private var tasks: [JDTask]
 
-    @State private var showUpgrade = false
-
     var body: some View {
         NavigationStack {
-            Group {
-                if premium.isPremium {
-                    analyticsContent
-                } else {
-                    freeContent
-                }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    HStack(spacing: 6) {
-                        AppLogoView(size: 26)
-                        Text("Just Do Three")
-                            .font(.headline)
-                    }
-                }
-            }
-        }
-        .sheet(isPresented: $showUpgrade) {
-            UpgradeSheet()
-        }
-    }
-
-    // MARK: - Free view: simple completed list
-
-    private var freeContent: some View {
-        VStack(spacing: 0) {
-            if logs.isEmpty {
-                EmptyStateView(
-                    icon: "checkmark.seal",
-                    title: "Nothing completed yet",
-                    message: "Finished tasks will appear here."
-                )
-            } else {
-                List {
-                    ForEach(groupedLogs, id: \.date) { group in
-                        Section(header: Text(group.date.longDayString)) {
-                            ForEach(group.logs, id: \.taskID) { log in
-                                HStack {
-                                    Image(systemName: log.isStretchGoal ? "star.fill" : "checkmark.circle.fill")
-                                        .foregroundStyle(log.isStretchGoal ? .orange : .green)
-                                    Text(log.taskTitle)
-                                }
-                            }
+            analyticsContent
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        HStack(spacing: 6) {
+                            AppLogoView(size: 26)
+                            Text("Just Do Three")
+                                .font(.headline)
                         }
                     }
                 }
-                .listStyle(.insetGrouped)
-            }
-
-            PremiumGateView(featureName: "History & Analytics") {
-                showUpgrade = true
-            }
         }
     }
 
-    // MARK: - Premium view: analytics
+    // MARK: - Analytics
 
     private var analyticsContent: some View {
         ScrollView {

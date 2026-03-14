@@ -17,8 +17,9 @@
 		3968C06BDE378CB1050EB99C /* RolloverEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5DFC01F2DB0F3EA9D97F15 /* RolloverEngine.swift */; };
 		3AAB1CD1DD0456DD73061792 /* PlannerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED183CD1E160ACA3A2B0A17B /* PlannerEngine.swift */; };
 		48D3A424F7271CDAF445386B /* PremiumGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB803F759E33223CC61A7F1 /* PremiumGateView.swift */; };
+		4D8234778C8DB87FD84A7796 /* BragCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9FDF090C318BD5125F23C8 /* BragCardView.swift */; };
 		4E2AC04F8F9E6A817A935DF4 /* RecurringRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D292CCCB9DAC9025273552B /* RecurringRule.swift */; };
-		5FBE72822F5E1FC500608BA5 /*  StoreKit.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE72812F5E1FC500608BA5 /*  StoreKit.storekit */; };
+		5EB9B2718B99036A1024CB3E /* BragSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558CABE5A57DCE84BABD826A /* BragSheet.swift */; };
 		6DBB4B75E35DEFF8BF84925A /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA8508B7B12A648EC90F634 /* EmptyStateView.swift */; };
 		A0733137D2E07D0202551F80 /* JDTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9244D2D09EFC3363D6A4D835 /* JDTask.swift */; };
 		A4338A6534BCDAACCB6435EC /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC06642F4BD10ED917C1C813 /* PreviewContainer.swift */; };
@@ -41,14 +42,14 @@
 		084EB54D11EE6B0F1D53B735 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0907822FE5FC342A97C4C987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E5DFC01F2DB0F3EA9D97F15 /* RolloverEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolloverEngine.swift; sourceTree = "<group>"; };
-		200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		3854F531D88F2596847BE463 /* JustDoThree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustDoThree.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		3854F531D88F2596847BE463 /* JustDoThree.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = JustDoThree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD3A97212AC99E4DB48E549 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
 		4809D5B4FDF66DB78EDF82F9 /* AppLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogoView.swift; sourceTree = "<group>"; };
 		48B577A258EF0DBDD29DAC2A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		558CABE5A57DCE84BABD826A /* BragSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BragSheet.swift; sourceTree = "<group>"; };
 		5591CE2E6C25FF3BC2724346 /* CompletionLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionLog.swift; sourceTree = "<group>"; };
 		5F8B76C173D328083435B6A3 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
-		5FBE72812F5E1FC500608BA5 /*  StoreKit.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = " StoreKit.storekit"; sourceTree = "<group>"; };
 		61CCAFC9BADC343232127109 /* BacklogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BacklogView.swift; sourceTree = "<group>"; };
 		66B12D5E74B9E9EC21C72282 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6AE15746757A5C3EE27834EB /* RolloverSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolloverSheet.swift; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 		ED183CD1E160ACA3A2B0A17B /* PlannerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerEngine.swift; sourceTree = "<group>"; };
 		EFA9F455A8F4B8CE66CCE8E1 /* PremiumManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumManager.swift; sourceTree = "<group>"; };
 		F8D1C067F49CCE195EC61C92 /* TermsOfUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseView.swift; sourceTree = "<group>"; };
+		FA9FDF090C318BD5125F23C8 /* BragCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BragCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -76,6 +78,7 @@
 			children = (
 				ED09558AE6E393CC3C82A644 /* AddTaskSheet.swift */,
 				4809D5B4FDF66DB78EDF82F9 /* AppLogoView.swift */,
+				FA9FDF090C318BD5125F23C8 /* BragCardView.swift */,
 				8DA8508B7B12A648EC90F634 /* EmptyStateView.swift */,
 				8FB803F759E33223CC61A7F1 /* PremiumGateView.swift */,
 			);
@@ -85,6 +88,7 @@
 		03797813B169FE3D717018CA /* Today */ = {
 			isa = PBXGroup;
 			children = (
+				558CABE5A57DCE84BABD826A /* BragSheet.swift */,
 				5F8B76C173D328083435B6A3 /* TodayView.swift */,
 			);
 			path = Today;
@@ -93,7 +97,6 @@
 		13B081FFF4101A0580F4FBF7 = {
 			isa = PBXGroup;
 			children = (
-				5FBE72812F5E1FC500608BA5 /*  StoreKit.storekit */,
 				4E7B741D069B8FC3B34BBA70 /* JustDoThree */,
 				E6F71FE0CFFE275AFAAA87A7 /* Products */,
 			);
@@ -271,7 +274,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2630;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 38260BA30AA8639687667FFA /* Build configuration list for PBXProject "JustDoThree" */;
 			developmentRegion = en;
@@ -298,7 +303,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2918E9C78BA897EC9CB9066 /* Assets.xcassets in Resources */,
-				5FBE72822F5E1FC500608BA5 /*  StoreKit.storekit in Resources */,
 				0A1BB9E08C8CB03731223D7B /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,6 +318,8 @@
 				DFE3D86AAA6332D7DFF3DCC2 /* AppLogoView.swift in Sources */,
 				CCA14A0EE8CA27BCAC98783A /* AppState.swift in Sources */,
 				33829380BFE55FA51B44124C /* BacklogView.swift in Sources */,
+				4D8234778C8DB87FD84A7796 /* BragCardView.swift in Sources */,
+				5EB9B2718B99036A1024CB3E /* BragSheet.swift in Sources */,
 				F5802032DDA1C268D3A7E6CD /* CompletionLog.swift in Sources */,
 				EB1DE899D5FED9E78C222E64 /* DailyPlan.swift in Sources */,
 				102BDFA9DD64CAF27D61BD8F /* Date+Helpers.swift in Sources */,
@@ -345,7 +351,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -377,10 +382,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 3ZAS78KQUH;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -394,7 +397,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -407,7 +409,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -439,10 +440,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 3ZAS78KQUH;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -463,7 +462,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -477,18 +475,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = JustDoThree/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.todd.justdothree;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -502,18 +498,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = JustDoThree/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.todd.justdothree;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;

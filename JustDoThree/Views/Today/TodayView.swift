@@ -12,6 +12,7 @@ struct TodayView: View {
 
     @State private var showBacklogPicker = false
     @State private var showTomorrowPicker = false
+    @State private var showBrag = false
     @State private var addingStretch = false
     @State private var taskToDelete: UUID? = nil
     @State private var showDeleteConfirm = false
@@ -43,6 +44,16 @@ struct TodayView: View {
 
     private var allPrimaryDone: Bool {
         todayPlan?.isAllPrimaryComplete ?? false
+    }
+
+    private var completedTaskTitles: [String] {
+        guard let plan = todayPlan else { return [] }
+        return todayTasks.filter { plan.completedTaskIDs.contains($0.id) }.map(\.title)
+    }
+
+    private var completedStretchTitles: [String] {
+        guard let plan = todayPlan else { return [] }
+        return stretchTasks.filter { plan.completedStretchIDs.contains($0.id) }.map(\.title)
     }
 
     private var slotsUsed: Int { todayPlan?.taskIDs.count ?? 0 }
@@ -90,6 +101,13 @@ struct TodayView: View {
         }
         .sheet(isPresented: $state.showRolloverSheet) {
             RolloverSheet()
+        }
+        .sheet(isPresented: $showBrag) {
+            BragSheet(
+                date: Date(),
+                completedTasks: completedTaskTitles,
+                completedStretches: completedStretchTitles
+            )
         }
         .confirmationDialog(
             "Remove this task from today?",
@@ -207,12 +225,22 @@ struct TodayView: View {
     }
 
     private var celebrationBanner: some View {
-        VStack(spacing: 8) {
-            Text("Nice work.")
-                .font(.title3.bold())
-            Text("You finished your three.")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+        VStack(spacing: 12) {
+            VStack(spacing: 8) {
+                Text("Nice work.")
+                    .font(.title3.bold())
+                Text("You finished your three.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+            Button {
+                showBrag = true
+            } label: {
+                Label("Share your win", systemImage: "square.and.arrow.up")
+                    .font(.subheadline.bold())
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.small)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 20)

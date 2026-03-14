@@ -12,7 +12,6 @@ private let addTaskSheetOrdinalFormatter: NumberFormatter = {
 struct AddTaskSheet: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @Environment(PremiumManager.self) private var premium
 
     /// Pass nil to create a new task; pass an existing task to edit its title.
     var existingTask: JDTask? = nil
@@ -22,7 +21,6 @@ struct AddTaskSheet: View {
 
     @State private var title: String = ""
     @State private var showImportInfo = false
-    @State private var showUpgrade = false
     @State private var recurringPattern: RecurringRule.Pattern? = nil
     @State private var recurringWeekday: Int = 2   // Monday (Calendar weekday 2)
     @State private var recurringDayOfMonth: Int = 1
@@ -50,97 +48,45 @@ struct AddTaskSheet: View {
 
                 // File import row — only shown when creating (not editing)
                 if !isEditing {
-                    if premium.isPremium {
-                        Section {
-                            Button {
-                                showImportInfo = true
-                            } label: {
-                                Label("Import from .txt or .csv", systemImage: "doc.badge.plus")
-                                    .font(.subheadline)
-                            }
-                        } footer: {
-                            Text("Add multiple tasks at once from a file.")
+                    Section {
+                        Button {
+                            showImportInfo = true
+                        } label: {
+                            Label("Import from .txt or .csv", systemImage: "doc.badge.plus")
+                                .font(.subheadline)
                         }
-                    } else {
-                        Section {
-                            Button {
-                                showUpgrade = true
-                            } label: {
-                                HStack(spacing: 10) {
-                                    Image(systemName: "doc.badge.plus")
-                                        .font(.subheadline)
-                                        .foregroundStyle(.secondary)
-                                    Text("Import tasks from a file")
-                                        .font(.subheadline)
-                                        .foregroundStyle(.secondary)
-                                    Spacer()
-                                    Text("Premium")
-                                        .font(.caption.bold())
-                                        .foregroundStyle(.teal)
-                                        .padding(.horizontal, 7)
-                                        .padding(.vertical, 3)
-                                        .background(.teal.opacity(0.12))
-                                        .clipShape(Capsule())
-                                }
-                            }
-                            .buttonStyle(.plain)
-                        }
+                    } footer: {
+                        Text("Add multiple tasks at once from a file.")
                     }
                 }
 
                 // Recurrence section
-                if premium.isPremium {
-                    Section {
-                        Picker("Repeat", selection: $recurringPattern) {
-                            Text("None").tag(Optional<RecurringRule.Pattern>.none)
-                            Text("Weekly").tag(Optional(RecurringRule.Pattern.weekly))
-                            Text("Monthly").tag(Optional(RecurringRule.Pattern.monthly))
-                        }
-
-                        if recurringPattern == .weekly {
-                            Picker("Day", selection: $recurringWeekday) {
-                                ForEach(1...7, id: \.self) { day in
-                                    Text(Calendar.current.weekdaySymbols[day - 1]).tag(day)
-                                }
-                            }
-                        }
-
-                        if recurringPattern == .monthly {
-                            Picker("Day of month", selection: $recurringDayOfMonth) {
-                                ForEach(1...31, id: \.self) { day in
-                                    Text(addTaskSheetOrdinalFormatter.string(from: NSNumber(value: day)) ?? "\(day)").tag(day)
-                                }
-                            }
-                        }
-                    } header: {
-                        Text("Recurrence")
-                    } footer: {
-                        Text("Recurring tasks reset automatically after completion.")
+                Section {
+                    Picker("Repeat", selection: $recurringPattern) {
+                        Text("None").tag(Optional<RecurringRule.Pattern>.none)
+                        Text("Weekly").tag(Optional(RecurringRule.Pattern.weekly))
+                        Text("Monthly").tag(Optional(RecurringRule.Pattern.monthly))
                     }
-                } else {
-                    Section {
-                        Button {
-                            showUpgrade = true
-                        } label: {
-                            HStack(spacing: 10) {
-                                Image(systemName: "repeat")
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
-                                Text("Recurring tasks")
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
-                                Spacer()
-                                Text("Premium")
-                                    .font(.caption.bold())
-                                    .foregroundStyle(.teal)
-                                    .padding(.horizontal, 7)
-                                    .padding(.vertical, 3)
-                                    .background(.teal.opacity(0.12))
-                                    .clipShape(Capsule())
+
+                    if recurringPattern == .weekly {
+                        Picker("Day", selection: $recurringWeekday) {
+                            ForEach(1...7, id: \.self) { day in
+                                Text(Calendar.current.weekdaySymbols[day - 1]).tag(day)
                             }
                         }
-                        .buttonStyle(.plain)
                     }
+
+                    if recurringPattern == .monthly {
+                        Picker("Day of month", selection: $recurringDayOfMonth) {
+                            ForEach(1...31, id: \.self) { day in
+                                Text(addTaskSheetOrdinalFormatter.string(from: NSNumber(value: day)) ?? "\(day)").tag(day)
+                            }
+                        }
+                    }
+                } header: {
+                    Text("Recurrence")
+                } footer: {
+                    Text("Recurring tasks reset automatically after completion.")
                 }
             }
             .navigationTitle(isEditing ? "Edit Task" : "New Task")
@@ -158,9 +104,6 @@ struct AddTaskSheet: View {
         .presentationDetents(recurringPattern != nil ? [.medium] : [.height(isEditing ? 300 : 340)])
         .sheet(isPresented: $showImportInfo) {
             ImportInstructionsSheet()
-        }
-        .sheet(isPresented: $showUpgrade) {
-            UpgradeSheet()
         }
     }
 

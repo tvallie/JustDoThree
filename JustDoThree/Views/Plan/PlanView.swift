@@ -2,34 +2,19 @@ import SwiftUI
 import SwiftData
 
 struct PlanView: View {
-    @Environment(PremiumManager.self) private var premium
-    @State private var showUpgrade = false
-
     var body: some View {
         NavigationStack {
-            Group {
-                if premium.isPremium {
-                    WeekPlannerView()
-                } else {
-                    PremiumGateView(featureName: "7-Day Planning") {
-                        showUpgrade = true
-                    }
-                    .frame(maxHeight: .infinity)
-                }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    HStack(spacing: 6) {
-                        AppLogoView(size: 26)
-                        Text("Just Do Three")
-                            .font(.headline)
+            WeekPlannerView()
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        HStack(spacing: 6) {
+                            AppLogoView(size: 26)
+                            Text("Just Do Three")
+                                .font(.headline)
+                        }
                     }
                 }
-            }
-        }
-        .sheet(isPresented: $showUpgrade) {
-            UpgradeSheet()
         }
     }
 }
