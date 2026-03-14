@@ -14,26 +14,43 @@ struct BragCardView: View {
         return f.string(from: date)
     }
 
+    // Static teal gradient — ImageRenderer-safe (no adaptive colors)
+    private var headerGradient: LinearGradient {
+        LinearGradient(
+            colors: [
+                Color(red: 0.0,  green: 0.62, blue: 0.62),
+                Color(red: 0.05, green: 0.45, blue: 0.58)
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+
     var body: some View {
         VStack(spacing: 0) {
-            // Header band
-            HStack(spacing: 10) {
-                AppLogoView(size: 30)
-                Text("Just Do Three")
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
+            // ── Festive header ──────────────────────────────────────────
+            VStack(spacing: 6) {
+                Text("🎉")
+                    .font(.system(size: 44))
+
+                Text("Look what I did!")
+                    .font(.system(size: 26, weight: .black, design: .rounded))
                     .foregroundColor(.white)
-                Spacer()
+                    .multilineTextAlignment(.center)
+
+                Text(dateString)
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundColor(Color(white: 1.0, opacity: 0.72))
+                    .padding(.top, 2)
             }
             .padding(.horizontal, 20)
-            .padding(.vertical, 14)
-            .background(Color(red: 0.0, green: 0.588, blue: 0.588))
+            .padding(.top, 24)
+            .padding(.bottom, 22)
+            .frame(maxWidth: .infinity)
+            .background(headerGradient)
 
-            // Body
-            VStack(alignment: .leading, spacing: 16) {
-                Text(dateString)
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(Color(white: 0.45))
-
+            // ── Task body ───────────────────────────────────────────────
+            VStack(alignment: .leading, spacing: 12) {
                 // Primary tasks
                 VStack(alignment: .leading, spacing: 10) {
                     ForEach(completedTasks, id: \.self) { title in
@@ -54,12 +71,13 @@ struct BragCardView: View {
                     Rectangle()
                         .fill(Color(white: 0.88))
                         .frame(height: 1)
+                        .padding(.vertical, 2)
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Stretch goals")
-                            .font(.system(size: 10, weight: .semibold))
-                            .foregroundColor(Color(white: 0.5))
-                            .kerning(0.5)
+                        Text("STRETCH GOALS")
+                            .font(.system(size: 9, weight: .bold))
+                            .foregroundColor(Color(white: 0.55))
+                            .kerning(0.8)
 
                         ForEach(completedStretches, id: \.self) { title in
                             HStack(alignment: .top, spacing: 10) {
@@ -79,17 +97,20 @@ struct BragCardView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Color.white)
 
-            // Footer
-            Text("Just Do Three")
-                .font(.system(size: 10, weight: .medium))
-                .foregroundColor(Color(white: 0.6))
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 10)
-                .background(Color(white: 0.96))
+            // ── Branded footer ──────────────────────────────────────────
+            HStack(spacing: 7) {
+                AppLogoView(size: 18)
+                Text("justdothree.com")
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(Color(white: 0.5))
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 11)
+            .background(Color(white: 0.96))
         }
         .frame(width: cardWidth)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: Color(white: 0, opacity: 0.12), radius: 12, x: 0, y: 4)
+        .shadow(color: Color(white: 0, opacity: 0.13), radius: 14, x: 0, y: 5)
     }
 }
 
