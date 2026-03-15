@@ -22,11 +22,8 @@
 	<string>1</string>
 	<key>NSUserNotificationsUsageDescription</key>
 	<string>Just Do Three uses notifications to send optional morning and evening reminders.</string>
-	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIColorName</key>
-		<string></string>
-	</dict>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
