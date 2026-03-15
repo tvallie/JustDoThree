@@ -20,7 +20,7 @@ struct JustDoThreeApp: App {
                 }
             }
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                     withAnimation(.easeOut(duration: 0.5)) {
                         showSplash = false
                     }
