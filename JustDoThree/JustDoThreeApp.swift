@@ -5,13 +5,27 @@ import SwiftData
 struct JustDoThreeApp: App {
     @State private var appState = AppState()
     @State private var premium = PremiumManager()
+    @State private var showSplash = true
 
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environment(appState)
-                .environment(premium)
-                .tint(.teal)
+            ZStack {
+                RootView()
+                    .environment(appState)
+                    .environment(premium)
+                    .tint(.teal)
+                if showSplash {
+                    SplashView()
+                        .transition(.opacity)
+                }
+            }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    withAnimation(.easeOut(duration: 0.5)) {
+                        showSplash = false
+                    }
+                }
+            }
         }
         .modelContainer(for: [JDTask.self, DailyPlan.self, CompletionLog.self])
     }
