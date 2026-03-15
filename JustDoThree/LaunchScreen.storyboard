@@ -14,7 +14,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="AppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="HCa-qe-sDo">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="LaunchLogo" translatesAutoresizingMaskIntoConstraints="NO" id="HCa-qe-sDo">
                                 <rect key="frame" x="126.5" y="306" width="140" height="140"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just Do Three" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eCn-ap-Qoe">
@@ -42,6 +42,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="AppLogo" width="512" height="512"/>
+        <image name="LaunchLogo" width="512" height="512"/>
     </resources>
 </document>
