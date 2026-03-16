@@ -212,10 +212,10 @@ struct TodayView: View {
                             Text("Add a task")
                                 .font(.subheadline)
                         }
-                        .foregroundStyle(.tertiary)
+                        .foregroundStyle(.secondary)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)
-                        .background(Color(.tertiarySystemFill))
+                        .background(Color(.secondarySystemFill))
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                     .buttonStyle(.plain)
