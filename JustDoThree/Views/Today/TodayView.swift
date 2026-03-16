@@ -69,7 +69,7 @@ struct TodayView: View {
                     dateHeader
                     progressPips
                     primaryTaskList
-                    if allPrimaryDone && slotsLeft == 0 {
+                    if allPrimaryDone && slotsUsed > 0 {
                         celebrationBanner
                         stretchSection
                     }
