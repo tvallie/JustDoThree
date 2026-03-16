@@ -207,18 +207,11 @@ struct TodayView: View {
                         addingStretch = false
                         showBacklogPicker = true
                     } label: {
-                        HStack(spacing: 6) {
-                            Image(systemName: "plus.circle")
-                            Text("Add a task")
-                                .font(.subheadline)
-                        }
-                        .foregroundStyle(.secondary)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 12)
-                        .background(Color(.secondarySystemFill))
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        Label("Add a task", systemImage: "plus")
+                            .frame(maxWidth: .infinity)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.bordered)
+                    .controlSize(.large)
                 }
             }
         }
