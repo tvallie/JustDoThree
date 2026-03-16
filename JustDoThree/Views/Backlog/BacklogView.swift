@@ -12,6 +12,7 @@ struct BacklogView: View {
     @State private var editingTask: JDTask? = nil
     @State private var showDeleteConfirm: JDTask? = nil
     @State private var showFileImporter = false
+    @State private var showPasteSheet = false
     @State private var importResult: ImportResult? = nil
 
     private var todayTaskIDs: Set<UUID> {
@@ -55,10 +56,19 @@ struct BacklogView: View {
             .navigationBarTitleDisplayMode(.inline)
             .safeAreaInset(edge: .bottom) {
                 HStack(spacing: 12) {
-                    Button {
-                        showFileImporter = true
+                    Menu {
+                        Button {
+                            showPasteSheet = true
+                        } label: {
+                            Label("Paste Tasks", systemImage: "doc.on.clipboard")
+                        }
+                        Button {
+                            showFileImporter = true
+                        } label: {
+                            Label("Import File", systemImage: "doc.badge.plus")
+                        }
                     } label: {
-                        Label("Import File", systemImage: "doc.badge.plus")
+                        Label("Import", systemImage: "square.and.arrow.down")
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
@@ -89,6 +99,9 @@ struct BacklogView: View {
         }
         .sheet(isPresented: $showAddSheet) {
             AddTaskSheet()
+        }
+        .sheet(isPresented: $showPasteSheet) {
+            PasteTasksSheet()
         }
         .sheet(item: $editingTask) { task in
             AddTaskSheet(existingTask: task)

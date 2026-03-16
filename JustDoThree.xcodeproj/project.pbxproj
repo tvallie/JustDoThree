@@ -11,6 +11,7 @@
 		102BDFA9DD64CAF27D61BD8F /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A50918BD04B398D5D467190 /* Date+Helpers.swift */; };
 		25137B0337ECB10CDA0CFA3F /* PremiumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA9F455A8F4B8CE66CCE8E1 /* PremiumManager.swift */; };
 		33829380BFE55FA51B44124C /* BacklogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CCAFC9BADC343232127109 /* BacklogView.swift */; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* PasteTasksSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6A7B8C9D0E1F2A3 /* PasteTasksSheet.swift */; };
 		3569F589DFF4BB8CD0FCB8BA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B577A258EF0DBDD29DAC2A /* SettingsView.swift */; };
 		367DBEF10FCF389C0989AE2D /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B76C173D328083435B6A3 /* TodayView.swift */; };
 		36E3C62447CDDE0407B3EFB4 /* JustDoThreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE5D6690047093E4F38B2ED /* JustDoThreeApp.swift */; };
@@ -53,6 +54,7 @@
 		5591CE2E6C25FF3BC2724346 /* CompletionLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionLog.swift; sourceTree = "<group>"; };
 		5F8B76C173D328083435B6A3 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		61CCAFC9BADC343232127109 /* BacklogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BacklogView.swift; sourceTree = "<group>"; };
+		B2C3D4E5F6A7B8C9D0E1F2A3 /* PasteTasksSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteTasksSheet.swift; sourceTree = "<group>"; };
 		66B12D5E74B9E9EC21C72282 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6AE15746757A5C3EE27834EB /* RolloverSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolloverSheet.swift; sourceTree = "<group>"; };
 		6BDE404626CBC00AE4E4CE8E /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				61CCAFC9BADC343232127109 /* BacklogView.swift */,
+				B2C3D4E5F6A7B8C9D0E1F2A3 /* PasteTasksSheet.swift */,
 			);
 			path = Backlog;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				DFE3D86AAA6332D7DFF3DCC2 /* AppLogoView.swift in Sources */,
 				CCA14A0EE8CA27BCAC98783A /* AppState.swift in Sources */,
 				33829380BFE55FA51B44124C /* BacklogView.swift in Sources */,
+				A1B2C3D4E5F6A7B8C9D0E1F2 /* PasteTasksSheet.swift in Sources */,
 				4D8234778C8DB87FD84A7796 /* BragCardView.swift in Sources */,
 				5EB9B2718B99036A1024CB3E /* BragSheet.swift in Sources */,
 				F5802032DDA1C268D3A7E6CD /* CompletionLog.swift in Sources */,
