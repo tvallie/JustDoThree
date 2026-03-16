@@ -69,7 +69,7 @@ struct TodayView: View {
                     dateHeader
                     progressPips
                     primaryTaskList
-                    if allPrimaryDone && slotsUsed > 0 {
+                    if allPrimaryDone && slotsLeft == 0 {
                         celebrationBanner
                         stretchSection
                     }
@@ -202,7 +202,7 @@ struct TodayView: View {
                     )
                 }
 
-                if slotsLeft > 0 && !allPrimaryDone {
+                if slotsLeft > 0 {
                     Button {
                         addingStretch = false
                         showBacklogPicker = true
@@ -317,7 +317,7 @@ struct TodayView: View {
             }
         }
         ToolbarItem(placement: .topBarTrailing) {
-            if slotsLeft > 0 && !allPrimaryDone {
+            if slotsLeft > 0 {
                 Button {
                     addingStretch = false
                     showBacklogPicker = true
