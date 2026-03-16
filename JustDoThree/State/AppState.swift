@@ -19,9 +19,8 @@ final class AppState {
         set { UserDefaults.standard.set(newValue, forKey: "jdt_autoScheduleRecurring") }
     }
 
-    var hasSeenOnboarding: Bool {
-        get { UserDefaults.standard.bool(forKey: "jdt_hasSeenOnboarding") }
-        set { UserDefaults.standard.set(newValue, forKey: "jdt_hasSeenOnboarding") }
+    var hasSeenOnboarding: Bool = UserDefaults.standard.bool(forKey: "jdt_hasSeenOnboarding") {
+        didSet { UserDefaults.standard.set(hasSeenOnboarding, forKey: "jdt_hasSeenOnboarding") }
     }
 
     // MARK: - Day transition
