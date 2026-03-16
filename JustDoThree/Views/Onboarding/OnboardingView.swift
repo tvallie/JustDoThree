@@ -16,14 +16,14 @@ struct OnboardingView: View {
             message: "Add tasks one at a time, paste a whole list, or import from a file. Your backlog is always there when you're ready to plan."
         ),
         .init(
-            symbol: "calendar.badge.checkmark",
-            title: "Pick your three",
-            message: "Each day, tap Add a task and choose up to three things from your backlog. That's your focus."
-        ),
-        .init(
             symbol: "star.circle",
             title: "Done? Go further.",
             message: "Check off your tasks as you go. Once you finish your three, add stretch goals to keep the momentum."
+        ),
+        .init(
+            symbol: "gearshape",
+            title: "Set it and forget it",
+            message: "Mark tasks as recurring and they'll show up automatically each day. Set a daily reminder and tweak your preferences in Settings."
         ),
     ]
 
