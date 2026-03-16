@@ -107,5 +107,70 @@ final class AppState {
         rolloverItems = items
         showRolloverSheet = true
     }
+
+    /// Seeds realistic history data for testing the HistoryView analytics cards.
+    /// Idempotent — skips seeding if 10 or more CompletionLog records already exist.
+    func seedHistoryData(context: ModelContext) {
+        // Idempotency check
+        let existingLogs = (try? context.fetch(FetchDescriptor<CompletionLog>())) ?? []
+        guard existingLogs.count < 10 else { return }
+
+        let cal = Calendar.current
+        let today = Date().startOfDay
+
+        // MARK: — Seed JDTasks (for Most Avoided card)
+        let taskDefs: [(title: String, rolloverCount: Int)] = [
+            ("Clean up dog poop in back yard", 4),
+            ("Mow lawn", 3),
+            ("Buy birthday gift for pet elephant", 2),
+            ("Plant a tree", 1),
+            ("Tell someone they are awesome", 0),
+        ]
+
+        var tasks: [JDTask] = []
+        for (index, def) in taskDefs.enumerated() {
+            let task = JDTask(title: def.title, sortOrder: index)
+            task.rolloverCount = def.rolloverCount
+            context.insert(task)
+            tasks.append(task)
+        }
+
+        // MARK: — Seed CompletionLogs (for Stats, Perfect Days, Recent Completions cards)
+        // 14 days back. Most days: 3 primary completions (perfect day).
+        // Days 4 and 9 (1-indexed offset): only 2 completions — makes avg/day ~2.7.
+        // Day 7: also add one stretch goal completion.
+
+        let incompleteDays: Set<Int> = [4, 9]
+        let stretchDay: Int = 7
+
+        for offset in 1...14 {
+            guard let planDate = cal.date(byAdding: .day, value: -offset, to: today) else { continue }
+
+            let taskCount = incompleteDays.contains(offset) ? 2 : 3
+            for slot in 0..<taskCount {
+                let task = tasks[(offset + slot) % tasks.count]
+                let log = CompletionLog(
+                    taskID: task.id,
+                    taskTitle: task.title,
+                    planDate: planDate,
+                    isStretchGoal: false
+                )
+                context.insert(log)
+            }
+
+            if offset == stretchDay {
+                let stretchTask = tasks[(offset + 3) % tasks.count]
+                let stretchLog = CompletionLog(
+                    taskID: stretchTask.id,
+                    taskTitle: stretchTask.title,
+                    planDate: planDate,
+                    isStretchGoal: true
+                )
+                context.insert(stretchLog)
+            }
+        }
+
+        try? context.save()
+    }
     #endif
 }
