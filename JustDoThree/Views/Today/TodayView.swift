@@ -56,7 +56,7 @@ struct TodayView: View {
         return stretchTasks.filter { plan.completedStretchIDs.contains($0.id) }.map(\.title)
     }
 
-    private var slotsUsed: Int { todayPlan?.taskIDs.count ?? 0 }
+    private var slotsUsed: Int { todayTasks.count }
     private var slotsLeft: Int { max(0, 3 - slotsUsed) }
 
     // MARK: - Body
@@ -323,6 +323,9 @@ struct TodayView: View {
 
     private func addToToday(_ task: JDTask) {
         let plan = todayPlan ?? PlannerEngine.fetchOrCreateTodayPlan(context: modelContext)
+        // Remove any IDs that no longer correspond to a real task (defensive cleanup)
+        let validIDs = Set(allTasks.map(\.id))
+        plan.taskIDs.removeAll { !validIDs.contains($0) }
         PlannerEngine.addToToday(task: task, plan: plan, context: modelContext)
     }
 
