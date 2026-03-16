@@ -99,6 +99,9 @@ struct SettingsView: View {
                     Button("Preview Rollover Sheet") {
                         appState.previewRolloverSheet(context: modelContext)
                     }
+                    Button("Seed History Data") {
+                        appState.seedHistoryData(context: modelContext)
+                    }
                 }
                 #endif
             }
