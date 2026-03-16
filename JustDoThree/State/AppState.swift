@@ -113,12 +113,12 @@ final class AppState {
     func seedHistoryData(context: ModelContext) {
         // Idempotency check
         let existingLogs = (try? context.fetch(FetchDescriptor<CompletionLog>())) ?? []
-        guard existingLogs.count < 10 else { return }
+        guard existingLogs.count < 10 else { return } // 10 is well below the ~40 logs a full seed produces
 
         let cal = Calendar.current
         let today = Date().startOfDay
 
-        // MARK: — Seed JDTasks (for Most Avoided card)
+        // MARK: - Seed JDTasks (for Most Avoided card)
         let taskDefs: [(title: String, rolloverCount: Int)] = [
             ("Clean up dog poop in back yard", 4),
             ("Mow lawn", 3),
@@ -135,7 +135,7 @@ final class AppState {
             tasks.append(task)
         }
 
-        // MARK: — Seed CompletionLogs (for Stats, Perfect Days, Recent Completions cards)
+        // MARK: - Seed CompletionLogs (for Stats, Perfect Days, Recent Completions cards)
         // 14 days back. Most days: 3 primary completions (perfect day).
         // Days 4 and 9 (1-indexed offset): only 2 completions — makes avg/day ~2.7.
         // Day 7: also add one stretch goal completion.
