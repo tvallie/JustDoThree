@@ -19,6 +19,11 @@ final class AppState {
         set { UserDefaults.standard.set(newValue, forKey: "jdt_autoScheduleRecurring") }
     }
 
+    var hasSeenOnboarding: Bool {
+        get { UserDefaults.standard.bool(forKey: "jdt_hasSeenOnboarding") }
+        set { UserDefaults.standard.set(newValue, forKey: "jdt_hasSeenOnboarding") }
+    }
+
     // MARK: - Day transition
 
     /// Prevents duplicate rollover checks within a single app session day.

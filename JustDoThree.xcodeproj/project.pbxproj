@@ -39,6 +39,7 @@
 		EE6AF0E1F419DEDA70E1A551 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A97212AC99E4DB48E549 /* PlanView.swift */; };
 		F5802032DDA1C268D3A7E6CD /* CompletionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5591CE2E6C25FF3BC2724346 /* CompletionLog.swift */; };
 		FDAD673500A62507C045EC31 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */; };
+		BBCC001122334455667788AA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBCC001122334455667788 /* OnboardingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		EFA9F455A8F4B8CE66CCE8E1 /* PremiumManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumManager.swift; sourceTree = "<group>"; };
 		F8D1C067F49CCE195EC61C92 /* TermsOfUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseView.swift; sourceTree = "<group>"; };
 		FA9FDF090C318BD5125F23C8 /* BragCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BragCardView.swift; sourceTree = "<group>"; };
+		AABBCC001122334455667788 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -168,6 +170,7 @@
 				FA0CCCCD21F776C2EB620160 /* Backlog */,
 				E23B9841177841D70BC6B645 /* History */,
 				F9F4770F2C5FE18D17447C06 /* Legal */,
+				CC001122334455667788AABB /* Onboarding */,
 				60997497FE54B1D6BABEB000 /* Plan */,
 				3512B722B37C76EFF16473DF /* Rollover */,
 				3327F7B8E4633BD752149030 /* Settings */,
@@ -244,6 +247,14 @@
 				F8D1C067F49CCE195EC61C92 /* TermsOfUseView.swift */,
 			);
 			path = Legal;
+			sourceTree = "<group>";
+		};
+		CC001122334455667788AABB /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				AABBCC001122334455667788 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		FA0CCCCD21F776C2EB620160 /* Backlog */ = {
@@ -337,6 +348,7 @@
 				A0733137D2E07D0202551F80 /* JDTask.swift in Sources */,
 				36E3C62447CDDE0407B3EFB4 /* JustDoThreeApp.swift in Sources */,
 				FDAD673500A62507C045EC31 /* NotificationManager.swift in Sources */,
+				BBCC001122334455667788AA /* OnboardingView.swift in Sources */,
 				EE6AF0E1F419DEDA70E1A551 /* PlanView.swift in Sources */,
 				3AAB1CD1DD0456DD73061792 /* PlannerEngine.swift in Sources */,
 				48D3A424F7271CDAF445386B /* PremiumGateView.swift in Sources */,
