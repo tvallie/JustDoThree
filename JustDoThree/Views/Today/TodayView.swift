@@ -181,9 +181,7 @@ struct TodayView: View {
                 EmptyStateView(
                     icon: "checkmark.circle",
                     title: "Pick your three",
-                    message: "Choose up to three tasks to focus on today.",
-                    actionTitle: "Add from Backlog",
-                    action: { addingStretch = false; showBacklogPicker = true }
+                    message: "Choose up to three tasks to focus on today."
                 )
             } else {
                 ForEach(todayTasks) { task in
@@ -201,18 +199,18 @@ struct TodayView: View {
                         }
                     )
                 }
+            }
 
-                if slotsLeft > 0 {
-                    Button {
-                        addingStretch = false
-                        showBacklogPicker = true
-                    } label: {
-                        Label("Add a task", systemImage: "plus")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .buttonStyle(.bordered)
-                    .controlSize(.large)
+            if slotsLeft > 0 {
+                Button {
+                    addingStretch = false
+                    showBacklogPicker = true
+                } label: {
+                    Label("Add a task", systemImage: "plus")
+                        .frame(maxWidth: .infinity)
                 }
+                .buttonStyle(.bordered)
+                .controlSize(.large)
             }
         }
     }
@@ -310,14 +308,14 @@ struct TodayView: View {
             }
         }
         ToolbarItem(placement: .topBarTrailing) {
-            if slotsLeft > 0 {
-                Button {
-                    addingStretch = false
-                    showBacklogPicker = true
-                } label: {
-                    Image(systemName: "plus")
-                }
+            Button {
+                addingStretch = false
+                showBacklogPicker = true
+            } label: {
+                Image(systemName: "plus")
             }
+            .opacity(slotsLeft > 0 ? 1 : 0)
+            .disabled(slotsLeft == 0)
         }
     }
 
