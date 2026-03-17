@@ -20,7 +20,7 @@ enum PlannerEngine {
         }
         let plan = DailyPlan(date: date)
         context.insert(plan)
-        try? context.save()
+        save(context: context)
         return plan
     }
 
@@ -67,14 +67,14 @@ enum PlannerEngine {
               !task.isCompleted || task.recurringRule != nil
         else { return false }
         plan.taskIDs.append(task.id)
-        try? context.save()
+        save(context: context)
         return true
     }
 
     static func removeFromToday(taskID: UUID, plan: DailyPlan, context: ModelContext) {
         plan.taskIDs.removeAll { $0 == taskID }
         plan.completedTaskIDs.removeAll { $0 == taskID }
-        try? context.save()
+        save(context: context)
     }
 
     // MARK: - Completion
@@ -91,7 +91,7 @@ enum PlannerEngine {
             task.isCompleted = true
             task.completionDate = Date()
         }
-        try? context.save()
+        save(context: context)
     }
 
     static func uncomplete(task: JDTask, plan: DailyPlan, context: ModelContext) {
@@ -108,7 +108,7 @@ enum PlannerEngine {
         }) {
             context.delete(log)
         }
-        try? context.save()
+        save(context: context)
     }
 
     // MARK: - Stretch goals
@@ -118,13 +118,13 @@ enum PlannerEngine {
               !task.isCompleted || task.recurringRule != nil
         else { return }
         plan.stretchTaskIDs.append(task.id)
-        try? context.save()
+        save(context: context)
     }
 
     static func removeStretch(taskID: UUID, plan: DailyPlan, context: ModelContext) {
         plan.stretchTaskIDs.removeAll { $0 == taskID }
         plan.completedStretchIDs.removeAll { $0 == taskID }
-        try? context.save()
+        save(context: context)
     }
 
     // MARK: - Recurring auto-schedule
@@ -153,7 +153,7 @@ enum PlannerEngine {
             plan.taskIDs.append(task.id)
             changed = true
         }
-        if changed { try? context.save() }
+        if changed { save(context: context) }
     }
 
     static func completeStretch(task: JDTask, plan: DailyPlan, context: ModelContext) {
@@ -168,6 +168,18 @@ enum PlannerEngine {
             task.isCompleted = true
             task.completionDate = Date()
         }
-        try? context.save()
+        save(context: context)
+    }
+
+    // MARK: - Save helper
+
+    private static func save(context: ModelContext) {
+        do {
+            try context.save()
+        } catch {
+            #if DEBUG
+            print("[PlannerEngine] SwiftData save failed: \(error)")
+            #endif
+        }
     }
 }

@@ -9,7 +9,6 @@ options:
 
 settings:
   base:
-    SWIFT_VERSION: "5.9"
     TARGETED_DEVICE_FAMILY: "1"
     SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: "NO"
 
@@ -42,7 +41,7 @@ targets:
           UIColorName: ""
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
-        NSUserNotificationsUsageDescription: "Just Do Three uses notifications to send optional morning and evening reminders."
+        NSUserNotificationUsageDescription: "Just Do Three uses notifications to send optional morning and evening reminders."
         ITSAppUsesNonExemptEncryption: false
     settings:
       base:

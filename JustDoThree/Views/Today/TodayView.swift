@@ -4,7 +4,6 @@ import SwiftData
 struct TodayView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(AppState.self) private var appState
-    @Environment(PremiumManager.self) private var premium
     @Environment(\.scenePhase) private var scenePhase
 
     @Query(sort: \DailyPlan.date) private var plans: [DailyPlan]
@@ -248,35 +247,22 @@ struct TodayView: View {
                 Text("Stretch goals")
                     .font(.headline)
                 Spacer()
-                if premium.isPremium {
-                    // Premium: choose source — backlog or tomorrow's plan
-                    Menu {
-                        Button("From Backlog", systemImage: "tray") {
-                            addingStretch = true
-                            showBacklogPicker = true
-                        }
-                        Button("From Tomorrow's Plan", systemImage: "calendar") {
-                            showTomorrowPicker = true
-                        }
-                    } label: {
-                        Label("Add", systemImage: "plus")
-                            .font(.subheadline)
-                    }
-                } else if !backlogTasks.isEmpty {
-                    Button {
+                Menu {
+                    Button("From Backlog", systemImage: "tray") {
                         addingStretch = true
                         showBacklogPicker = true
-                    } label: {
-                        Label("Add", systemImage: "plus")
-                            .font(.subheadline)
                     }
+                    Button("From Tomorrow's Plan", systemImage: "calendar") {
+                        showTomorrowPicker = true
+                    }
+                } label: {
+                    Label("Add", systemImage: "plus")
+                        .font(.subheadline)
                 }
             }
 
             if stretchTasks.isEmpty {
-                Text(premium.isPremium
-                     ? "Want to keep going? Add a bonus task from your backlog or get a head start on tomorrow."
-                     : "Want to keep going? Pick a bonus task from your backlog.")
+                Text("Want to keep going? Add a bonus task from your backlog or get a head start on tomorrow.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             } else {
@@ -628,7 +614,7 @@ struct BacklogPickerSheet: View {
 
 // MARK: - TomorrowPickerSheet
 
-/// Lets a premium user pull a task from tomorrow's plan into today as a stretch goal.
+/// Lets users pull a task from tomorrow's plan into today as a stretch goal.
 /// The task is removed from tomorrow's plan when added to today.
 struct TomorrowPickerSheet: View {
     @Environment(\.dismiss) private var dismiss
@@ -722,6 +708,5 @@ struct TomorrowPickerSheet: View {
 #Preview {
     TodayView()
         .environment(AppState())
-        .environment(PremiumManager())
         .modelContainer(previewContainer)
 }

@@ -93,7 +93,6 @@ struct SettingsView: View {
                         .padding(.top, 4)
                 }
 
-                // DEBUG (remove before release)
                 #if DEBUG
                 Section("Debug") {
                     Button("Preview Rollover Sheet") {
@@ -134,6 +133,5 @@ extension Bundle {
 #Preview {
     SettingsView()
         .environment(AppState())
-        .environment(PremiumManager())
         .modelContainer(previewContainer)
 }

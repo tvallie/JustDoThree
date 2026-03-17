@@ -298,5 +298,4 @@ private struct ImportFormatBlock: View {
 #Preview {
     AddTaskSheet()
         .modelContainer(previewContainer)
-        .environment(PremiumManager())
 }

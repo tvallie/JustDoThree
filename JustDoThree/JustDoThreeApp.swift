@@ -4,7 +4,6 @@ import SwiftData
 @main
 struct JustDoThreeApp: App {
     @State private var appState = AppState()
-    @State private var premium = PremiumManager()
     @State private var showSplash = true
 
     var body: some Scene {
@@ -12,7 +11,6 @@ struct JustDoThreeApp: App {
             ZStack {
                 RootView()
                     .environment(appState)
-                    .environment(premium)
                     .tint(.teal)
                 if showSplash {
                     SplashView()

@@ -89,6 +89,18 @@ enum RolloverEngine {
                 item.task.rolloverCount += 1
             }
         }
-        try? context.save()
+        save(context: context)
+    }
+
+    // MARK: - Save helper
+
+    private static func save(context: ModelContext) {
+        do {
+            try context.save()
+        } catch {
+            #if DEBUG
+            print("[RolloverEngine] SwiftData save failed: \(error)")
+            #endif
+        }
     }
 }

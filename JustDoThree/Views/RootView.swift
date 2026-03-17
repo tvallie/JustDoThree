@@ -34,6 +34,5 @@ struct RootView: View {
 #Preview {
     RootView()
         .environment(AppState())
-        .environment(PremiumManager())
         .modelContainer(previewContainer)
 }

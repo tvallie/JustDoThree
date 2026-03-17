@@ -11,14 +11,12 @@
 		0A1BB9E08C8CB03731223D7B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */; };
 		102BDFA9DD64CAF27D61BD8F /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A50918BD04B398D5D467190 /* Date+Helpers.swift */; };
 		13443B978C2153A6C99EE44D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F11214952D339BF6C1FF1DF6 /* LaunchScreen.storyboard */; };
-		25137B0337ECB10CDA0CFA3F /* PremiumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA9F455A8F4B8CE66CCE8E1 /* PremiumManager.swift */; };
 		33829380BFE55FA51B44124C /* BacklogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CCAFC9BADC343232127109 /* BacklogView.swift */; };
 		3569F589DFF4BB8CD0FCB8BA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B577A258EF0DBDD29DAC2A /* SettingsView.swift */; };
 		367DBEF10FCF389C0989AE2D /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B76C173D328083435B6A3 /* TodayView.swift */; };
 		36E3C62447CDDE0407B3EFB4 /* JustDoThreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE5D6690047093E4F38B2ED /* JustDoThreeApp.swift */; };
 		3968C06BDE378CB1050EB99C /* RolloverEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5DFC01F2DB0F3EA9D97F15 /* RolloverEngine.swift */; };
 		3AAB1CD1DD0456DD73061792 /* PlannerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED183CD1E160ACA3A2B0A17B /* PlannerEngine.swift */; };
-		48D3A424F7271CDAF445386B /* PremiumGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB803F759E33223CC61A7F1 /* PremiumGateView.swift */; };
 		4D8234778C8DB87FD84A7796 /* BragCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9FDF090C318BD5125F23C8 /* BragCardView.swift */; };
 		4E2AC04F8F9E6A817A935DF4 /* RecurringRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D292CCCB9DAC9025273552B /* RecurringRule.swift */; };
 		551A96132FF1FAFC785FC84D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626E0E7798EB25E07D13923B /* OnboardingView.swift */; };
@@ -67,7 +65,6 @@
 		8A50918BD04B398D5D467190 /* Date+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
 		8B67C8C0DEBF1F209E23D49D /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		8DA8508B7B12A648EC90F634 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
-		8FB803F759E33223CC61A7F1 /* PremiumGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumGateView.swift; sourceTree = "<group>"; };
 		9244D2D09EFC3363D6A4D835 /* JDTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDTask.swift; sourceTree = "<group>"; };
 		95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9D292CCCB9DAC9025273552B /* RecurringRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurringRule.swift; sourceTree = "<group>"; };
@@ -75,7 +72,6 @@
 		CC06642F4BD10ED917C1C813 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		ED09558AE6E393CC3C82A644 /* AddTaskSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskSheet.swift; sourceTree = "<group>"; };
 		ED183CD1E160ACA3A2B0A17B /* PlannerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerEngine.swift; sourceTree = "<group>"; };
-		EFA9F455A8F4B8CE66CCE8E1 /* PremiumManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumManager.swift; sourceTree = "<group>"; };
 		F11214952D339BF6C1FF1DF6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F1EB60C431BF2FA2AD3B716A /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		F8D1C067F49CCE195EC61C92 /* TermsOfUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseView.swift; sourceTree = "<group>"; };
@@ -90,7 +86,6 @@
 				4809D5B4FDF66DB78EDF82F9 /* AppLogoView.swift */,
 				FA9FDF090C318BD5125F23C8 /* BragCardView.swift */,
 				8DA8508B7B12A648EC90F634 /* EmptyStateView.swift */,
-				8FB803F759E33223CC61A7F1 /* PremiumGateView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -124,7 +119,6 @@
 			isa = PBXGroup;
 			children = (
 				95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */,
-				EFA9F455A8F4B8CE66CCE8E1 /* PremiumManager.swift */,
 				F1EB60C431BF2FA2AD3B716A /* ReviewManager.swift */,
 			);
 			path = Managers;
@@ -360,8 +354,6 @@
 				6D6F37FE60B39347DEBAF9C6 /* PasteTasksSheet.swift in Sources */,
 				EE6AF0E1F419DEDA70E1A551 /* PlanView.swift in Sources */,
 				3AAB1CD1DD0456DD73061792 /* PlannerEngine.swift in Sources */,
-				48D3A424F7271CDAF445386B /* PremiumGateView.swift in Sources */,
-				25137B0337ECB10CDA0CFA3F /* PremiumManager.swift in Sources */,
 				A4338A6534BCDAACCB6435EC /* PreviewContainer.swift in Sources */,
 				AA027595E9EAAED2E8CE1E5B /* PrivacyPolicyView.swift in Sources */,
 				4E2AC04F8F9E6A817A935DF4 /* RecurringRule.swift in Sources */,
@@ -432,7 +424,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.9;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -497,7 +489,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.9;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;

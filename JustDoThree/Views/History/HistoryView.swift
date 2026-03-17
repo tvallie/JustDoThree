@@ -2,8 +2,6 @@ import SwiftUI
 import SwiftData
 
 struct HistoryView: View {
-    @Environment(PremiumManager.self) private var premium
-
     @Query private var logs: [CompletionLog]
     @Query(sort: \JDTask.rolloverCount, order: .reverse) private var tasks: [JDTask]
 
@@ -170,7 +168,7 @@ struct RecentCompletionsCard: View {
             Text("Recent completions")
                 .font(.headline)
 
-            ForEach(logs, id: \.taskID) { log in
+            ForEach(logs, id: \.self) { log in
                 HStack {
                     Image(systemName: log.isStretchGoal ? "star.fill" : "checkmark.circle.fill")
                         .foregroundStyle(log.isStretchGoal ? .orange : .green)
@@ -192,6 +190,5 @@ struct RecentCompletionsCard: View {
 
 #Preview {
     HistoryView()
-        .environment(PremiumManager())
         .modelContainer(previewContainer)
 }

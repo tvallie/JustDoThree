@@ -22,7 +22,7 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
-	<key>NSUserNotificationsUsageDescription</key>
+	<key>NSUserNotificationUsageDescription</key>
 	<string>Just Do Three uses notifications to send optional morning and evening reminders.</string>
 	<key>UILaunchScreen</key>
 	<dict>

@@ -210,6 +210,5 @@ struct DayChip: View {
 
 #Preview {
     PlanView()
-        .environment(PremiumManager())
         .modelContainer(previewContainer)
 }
