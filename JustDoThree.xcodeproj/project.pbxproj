@@ -31,6 +31,7 @@
 		B2918E9C78BA897EC9CB9066 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0907822FE5FC342A97C4C987 /* Assets.xcassets */; };
 		BA61F0F0C90B89EE87E85631 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74FB303A18EEE20516FC52AE /* RootView.swift */; };
 		C1922061DBBD5E7F38A5E45C /* AddTaskSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED09558AE6E393CC3C82A644 /* AddTaskSheet.swift */; };
+		CB98969E140ABC2E2D625114 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB60C431BF2FA2AD3B716A /* ReviewManager.swift */; };
 		CC40CB8D39B6E1A306DC475D /* RolloverSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE15746757A5C3EE27834EB /* RolloverSheet.swift */; };
 		CCA14A0EE8CA27BCAC98783A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084EB54D11EE6B0F1D53B735 /* AppState.swift */; };
 		D1C31CF2079F9513F1EDAD73 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDE404626CBC00AE4E4CE8E /* HistoryView.swift */; };
@@ -40,15 +41,14 @@
 		EE6AF0E1F419DEDA70E1A551 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A97212AC99E4DB48E549 /* PlanView.swift */; };
 		F5802032DDA1C268D3A7E6CD /* CompletionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5591CE2E6C25FF3BC2724346 /* CompletionLog.swift */; };
 		FDAD673500A62507C045EC31 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */; };
-		FF001122334455667788BB00 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE001122334455667788BB00 /* ReviewManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		084EB54D11EE6B0F1D53B735 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0907822FE5FC342A97C4C987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E5DFC01F2DB0F3EA9D97F15 /* RolloverEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolloverEngine.swift; sourceTree = "<group>"; };
-		200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		3854F531D88F2596847BE463 /* JustDoThree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustDoThree.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		3854F531D88F2596847BE463 /* JustDoThree.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = JustDoThree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD3A97212AC99E4DB48E549 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
 		4809D5B4FDF66DB78EDF82F9 /* AppLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogoView.swift; sourceTree = "<group>"; };
 		48B577A258EF0DBDD29DAC2A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -75,9 +75,9 @@
 		CC06642F4BD10ED917C1C813 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		ED09558AE6E393CC3C82A644 /* AddTaskSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskSheet.swift; sourceTree = "<group>"; };
 		ED183CD1E160ACA3A2B0A17B /* PlannerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerEngine.swift; sourceTree = "<group>"; };
-		EE001122334455667788BB00 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		EFA9F455A8F4B8CE66CCE8E1 /* PremiumManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumManager.swift; sourceTree = "<group>"; };
 		F11214952D339BF6C1FF1DF6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F1EB60C431BF2FA2AD3B716A /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		F8D1C067F49CCE195EC61C92 /* TermsOfUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseView.swift; sourceTree = "<group>"; };
 		FA9FDF090C318BD5125F23C8 /* BragCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BragCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,7 +125,7 @@
 			children = (
 				95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */,
 				EFA9F455A8F4B8CE66CCE8E1 /* PremiumManager.swift */,
-				EE001122334455667788BB00 /* ReviewManager.swift */,
+				F1EB60C431BF2FA2AD3B716A /* ReviewManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -355,7 +355,6 @@
 				A0733137D2E07D0202551F80 /* JDTask.swift in Sources */,
 				36E3C62447CDDE0407B3EFB4 /* JustDoThreeApp.swift in Sources */,
 				FDAD673500A62507C045EC31 /* NotificationManager.swift in Sources */,
-				FF001122334455667788BB00 /* ReviewManager.swift in Sources */,
 				551A96132FF1FAFC785FC84D /* OnboardingView.swift in Sources */,
 				6D6F37FE60B39347DEBAF9C6 /* PasteTasksSheet.swift in Sources */,
 				EE6AF0E1F419DEDA70E1A551 /* PlanView.swift in Sources */,
@@ -365,6 +364,7 @@
 				A4338A6534BCDAACCB6435EC /* PreviewContainer.swift in Sources */,
 				AA027595E9EAAED2E8CE1E5B /* PrivacyPolicyView.swift in Sources */,
 				4E2AC04F8F9E6A817A935DF4 /* RecurringRule.swift in Sources */,
+				CB98969E140ABC2E2D625114 /* ReviewManager.swift in Sources */,
 				3968C06BDE378CB1050EB99C /* RolloverEngine.swift in Sources */,
 				CC40CB8D39B6E1A306DC475D /* RolloverSheet.swift in Sources */,
 				BA61F0F0C90B89EE87E85631 /* RootView.swift in Sources */,
@@ -507,10 +507,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3ZAS78KQUH;
 				INFOPLIST_FILE = JustDoThree/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -531,10 +532,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 3ZAS78KQUH;
 				INFOPLIST_FILE = JustDoThree/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
