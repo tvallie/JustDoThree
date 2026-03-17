@@ -40,6 +40,7 @@
 		EE6AF0E1F419DEDA70E1A551 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A97212AC99E4DB48E549 /* PlanView.swift */; };
 		F5802032DDA1C268D3A7E6CD /* CompletionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5591CE2E6C25FF3BC2724346 /* CompletionLog.swift */; };
 		FDAD673500A62507C045EC31 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */; };
+		FF001122334455667788BB00 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE001122334455667788BB00 /* ReviewManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		F11214952D339BF6C1FF1DF6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F8D1C067F49CCE195EC61C92 /* TermsOfUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseView.swift; sourceTree = "<group>"; };
 		FA9FDF090C318BD5125F23C8 /* BragCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BragCardView.swift; sourceTree = "<group>"; };
+		EE001122334455667788BB00 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -123,6 +125,7 @@
 			children = (
 				95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */,
 				EFA9F455A8F4B8CE66CCE8E1 /* PremiumManager.swift */,
+				EE001122334455667788BB00 /* ReviewManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				A0733137D2E07D0202551F80 /* JDTask.swift in Sources */,
 				36E3C62447CDDE0407B3EFB4 /* JustDoThreeApp.swift in Sources */,
 				FDAD673500A62507C045EC31 /* NotificationManager.swift in Sources */,
+				FF001122334455667788BB00 /* ReviewManager.swift in Sources */,
 				551A96132FF1FAFC785FC84D /* OnboardingView.swift in Sources */,
 				6D6F37FE60B39347DEBAF9C6 /* PasteTasksSheet.swift in Sources */,
 				EE6AF0E1F419DEDA70E1A551 /* PlanView.swift in Sources */,

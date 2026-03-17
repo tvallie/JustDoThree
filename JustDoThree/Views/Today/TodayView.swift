@@ -137,6 +137,9 @@ struct TodayView: View {
                 PlannerEngine.autoScheduleRecurring(for: Date(), context: modelContext)
             }
         }
+        .onChange(of: allPrimaryDone) { _, newValue in
+            if newValue { ReviewManager.shared.recordPerfectDay() }
+        }
     }
 
     // MARK: - Subviews

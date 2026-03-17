@@ -27,6 +27,7 @@ struct JustDoThreeApp: App {
                     .environment(appState)
             }
             .onAppear {
+                ReviewManager.shared.recordFirstLaunchIfNeeded()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     withAnimation(.easeOut(duration: 0.4)) {
                         showSplash = false
