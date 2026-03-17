@@ -3,8 +3,8 @@ import StoreKit
 import UIKit
 
 /// Tracks usage milestones and requests an App Store review after the user
-/// has completed all their primary tasks on ≥5 separate days AND has been
-/// using the app for ≥5 days. Asks at most once per app version.
+/// has been using the app for ≥10 days AND has completed all their primary
+/// tasks on ≥5 separate days. Asks at most once per app version.
 final class ReviewManager {
     static let shared = ReviewManager()
     private init() {}
@@ -23,7 +23,7 @@ final class ReviewManager {
     // MARK: - Thresholds
 
     private let requiredPerfectDays = 5
-    private let requiredDays        = 5
+    private let requiredDays        = 10
 
     // MARK: - Public API
 
@@ -65,8 +65,8 @@ final class ReviewManager {
 
     private func requestReviewIfEligible() {
         guard !alreadyRequestedThisVersion else { return }
-        guard defaults.integer(forKey: Keys.perfectDayCount) >= requiredPerfectDays else { return }
         guard daysSinceFirstLaunch >= requiredDays else { return }
+        guard defaults.integer(forKey: Keys.perfectDayCount) >= requiredPerfectDays else { return }
 
         guard let scene = UIApplication.shared.connectedScenes
             .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
