@@ -102,8 +102,17 @@ struct RolloverSheet: View {
 
     private func applyToAll(_ choice: RolloverItem.Choice) {
         var updated = appState.rolloverItems
+        var slotsRemaining = todaySlotsFree
         for i in updated.indices where !updated[i].isIndividuallySet {
-            updated[i].choice = choice
+            if case .addToToday = choice {
+                if slotsRemaining > 0 {
+                    updated[i].choice = .addToToday
+                    slotsRemaining -= 1
+                }
+                // If no slots remain, leave this item's choice unchanged
+            } else {
+                updated[i].choice = choice
+            }
         }
         appState.rolloverItems = updated
     }
