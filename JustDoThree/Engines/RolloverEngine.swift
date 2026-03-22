@@ -91,6 +91,7 @@ enum RolloverEngine {
             case .addToTodayReplacing(let bumpedID):
                 // Remove the bumped task from today (it stays in the task store — backlog)
                 todayPlan.taskIDs.removeAll { $0 == bumpedID }
+                todayPlan.completedTaskIDs.removeAll { $0 == bumpedID }
                 // Add the rollover task
                 if !todayPlan.taskIDs.contains(item.task.id) {
                     todayPlan.taskIDs.append(item.task.id)
