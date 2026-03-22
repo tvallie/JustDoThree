@@ -121,6 +121,53 @@ private struct RolloverItemRow: View {
     }
 }
 
+// MARK: - Day picker sheet
+
+private struct DayPickerSheet: View {
+    let onSelect: (Date) -> Void
+
+    private var futureDays: [Date] {
+        (1...7).compactMap {
+            Calendar.current.date(byAdding: .day, value: $0, to: Date().startOfDay)
+        }
+    }
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("Schedule for...")
+                .font(.headline)
+                .padding(.top, 24)
+
+            LazyVGrid(
+                columns: Array(repeating: GridItem(.flexible()), count: 4),
+                spacing: 12
+            ) {
+                ForEach(futureDays, id: \.self) { day in
+                    Button {
+                        onSelect(day)
+                    } label: {
+                        VStack(spacing: 2) {
+                            Text(day.formatted(.dateTime.weekday(.abbreviated)))
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+                            Text(day.formatted(.dateTime.day()))
+                                .font(.callout.bold())
+                                .foregroundStyle(.primary)
+                        }
+                        .frame(width: 60, height: 52)
+                        .background(Color(.tertiarySystemFill))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.horizontal, 24)
+
+            Spacer()
+        }
+    }
+}
+
 #Preview {
     RolloverSheet()
         .environment(AppState())
