@@ -88,13 +88,21 @@ enum RolloverEngine {
                 }
                 item.task.rolloverCount += 1
 
-            case .addToTodayReplacing:
-                // Full logic implemented in a later task
-                break
+            case .addToTodayReplacing(let bumpedID):
+                // Remove the bumped task from today (it stays in the task store — backlog)
+                todayPlan.taskIDs.removeAll { $0 == bumpedID }
+                // Add the rollover task
+                if !todayPlan.taskIDs.contains(item.task.id) {
+                    todayPlan.taskIDs.append(item.task.id)
+                }
+                item.task.rolloverCount += 1
 
-            case .scheduleFor:
-                // Full logic implemented in a later task
-                break
+            case .scheduleFor(let date):
+                let plan = PlannerEngine.fetchOrCreatePlan(for: date, context: context)
+                if plan.taskIDs.count < 3, !plan.taskIDs.contains(item.task.id) {
+                    plan.taskIDs.append(item.task.id)
+                }
+                item.task.rolloverCount += 1
 
             case .backlog:
                 item.task.rolloverCount += 1
