@@ -19,7 +19,7 @@ struct RolloverSheet: View {
     }
 
     private var todaySlotsFree: Int {
-        3 - (todayPlan?.taskIDs.count ?? 0)
+        max(0, 3 - (todayPlan?.taskIDs.count ?? 0))
     }
 
     var body: some View {
