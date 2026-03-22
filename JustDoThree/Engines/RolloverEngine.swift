@@ -3,16 +3,19 @@ import SwiftData
 
 /// Represents one task surfaced during rollover, with the user's pending choice.
 struct RolloverItem: Identifiable {
-    enum Choice {
-        case doneYesterday  // mark complete for the previous day
-        case addToToday     // move into today's plan
-        case backlog        // leave in backlog (increment rolloverCount)
+    enum Choice: Equatable {
+        case doneYesterday              // mark complete for the previous day
+        case addToToday                 // move into today's plan (only if a slot is free)
+        case addToTodayReplacing(taskID: UUID) // replace an existing today-task (it goes to backlog)
+        case scheduleFor(Date)          // add to a specific future day's plan
+        case backlog                    // leave in backlog (increment rolloverCount)
     }
 
     let id: UUID              // matches task.id
     let task: JDTask
     let fromPlan: DailyPlan
-    var choice: Choice = .addToToday
+    var choice: Choice = .backlog
+    var isIndividuallySet: Bool = false
 }
 
 /// Pure logic for detecting and resolving day-rollover.
@@ -84,6 +87,14 @@ enum RolloverEngine {
                     todayPlan.taskIDs.append(item.task.id)
                 }
                 item.task.rolloverCount += 1
+
+            case .addToTodayReplacing:
+                // Full logic implemented in a later task
+                break
+
+            case .scheduleFor:
+                // Full logic implemented in a later task
+                break
 
             case .backlog:
                 item.task.rolloverCount += 1
