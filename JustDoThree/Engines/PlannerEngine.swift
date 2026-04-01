@@ -56,6 +56,11 @@ enum PlannerEngine {
         allTasks(context: context).first { $0.id == id }
     }
 
+    static func topInsertionStartOrder(existingTasks: [JDTask], count: Int) -> Int {
+        let minimum = existingTasks.map(\.sortOrder).min() ?? 0
+        return minimum - max(1, count)
+    }
+
     // MARK: - Today task management
 
     /// Adds a task to a plan. Returns false if the plan is full, task is already there,
@@ -72,8 +77,14 @@ enum PlannerEngine {
     }
 
     static func removeFromToday(taskID: UUID, plan: DailyPlan, context: ModelContext) {
+        let removedWasCompleted = plan.completedTaskIDs.contains(taskID)
+        let wasFullyComplete = plan.taskIDs.count == 3 && plan.isAllPrimaryComplete
+
         plan.taskIDs.removeAll { $0 == taskID }
         plan.completedTaskIDs.removeAll { $0 == taskID }
+        if removedWasCompleted && wasFullyComplete {
+            promoteFirstStretchGoalIfNeeded(in: plan)
+        }
         save(context: context)
     }
 
@@ -172,6 +183,23 @@ enum PlannerEngine {
     }
 
     // MARK: - Save helper
+
+    private static func promoteFirstStretchGoalIfNeeded(in plan: DailyPlan) {
+        guard let promotedID = plan.stretchTaskIDs.first,
+              !plan.taskIDs.contains(promotedID),
+              plan.taskIDs.count < 3
+        else { return }
+
+        plan.stretchTaskIDs.removeAll { $0 == promotedID }
+        plan.taskIDs.append(promotedID)
+
+        if plan.completedStretchIDs.contains(promotedID) {
+            plan.completedStretchIDs.removeAll { $0 == promotedID }
+            if !plan.completedTaskIDs.contains(promotedID) {
+                plan.completedTaskIDs.append(promotedID)
+            }
+        }
+    }
 
     private static func save(context: ModelContext) {
         do {

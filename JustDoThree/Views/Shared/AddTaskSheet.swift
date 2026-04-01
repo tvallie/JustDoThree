@@ -21,6 +21,7 @@ struct AddTaskSheet: View {
 
     @State private var title: String = ""
     @State private var showImportInfo = false
+    @State private var showPasteSheet = false
     @State private var recurringPattern: RecurringRule.Pattern? = nil
     @State private var recurringWeekday: Int = 2   // Monday (Calendar weekday 2)
     @State private var recurringDayOfMonth: Int = 1
@@ -50,13 +51,19 @@ struct AddTaskSheet: View {
                 if !isEditing {
                     Section {
                         Button {
+                            showPasteSheet = true
+                        } label: {
+                            Label("Paste tasks", systemImage: "doc.on.clipboard")
+                                .font(.subheadline)
+                        }
+                        Button {
                             showImportInfo = true
                         } label: {
                             Label("Import from .txt or .csv", systemImage: "doc.badge.plus")
                                 .font(.subheadline)
                         }
                     } footer: {
-                        Text("Add multiple tasks at once from a file.")
+                        Text("Add multiple tasks at once from paste or a file.")
                     }
                 }
 
@@ -105,6 +112,9 @@ struct AddTaskSheet: View {
         .sheet(isPresented: $showImportInfo) {
             ImportInstructionsSheet()
         }
+        .sheet(isPresented: $showPasteSheet) {
+            PasteTasksSheet()
+        }
     }
 
     private var trimmedTitle: String { title.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -124,8 +134,8 @@ struct AddTaskSheet: View {
             task.recurringRule = builtRecurringRule
             try? modelContext.save()
         } else {
-            let nextOrder = (allTasks.map(\.sortOrder).max() ?? -1) + 1
-            let task = JDTask(title: trimmedTitle, sortOrder: nextOrder)
+            let startOrder = PlannerEngine.topInsertionStartOrder(existingTasks: allTasks, count: 1)
+            let task = JDTask(title: trimmedTitle, sortOrder: startOrder)
             task.recurringRule = builtRecurringRule
             modelContext.insert(task)
             try? modelContext.save()
@@ -234,7 +244,7 @@ struct ImportInstructionsSheet: View {
         let isCSV = url.pathExtension.lowercased() == "csv"
         let lines = content.components(separatedBy: .newlines)
         let existingTitles = Set(allTasks.map { $0.title.trimmingCharacters(in: .whitespaces).lowercased() })
-        let nextSortOrder = (allTasks.map(\.sortOrder).max() ?? -1) + 1
+        let startSortOrder = PlannerEngine.topInsertionStartOrder(existingTasks: allTasks, count: lines.count)
 
         var imported = 0
         var skipped = 0
@@ -244,7 +254,7 @@ struct ImportInstructionsSheet: View {
             let title = raw.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !title.isEmpty else { continue }
             guard !existingTitles.contains(title.lowercased()) else { skipped += 1; continue }
-            modelContext.insert(JDTask(title: title, sortOrder: nextSortOrder + imported))
+            modelContext.insert(JDTask(title: title, sortOrder: startSortOrder + imported))
             imported += 1
         }
 

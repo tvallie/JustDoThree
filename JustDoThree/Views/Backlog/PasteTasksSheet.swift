@@ -63,7 +63,7 @@ struct PasteTasksSheet: View {
 
     private func importLines() {
         let existingTitles = Set(allTasks.map { $0.title.trimmingCharacters(in: .whitespaces).lowercased() })
-        let nextSortOrder = (allTasks.map(\.sortOrder).max() ?? -1) + 1
+        let startSortOrder = PlannerEngine.topInsertionStartOrder(existingTasks: allTasks, count: nonBlankLines.count)
 
         var imported = 0
         var skipped = 0
@@ -73,7 +73,7 @@ struct PasteTasksSheet: View {
                 skipped += 1
                 continue
             }
-            modelContext.insert(JDTask(title: title, sortOrder: nextSortOrder + imported))
+            modelContext.insert(JDTask(title: title, sortOrder: startSortOrder + imported))
             imported += 1
         }
 

@@ -22,6 +22,8 @@ struct RolloverSheet: View {
         max(0, 3 - (todayPlan?.taskIDs.count ?? 0))
     }
 
+    @State private var activeScheduleConflict: ScheduleConflict? = nil
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -77,7 +79,7 @@ struct RolloverSheet: View {
                 // Footer
                 VStack(spacing: 12) {
                     Button {
-                        appState.applyRolloverChoices(context: modelContext)
+                        confirmChoices()
                     } label: {
                         Text("Confirm")
                             .frame(maxWidth: .infinity)
@@ -97,6 +99,13 @@ struct RolloverSheet: View {
             .navigationTitle("Yesterday's Tasks")
             .navigationBarTitleDisplayMode(.inline)
             .interactiveDismissDisabled()
+            .sheet(item: $activeScheduleConflict) { conflict in
+                ScheduleOverflowResolutionSheet(conflict: conflict) { keptTaskIDs in
+                    resolve(conflict: conflict, keeping: keptTaskIDs)
+                }
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+            }
         }
     }
 
@@ -116,6 +125,65 @@ struct RolloverSheet: View {
         }
         appState.rolloverItems = updated
     }
+
+    private func confirmChoices() {
+        if let conflict = scheduleConflicts.first {
+            if conflict.availableSlots <= 0 {
+                resolve(conflict: conflict, keeping: [])
+            } else {
+                activeScheduleConflict = conflict
+            }
+            return
+        }
+
+        appState.applyRolloverChoices(context: modelContext)
+    }
+
+    private var scheduleConflicts: [ScheduleConflict] {
+        let grouped = Dictionary(grouping: appState.rolloverItems) { item -> Date? in
+            if case .scheduleFor(let date) = item.choice {
+                return date.startOfDay
+            }
+            return nil
+        }
+
+        return grouped.compactMap { key, items -> ScheduleConflict? in
+            guard let date = key else { return nil }
+            let existingPlan = plans.first { $0.date.isSameDay(as: date) }
+            let availableSlots = max(0, 3 - (existingPlan?.taskIDs.count ?? 0))
+            guard items.count > availableSlots else { return nil }
+            return ScheduleConflict(date: date, availableSlots: availableSlots, items: items.sorted { $0.task.sortOrder < $1.task.sortOrder })
+        }
+        .sorted { $0.date < $1.date }
+    }
+
+    private func resolve(conflict: ScheduleConflict, keeping keptTaskIDs: Set<UUID>) {
+        var updated = appState.rolloverItems
+        for index in updated.indices {
+            guard case .scheduleFor(let date) = updated[index].choice,
+                  date.isSameDay(as: conflict.date)
+            else { continue }
+
+            if keptTaskIDs.contains(updated[index].id) {
+                updated[index].choice = .scheduleFor(conflict.date)
+            } else {
+                updated[index].choice = .backlog
+            }
+            updated[index].isIndividuallySet = true
+        }
+
+        appState.rolloverItems = updated
+        activeScheduleConflict = nil
+        confirmChoices()
+    }
+}
+
+private struct ScheduleConflict: Identifiable {
+    let date: Date
+    let availableSlots: Int
+    let items: [RolloverItem]
+
+    var id: Date { date }
 }
 
 // MARK: - Apply to all bar
@@ -390,6 +458,95 @@ private struct DayPickerSheet: View {
 
             Spacer()
         }
+    }
+}
+
+private struct ScheduleOverflowResolutionSheet: View {
+    @Environment(\.dismiss) private var dismiss
+
+    let conflict: ScheduleConflict
+    let onConfirm: (Set<UUID>) -> Void
+
+    @State private var selectedTaskIDs: Set<UUID>
+
+    init(conflict: ScheduleConflict, onConfirm: @escaping (Set<UUID>) -> Void) {
+        self.conflict = conflict
+        self.onConfirm = onConfirm
+        let initiallySelected = Set(conflict.items.prefix(conflict.availableSlots).map(\.id))
+        _selectedTaskIDs = State(initialValue: initiallySelected)
+    }
+
+    private var heading: String {
+        if conflict.availableSlots <= 0 {
+            return "No spots are open on \(conflict.date.shortDayString)."
+        }
+        return "Choose \(conflict.availableSlots) task\(conflict.availableSlots == 1 ? "" : "s") to keep on \(conflict.date.shortDayString)."
+    }
+
+    var body: some View {
+        NavigationStack {
+            List {
+                Section {
+                    Text(heading)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    Text("Any task you do not keep here will go to the backlog.")
+                        .font(.caption)
+                        .foregroundStyle(.tertiary)
+                }
+
+                Section("Rollover tasks") {
+                    ForEach(conflict.items) { item in
+                        Button {
+                            toggleSelection(for: item.id)
+                        } label: {
+                            HStack(spacing: 12) {
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text(item.task.title)
+                                        .foregroundStyle(.primary)
+                                    if item.task.rolloverCount > 0 {
+                                        Text("Rolled over \(item.task.rolloverCount)×")
+                                            .font(.caption2)
+                                            .foregroundStyle(.tertiary)
+                                    }
+                                }
+                                Spacer()
+                                Image(systemName: selectedTaskIDs.contains(item.id) ? "checkmark.circle.fill" : "circle")
+                                    .foregroundStyle(selectedTaskIDs.contains(item.id) ? Color.accentColor : Color(.tertiaryLabel))
+                            }
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(conflict.availableSlots <= 0)
+                    }
+                }
+            }
+            .navigationTitle("Schedule Overflow")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(conflict.availableSlots <= 0 ? "Send to Backlog" : "Confirm") {
+                        onConfirm(selectedTaskIDs)
+                        dismiss()
+                    }
+                    .disabled(conflict.availableSlots > 0 && selectedTaskIDs.count != conflict.availableSlots)
+                }
+            }
+        }
+    }
+
+    private func toggleSelection(for taskID: UUID) {
+        guard conflict.availableSlots > 0 else { return }
+
+        if selectedTaskIDs.contains(taskID) {
+            selectedTaskIDs.remove(taskID)
+            return
+        }
+
+        guard selectedTaskIDs.count < conflict.availableSlots else { return }
+        selectedTaskIDs.insert(taskID)
     }
 }
 

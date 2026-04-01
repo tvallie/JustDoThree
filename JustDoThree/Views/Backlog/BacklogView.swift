@@ -14,6 +14,7 @@ struct BacklogView: View {
     @State private var showFileImporter = false
     @State private var showPasteSheet = false
     @State private var importResult: ImportResult? = nil
+    @State private var searchText = ""
 
     private var todayTaskIDs: Set<UUID> {
         let plan = plans.first { $0.date.isSameDay(as: Date()) }
@@ -24,10 +25,16 @@ struct BacklogView: View {
         allTasks.filter { ($0.recurringRule != nil || !$0.isCompleted) && !todayTaskIDs.contains($0.id) }
     }
 
+    private var filteredBacklogTasks: [JDTask] {
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !query.isEmpty else { return backlogTasks }
+        return backlogTasks.filter { $0.title.localizedCaseInsensitiveContains(query) }
+    }
+
     var body: some View {
         NavigationStack {
             Group {
-                if backlogTasks.isEmpty {
+                if backlogTasks.isEmpty && searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                     EmptyStateView(
                         icon: "tray",
                         title: "Your backlog is clear",
@@ -37,23 +44,34 @@ struct BacklogView: View {
                     )
                 } else {
                     List {
-                        ForEach(backlogTasks) { task in
+                        ForEach(filteredBacklogTasks) { task in
                             BacklogRow(
                                 task: task,
+                                futurePlanLabel: nearestFuturePlanLabel(for: task),
                                 onEdit: { editingTask = task },
                                 onDelete: { showDeleteConfirm = task }
                             )
                             // Suppress the system delete circles — we have our own button
                             .deleteDisabled(true)
                         }
-                        .onMove(perform: move)
+                        .onMove(perform: searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? move : nil)
+
+                        if filteredBacklogTasks.isEmpty {
+                            ContentUnavailableView(
+                                "No Matching Tasks",
+                                systemImage: "magnifyingglass",
+                                description: Text("Try a different search term.")
+                            )
+                            .listRowBackground(Color.clear)
+                        }
                     }
                     .listStyle(.plain)
                     // Always in edit mode so drag handles are live without tapping EditButton
-                    .environment(\.editMode, .constant(.active))
+                    .environment(\.editMode, .constant(searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? .active : .inactive))
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
+            .searchable(text: $searchText, prompt: "Search backlog")
             .safeAreaInset(edge: .bottom) {
                 HStack(spacing: 12) {
                     Menu {
@@ -164,6 +182,16 @@ struct BacklogView: View {
         showDeleteConfirm = nil
     }
 
+    private func nearestFuturePlanLabel(for task: JDTask) -> String? {
+        let today = Date().startOfDay
+        let nearest = plans
+            .filter { $0.date > today && ($0.taskIDs.contains(task.id) || $0.stretchTaskIDs.contains(task.id)) }
+            .min(by: { $0.date < $1.date })
+
+        guard let nearest else { return nil }
+        return "Planned for \(nearest.date.shortDayString)"
+    }
+
     // MARK: - File import
 
     private func handleImport(result: Result<[URL], Error>) {
@@ -179,7 +207,7 @@ struct BacklogView: View {
 
         // Build a set of existing titles for fast duplicate detection (case-insensitive)
         let existingTitles = Set(allTasks.map { $0.title.trimmingCharacters(in: .whitespaces).lowercased() })
-        let nextSortOrder = (allTasks.map(\.sortOrder).max() ?? -1) + 1
+        let startSortOrder = PlannerEngine.topInsertionStartOrder(existingTasks: allTasks, count: lines.count)
 
         var imported = 0
         var skipped = 0
@@ -194,7 +222,7 @@ struct BacklogView: View {
                 continue
             }
 
-            let task = JDTask(title: title, sortOrder: nextSortOrder + imported)
+            let task = JDTask(title: title, sortOrder: startSortOrder + imported)
             modelContext.insert(task)
             imported += 1
         }
@@ -234,6 +262,7 @@ private struct ImportResult {
 
 struct BacklogRow: View {
     let task: JDTask
+    let futurePlanLabel: String?
     let onEdit: () -> Void
     let onDelete: () -> Void
 
@@ -263,6 +292,12 @@ struct BacklogRow: View {
                                 .foregroundStyle(.teal)
                                 .lineLimit(1)
                         }
+                    }
+                    if let futurePlanLabel {
+                        Label(futurePlanLabel, systemImage: "calendar")
+                            .font(.caption)
+                            .foregroundStyle(.tertiary)
+                            .lineLimit(1)
                     }
                 }
             }

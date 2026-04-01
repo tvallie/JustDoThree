@@ -604,8 +604,8 @@ struct BacklogPickerSheet: View {
 
     private func createAndAdd() {
         guard !trimmed.isEmpty else { return }
-        let nextOrder = (allTasks.map(\.sortOrder).max() ?? -1) + 1
-        let task = JDTask(title: trimmed, sortOrder: nextOrder)
+        let startOrder = PlannerEngine.topInsertionStartOrder(existingTasks: allTasks, count: 1)
+        let task = JDTask(title: trimmed, sortOrder: startOrder)
         modelContext.insert(task)
         try? modelContext.save()
         onSelect(task)
