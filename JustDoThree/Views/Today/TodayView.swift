@@ -359,6 +359,7 @@ struct TaskCard: View {
     let onToggle: () -> Void
     let onDelete: () -> Void
     let onEdit: () -> Void
+    var removeActionTitle: String = "Remove from Today"
     /// Provide this to show a "Replace Task" option in the menu (today primary tasks only).
     var onReplace: (() -> Void)? = nil
 
@@ -402,7 +403,7 @@ struct TaskCard: View {
                     Button("Replace Task", systemImage: "arrow.left.arrow.right") { onReplace() }
                 }
                 Divider()
-                Button("Remove from Today", systemImage: "xmark", role: .destructive) { onDelete() }
+                Button(removeActionTitle, systemImage: "xmark", role: .destructive) { onDelete() }
             } label: {
                 Image(systemName: "ellipsis")
                     .font(.callout)
