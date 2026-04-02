@@ -16,6 +16,9 @@ struct TodayView: View {
     @State private var taskToDelete: UUID? = nil
     @State private var showDeleteConfirm = false
     @State private var showEditSheet: JDTask? = nil
+    @State private var showConfetti = false
+    @State private var confettiBurstID = UUID()
+    @State private var celebrationCount = 0
     @AppStorage("jdt_autoScheduleRecurring") private var autoScheduleRecurring = false
 
     // MARK: - Computed
@@ -79,7 +82,18 @@ struct TodayView: View {
             .background(Color(.systemBackground))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { toolbar }
+            .overlay(alignment: .top) {
+                if showConfetti {
+                    CelebrationConfettiView()
+                        .id(confettiBurstID)
+                        .frame(height: 260)
+                        .padding(.top, 8)
+                        .transition(.opacity)
+                        .allowsHitTesting(false)
+                }
+            }
         }
+        .sensoryFeedback(.success, trigger: celebrationCount)
         .sheet(isPresented: $showBacklogPicker) {
             BacklogPickerSheet(
                 title: addingStretch ? "Add a Stretch Goal" : "Add to Today",
@@ -137,7 +151,9 @@ struct TodayView: View {
             }
         }
         .onChange(of: allPrimaryDone) { _, newValue in
-            if newValue { ReviewManager.shared.recordPerfectDay() }
+            guard newValue else { return }
+            ReviewManager.shared.recordPerfectDay()
+            triggerCelebration()
         }
     }
 
@@ -296,16 +312,6 @@ struct TodayView: View {
                     .font(.headline)
             }
         }
-        ToolbarItem(placement: .topBarTrailing) {
-            Button {
-                addingStretch = false
-                showBacklogPicker = true
-            } label: {
-                Image(systemName: "plus")
-            }
-            .opacity(slotsLeft > 0 ? 1 : 0)
-            .disabled(slotsLeft == 0)
-        }
     }
 
     // MARK: - Actions
@@ -347,6 +353,22 @@ struct TodayView: View {
     private func uncompleteStretch(_ task: JDTask) {
         guard let plan = todayPlan else { return }
         PlannerEngine.uncomplete(task: task, plan: plan, context: modelContext)
+    }
+
+    private func triggerCelebration() {
+        confettiBurstID = UUID()
+        celebrationCount += 1
+        withAnimation(.easeOut(duration: 0.2)) {
+            showConfetti = true
+        }
+
+        let burstID = confettiBurstID
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.2) {
+            guard burstID == confettiBurstID else { return }
+            withAnimation(.easeOut(duration: 0.35)) {
+                showConfetti = false
+            }
+        }
     }
 }
 
@@ -417,6 +439,71 @@ struct TaskCard: View {
         .background(Color(.secondarySystemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 12))
     }
+}
+
+private struct CelebrationConfettiView: View {
+    private let pieces = CelebrationConfettiPiece.sampleBurst
+    @State private var animateBurst = false
+
+    var body: some View {
+        GeometryReader { proxy in
+            ZStack {
+                ForEach(pieces) { piece in
+                    RoundedRectangle(cornerRadius: piece.cornerRadius, style: .continuous)
+                        .fill(piece.color.gradient)
+                        .frame(width: piece.size.width, height: piece.size.height)
+                        .rotationEffect(.degrees(animateBurst ? piece.endRotation : piece.startRotation))
+                        .position(
+                            x: proxy.size.width * (animateBurst ? piece.endX : piece.startX),
+                            y: animateBurst ? piece.endY : -24
+                        )
+                        .opacity(animateBurst ? 0 : 1)
+                        .animation(
+                            .timingCurve(0.2, 0.8, 0.2, 1, duration: piece.duration)
+                                .delay(piece.delay),
+                            value: animateBurst
+                        )
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .clipped()
+            .onAppear {
+                animateBurst = false
+                DispatchQueue.main.async {
+                    animateBurst = true
+                }
+            }
+        }
+    }
+}
+
+private struct CelebrationConfettiPiece: Identifiable {
+    let id: Int
+    let color: Color
+    let size: CGSize
+    let startX: CGFloat
+    let endX: CGFloat
+    let endY: CGFloat
+    let startRotation: Double
+    let endRotation: Double
+    let delay: Double
+    let duration: Double
+    let cornerRadius: CGFloat
+
+    static let sampleBurst: [CelebrationConfettiPiece] = [
+        .init(id: 0, color: .pink, size: CGSize(width: 10, height: 18), startX: 0.18, endX: 0.06, endY: 200, startRotation: -10, endRotation: 220, delay: 0.00, duration: 1.20, cornerRadius: 4),
+        .init(id: 1, color: .orange, size: CGSize(width: 12, height: 16), startX: 0.24, endX: 0.18, endY: 228, startRotation: 12, endRotation: -180, delay: 0.04, duration: 1.05, cornerRadius: 5),
+        .init(id: 2, color: .yellow, size: CGSize(width: 9, height: 20), startX: 0.31, endX: 0.28, endY: 212, startRotation: -22, endRotation: 260, delay: 0.08, duration: 1.18, cornerRadius: 4),
+        .init(id: 3, color: .green, size: CGSize(width: 11, height: 14), startX: 0.38, endX: 0.36, endY: 236, startRotation: 20, endRotation: -210, delay: 0.02, duration: 1.26, cornerRadius: 5),
+        .init(id: 4, color: .mint, size: CGSize(width: 8, height: 18), startX: 0.46, endX: 0.41, endY: 190, startRotation: -12, endRotation: 170, delay: 0.00, duration: 0.98, cornerRadius: 4),
+        .init(id: 5, color: .teal, size: CGSize(width: 10, height: 10), startX: 0.52, endX: 0.55, endY: 220, startRotation: 0, endRotation: 360, delay: 0.06, duration: 1.12, cornerRadius: 10),
+        .init(id: 6, color: .cyan, size: CGSize(width: 9, height: 18), startX: 0.58, endX: 0.63, endY: 210, startRotation: 18, endRotation: -190, delay: 0.01, duration: 1.04, cornerRadius: 4),
+        .init(id: 7, color: .blue, size: CGSize(width: 11, height: 16), startX: 0.64, endX: 0.73, endY: 235, startRotation: -18, endRotation: 240, delay: 0.09, duration: 1.22, cornerRadius: 5),
+        .init(id: 8, color: .indigo, size: CGSize(width: 10, height: 18), startX: 0.70, endX: 0.82, endY: 205, startRotation: 10, endRotation: -220, delay: 0.03, duration: 1.08, cornerRadius: 4),
+        .init(id: 9, color: .purple, size: CGSize(width: 12, height: 12), startX: 0.78, endX: 0.92, endY: 198, startRotation: -8, endRotation: 190, delay: 0.07, duration: 1.16, cornerRadius: 6),
+        .init(id: 10, color: .red, size: CGSize(width: 8, height: 16), startX: 0.43, endX: 0.22, endY: 248, startRotation: -30, endRotation: 310, delay: 0.12, duration: 1.30, cornerRadius: 4),
+        .init(id: 11, color: .accentColor, size: CGSize(width: 10, height: 14), startX: 0.57, endX: 0.79, endY: 244, startRotation: 24, endRotation: -260, delay: 0.11, duration: 1.28, cornerRadius: 4),
+    ]
 }
 
 // MARK: - BacklogPickerSheet
