@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import UIKit
 
 struct TodayView: View {
     @Environment(\.modelContext) private var modelContext
@@ -18,7 +19,6 @@ struct TodayView: View {
     @State private var showEditSheet: JDTask? = nil
     @State private var showConfetti = false
     @State private var confettiBurstID = UUID()
-    @State private var celebrationCount = 0
     @AppStorage("jdt_autoScheduleRecurring") private var autoScheduleRecurring = false
 
     // MARK: - Computed
@@ -93,7 +93,6 @@ struct TodayView: View {
                 }
             }
         }
-        .sensoryFeedback(.success, trigger: celebrationCount)
         .sheet(isPresented: $showBacklogPicker) {
             BacklogPickerSheet(
                 title: addingStretch ? "Add a Stretch Goal" : "Add to Today",
@@ -357,7 +356,9 @@ struct TodayView: View {
 
     private func triggerCelebration() {
         confettiBurstID = UUID()
-        celebrationCount += 1
+        let generator = UINotificationFeedbackGenerator()
+        generator.prepare()
+        generator.notificationOccurred(.success)
         withAnimation(.easeOut(duration: 0.2)) {
             showConfetti = true
         }
