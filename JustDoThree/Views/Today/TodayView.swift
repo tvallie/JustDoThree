@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import UIKit
+import AudioToolbox
 
 struct TodayView: View {
     @Environment(\.modelContext) private var modelContext
@@ -385,6 +386,7 @@ private final class TodayHaptics {
         impactGenerator.prepare()
         successGenerator.notificationOccurred(.success)
         impactGenerator.impactOccurred(intensity: 1.0)
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
 }
 
