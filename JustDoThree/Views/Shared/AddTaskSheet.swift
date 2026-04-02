@@ -13,6 +13,8 @@ struct AddTaskSheet: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
+    @AppStorage("jdt_enableTaskDates") private var enableTaskDates = false
+
     /// Pass nil to create a new task; pass an existing task to edit its title.
     var existingTask: JDTask? = nil
 
@@ -25,9 +27,12 @@ struct AddTaskSheet: View {
     @State private var recurringPattern: RecurringRule.Pattern? = nil
     @State private var recurringWeekday: Int = 2   // Monday (Calendar weekday 2)
     @State private var recurringDayOfMonth: Int = 1
+    @State private var taskDateEnabled = false
+    @State private var selectedTaskDate: Date? = nil
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
 
     var isEditing: Bool { existingTask != nil }
+    private var minimumTaskDate: Date { Date().startOfDay }
 
     var body: some View {
         NavigationStack {
@@ -35,16 +40,6 @@ struct AddTaskSheet: View {
                 Section {
                     TextField("What do you need to do?", text: $title, axis: .vertical)
                         .lineLimit(1...4)
-                        .onAppear {
-                            if let existing = existingTask {
-                                title = existing.title
-                                if let rule = existing.recurringRule {
-                                    recurringPattern = rule.pattern
-                                    if let wd = rule.weekday { recurringWeekday = wd }
-                                    if let d = rule.dayOfMonth { recurringDayOfMonth = d }
-                                }
-                            }
-                        }
                 }
 
                 // File import row — only shown when creating (not editing)
@@ -95,6 +90,32 @@ struct AddTaskSheet: View {
                 } footer: {
                     Text("Recurring tasks reset automatically after completion.")
                 }
+
+                if enableTaskDates {
+                    Section("Task Date") {
+                        if taskDateEnabled {
+                            DatePicker(
+                                "Task Date",
+                                selection: Binding(
+                                    get: { selectedTaskDate ?? minimumTaskDate },
+                                    set: { selectedTaskDate = $0.startOfDay }
+                                ),
+                                in: minimumTaskDate...,
+                                displayedComponents: .date
+                            )
+
+                            Button("Remove Task Date", role: .destructive) {
+                                taskDateEnabled = false
+                                selectedTaskDate = nil
+                            }
+                        } else {
+                            Button("Add Task Date") {
+                                taskDateEnabled = true
+                                selectedTaskDate = (existingTask?.taskDate ?? minimumTaskDate).startOfDay
+                            }
+                        }
+                    }
+                }
             }
             .navigationTitle(isEditing ? "Edit Task" : "New Task")
             .navigationBarTitleDisplayMode(.inline)
@@ -108,13 +129,14 @@ struct AddTaskSheet: View {
                 }
             }
         }
-        .presentationDetents(recurringPattern != nil ? [.medium] : [.height(isEditing ? 300 : 340)])
+        .presentationDetents(sheetDetents)
         .sheet(isPresented: $showImportInfo) {
             ImportInstructionsSheet()
         }
         .sheet(isPresented: $showPasteSheet) {
             PasteTasksSheet()
         }
+        .onAppear(perform: loadExistingState)
     }
 
     private var trimmedTitle: String { title.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -127,16 +149,45 @@ struct AddTaskSheet: View {
         }
     }
 
+    private var normalizedTaskDate: Date? {
+        guard enableTaskDates, taskDateEnabled else { return nil }
+        return selectedTaskDate?.startOfDay
+    }
+
+    private var sheetDetents: Set<PresentationDetent> {
+        if recurringPattern != nil || (enableTaskDates && taskDateEnabled) {
+            return [.medium]
+        }
+
+        return [.height(isEditing ? 300 : 340)]
+    }
+
+    private func loadExistingState() {
+        guard let existing = existingTask else { return }
+        title = existing.title
+        if let rule = existing.recurringRule {
+            recurringPattern = rule.pattern
+            if let wd = rule.weekday { recurringWeekday = wd }
+            if let d = rule.dayOfMonth { recurringDayOfMonth = d }
+        }
+        if let taskDate = existing.taskDate {
+            taskDateEnabled = true
+            selectedTaskDate = taskDate.startOfDay
+        }
+    }
+
     private func save() {
         guard !trimmedTitle.isEmpty else { return }
         if let task = existingTask {
             task.title = trimmedTitle
             task.recurringRule = builtRecurringRule
+            task.taskDate = normalizedTaskDate
             try? modelContext.save()
         } else {
             let startOrder = PlannerEngine.topInsertionStartOrder(existingTasks: allTasks, count: 1)
             let task = JDTask(title: trimmedTitle, sortOrder: startOrder)
             task.recurringRule = builtRecurringRule
+            task.taskDate = normalizedTaskDate
             modelContext.insert(task)
             try? modelContext.save()
             onCreated?(task)

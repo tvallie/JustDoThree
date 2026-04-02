@@ -30,6 +30,18 @@ extension Date {
     var monthDayString: String {
         formatted(.dateTime.month(.abbreviated).day())
     }
+
+    /// E.g. "Mar 7" or "Mar 7, 2027" when outside the current year.
+    var backlogTaskDateString: String {
+        let currentYear = Calendar.current.component(.year, from: Date())
+        let dateYear = Calendar.current.component(.year, from: self)
+
+        if dateYear == currentYear {
+            return formatted(.dateTime.month(.abbreviated).day())
+        }
+
+        return formatted(.dateTime.month(.abbreviated).day().year())
+    }
 }
 
 extension Calendar {

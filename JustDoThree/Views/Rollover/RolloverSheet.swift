@@ -193,6 +193,10 @@ private struct ApplyToAllBar: View {
     let onApply: (RolloverItem.Choice) -> Void
     @State private var showSchedulePicker = false
 
+    private let choiceColumns = [
+        GridItem(.adaptive(minimum: 96), spacing: 8, alignment: .leading)
+    ]
+
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 8) {
@@ -200,20 +204,19 @@ private struct ApplyToAllBar: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
 
-                HStack(spacing: 8) {
+                LazyVGrid(columns: choiceColumns, alignment: .leading, spacing: 8) {
                     applyButton("Done", choice: .doneYesterday, icon: "checkmark")
                     applyButton("Today", choice: .addToToday, icon: "calendar",
                                disabled: slotsAvailable <= 0)
                     Button {
                         showSchedulePicker = true
                     } label: {
-                        Label("Schedule", systemImage: "calendar.badge.plus")
-                            .font(.caption)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 6)
-                            .background(Color(.tertiarySystemFill))
-                            .foregroundStyle(.primary)
-                            .clipShape(Capsule())
+                        choiceLabel(
+                            "Schedule",
+                            icon: "calendar.badge.plus",
+                            fill: Color(.tertiarySystemFill),
+                            foreground: .primary
+                        )
                     }
                     .buttonStyle(.plain)
                     applyButton("Backlog", choice: .backlog, icon: "tray")
@@ -243,16 +246,31 @@ private struct ApplyToAllBar: View {
         Button {
             onApply(choice)
         } label: {
-            Label(label, systemImage: icon)
-                .font(.caption)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 6)
-                .background(Color(.tertiarySystemFill))
-                .foregroundStyle(disabled ? .secondary : .primary)
-                .clipShape(Capsule())
+            choiceLabel(
+                label,
+                icon: icon,
+                fill: Color(.tertiarySystemFill),
+                foreground: disabled ? .secondary : .primary
+            )
         }
         .buttonStyle(.plain)
         .disabled(disabled)
+    }
+
+    private func choiceLabel(
+        _ label: String,
+        icon: String,
+        fill: Color,
+        foreground: Color
+    ) -> some View {
+        Label(label, systemImage: icon)
+            .font(.caption)
+            .lineLimit(1)
+            .fixedSize(horizontal: true, vertical: false)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(fill, in: Capsule())
+            .foregroundStyle(foreground)
     }
 }
 
@@ -265,6 +283,10 @@ private struct RolloverItemRow: View {
     let onChoiceChange: (RolloverItem.Choice) -> Void
 
     @State private var showSchedulePicker = false
+
+    private let choiceColumns = [
+        GridItem(.adaptive(minimum: 96), spacing: 8, alignment: .leading)
+    ]
 
     // MARK: Helpers
 
@@ -304,7 +326,7 @@ private struct RolloverItemRow: View {
             }
 
             // Choice buttons
-            HStack(spacing: 8) {
+            LazyVGrid(columns: choiceColumns, alignment: .leading, spacing: 8) {
                 choiceButton("Done", icon: "checkmark",
                              isSelected: item.choice == .doneYesterday) {
                     onChoiceChange(.doneYesterday)
@@ -314,13 +336,12 @@ private struct RolloverItemRow: View {
                 Button {
                     onChoiceChange(.addToToday)
                 } label: {
-                    Label("Today", systemImage: "calendar")
-                        .font(.caption)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 6)
-                        .background(isTodaySelected ? Color.accentColor : Color(.tertiarySystemFill))
-                        .foregroundStyle(isTodaySelected ? .white : .primary)
-                        .clipShape(Capsule())
+                    choiceLabel(
+                        "Today",
+                        icon: "calendar",
+                        fill: isTodaySelected ? Color.accentColor : Color(.tertiarySystemFill),
+                        foreground: isTodaySelected ? .white : .primary
+                    )
                 }
                 .buttonStyle(.plain)
 
@@ -328,13 +349,12 @@ private struct RolloverItemRow: View {
                 Button {
                     showSchedulePicker = true
                 } label: {
-                    Label(scheduleButtonLabel, systemImage: "calendar.badge.plus")
-                        .font(.caption)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 6)
-                        .background(isScheduleSelected ? Color.accentColor : Color(.tertiarySystemFill))
-                        .foregroundStyle(isScheduleSelected ? .white : .primary)
-                        .clipShape(Capsule())
+                    choiceLabel(
+                        scheduleButtonLabel,
+                        icon: "calendar.badge.plus",
+                        fill: isScheduleSelected ? Color.accentColor : Color(.tertiarySystemFill),
+                        foreground: isScheduleSelected ? .white : .primary
+                    )
                 }
                 .buttonStyle(.plain)
 
@@ -402,15 +422,30 @@ private struct RolloverItemRow: View {
         action: @escaping () -> Void
     ) -> some View {
         Button(action: action) {
-            Label(label, systemImage: icon)
-                .font(.caption)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 6)
-                .background(isSelected ? Color.accentColor : Color(.tertiarySystemFill))
-                .foregroundStyle(isSelected ? .white : .primary)
-                .clipShape(Capsule())
+            choiceLabel(
+                label,
+                icon: icon,
+                fill: isSelected ? Color.accentColor : Color(.tertiarySystemFill),
+                foreground: isSelected ? .white : .primary
+            )
         }
         .buttonStyle(.plain)
+    }
+
+    private func choiceLabel(
+        _ label: String,
+        icon: String,
+        fill: Color,
+        foreground: Color
+    ) -> some View {
+        Label(label, systemImage: icon)
+            .font(.caption)
+            .lineLimit(1)
+            .fixedSize(horizontal: true, vertical: false)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(fill, in: Capsule())
+            .foregroundStyle(foreground)
     }
 }
 
