@@ -261,6 +261,8 @@ private struct ImportResult {
 // MARK: - BacklogRow
 
 struct BacklogRow: View {
+    @AppStorage("jdt_enableTaskDates") private var enableTaskDates = false
+
     let task: JDTask
     let futurePlanLabel: String?
     let onEdit: () -> Void
@@ -275,10 +277,12 @@ struct BacklogRow: View {
                         .font(.body)
                         .foregroundStyle(.primary)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    HStack(spacing: 8) {
-                        Text(task.createdDate.monthDayString)
+                    if enableTaskDates, let taskDate = task.taskDate {
+                        Text(taskDate.backlogTaskDateString)
                             .font(.caption)
                             .foregroundStyle(.tertiary)
+                    }
+                    HStack(spacing: 8) {
                         if task.rolloverCount > 0 {
                             Label("\(task.rolloverCount) rollover\(task.rolloverCount == 1 ? "" : "s")",
                                   systemImage: "arrow.triangle.2.circlepath")

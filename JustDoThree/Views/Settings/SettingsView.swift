@@ -5,6 +5,7 @@ struct SettingsView: View {
     @Environment(AppState.self) private var appState
     @State private var notifManager = NotificationManager.shared
     @AppStorage("jdt_autoScheduleRecurring") private var autoScheduleRecurring = false
+    @AppStorage("jdt_enableTaskDates") private var enableTaskDates = false
 
     // Notification bindings backed by NotificationManager
     @State private var morningOn: Bool = NotificationManager.shared.morningEnabled
@@ -62,6 +63,15 @@ struct SettingsView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text("Auto-schedule recurring tasks")
                             Text("Adds recurring tasks to your plan automatically on their scheduled day")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+
+                    Toggle(isOn: $enableTaskDates) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Enable Task Dates")
+                            Text("Shows an optional date field in backlog task details.")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }

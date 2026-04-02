@@ -7,6 +7,7 @@ final class JDTask {
     var id: UUID
     var title: String
     var createdDate: Date
+    var taskDate: Date?
     /// Incremented each time this task is rolled over to a new day without completion.
     var rolloverCount: Int
     /// Sort position within the backlog (lower = higher priority).
@@ -21,6 +22,7 @@ final class JDTask {
         self.id = UUID()
         self.title = title
         self.createdDate = Date()
+        self.taskDate = nil
         self.rolloverCount = 0
         self.sortOrder = sortOrder
         self.isCompleted = false
