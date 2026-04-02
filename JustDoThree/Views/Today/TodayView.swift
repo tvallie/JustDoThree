@@ -356,9 +356,7 @@ struct TodayView: View {
 
     private func triggerCelebration() {
         confettiBurstID = UUID()
-        let generator = UINotificationFeedbackGenerator()
-        generator.prepare()
-        generator.notificationOccurred(.success)
+        TodayHaptics.shared.celebrateCompletion()
         withAnimation(.easeOut(duration: 0.2)) {
             showConfetti = true
         }
@@ -370,6 +368,23 @@ struct TodayView: View {
                 showConfetti = false
             }
         }
+    }
+}
+
+@MainActor
+private final class TodayHaptics {
+    static let shared = TodayHaptics()
+
+    private let successGenerator = UINotificationFeedbackGenerator()
+    private let impactGenerator = UIImpactFeedbackGenerator(style: .heavy)
+
+    private init() {}
+
+    func celebrateCompletion() {
+        successGenerator.prepare()
+        impactGenerator.prepare()
+        successGenerator.notificationOccurred(.success)
+        impactGenerator.impactOccurred(intensity: 1.0)
     }
 }
 
