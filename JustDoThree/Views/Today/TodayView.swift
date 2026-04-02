@@ -149,11 +149,6 @@ struct TodayView: View {
                 PlannerEngine.autoScheduleRecurring(for: Date(), context: modelContext)
             }
         }
-        .onChange(of: allPrimaryDone) { _, newValue in
-            guard newValue else { return }
-            ReviewManager.shared.recordPerfectDay()
-            triggerCelebration()
-        }
     }
 
     // MARK: - Subviews
@@ -331,7 +326,12 @@ struct TodayView: View {
 
     private func complete(_ task: JDTask) {
         guard let plan = todayPlan else { return }
+        let wasAllPrimaryDone = plan.isAllPrimaryComplete
         PlannerEngine.complete(task: task, plan: plan, context: modelContext)
+        if !wasAllPrimaryDone && plan.isAllPrimaryComplete {
+            ReviewManager.shared.recordPerfectDay()
+            triggerCelebration()
+        }
     }
 
     private func uncomplete(_ task: JDTask) {
