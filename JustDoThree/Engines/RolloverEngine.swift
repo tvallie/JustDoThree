@@ -47,10 +47,15 @@ enum RolloverEngine {
                 guard
                     let task = allTasks.first(where: { $0.id == taskID }),
                     !task.isCompleted,
-                    !todayPlan.taskIDs.contains(taskID)
+                    !todayPlan.taskIDs.contains(taskID),
+                    !todayPlan.stretchTaskIDs.contains(taskID)
                 else { continue }
                 items.append(RolloverItem(id: taskID, task: task, fromPlan: plan))
             }
+            // Mark completed task IDs as seen so older plans cannot re-surface tasks
+            // that were already handled in this more-recent plan (matters for recurring
+            // tasks where isCompleted stays false after completion).
+            plan.completedTaskIDs.forEach { seen.insert($0) }
         }
         return items
     }
