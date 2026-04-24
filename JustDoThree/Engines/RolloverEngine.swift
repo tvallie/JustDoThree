@@ -52,12 +52,13 @@ enum RolloverEngine {
                 else { continue }
                 items.append(RolloverItem(id: taskID, task: task, fromPlan: plan))
             }
-            // Mark all completed task IDs (primary and stretch) as seen so older plans
-            // cannot re-surface tasks already handled in this more-recent plan.
-            // This matters for recurring tasks where isCompleted stays false after
-            // completion — both regular completions and stretch-goal completions.
+            // Mark all task IDs tracked in this plan as seen so older plans cannot
+            // re-surface them. Covers: primary completions, stretch completions, and
+            // stretch goals that were added but not completed — all mean the task was
+            // already "in" this more-recent plan and should not resurface from older ones.
             plan.completedTaskIDs.forEach { seen.insert($0) }
             plan.completedStretchIDs.forEach { seen.insert($0) }
+            plan.stretchTaskIDs.forEach { seen.insert($0) }
         }
         return items
     }
