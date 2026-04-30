@@ -39,6 +39,9 @@
 		EE6AF0E1F419DEDA70E1A551 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A97212AC99E4DB48E549 /* PlanView.swift */; };
 		F5802032DDA1C268D3A7E6CD /* CompletionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5591CE2E6C25FF3BC2724346 /* CompletionLog.swift */; };
 		FDAD673500A62507C045EC31 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */; };
+		5E0E32A210EE49BA85E840C5 /* TaskOCREngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90845531E10E48FFB504570C /* TaskOCREngine.swift */; };
+		CA13A2A1DEF64D6EB5C921C4 /* CameraPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931A23C8409947D0A59E7C97 /* CameraPickerView.swift */; };
+		4872DA2C8B3E4A468C07472B /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF932606CC44BDB8BC67520 /* PhotoPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +79,9 @@
 		F1EB60C431BF2FA2AD3B716A /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		F8D1C067F49CCE195EC61C92 /* TermsOfUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseView.swift; sourceTree = "<group>"; };
 		FA9FDF090C318BD5125F23C8 /* BragCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BragCardView.swift; sourceTree = "<group>"; };
+		90845531E10E48FFB504570C /* TaskOCREngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskOCREngine.swift; sourceTree = "<group>"; };
+		931A23C8409947D0A59E7C97 /* CameraPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerView.swift; sourceTree = "<group>"; };
+		CBF932606CC44BDB8BC67520 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -85,7 +91,9 @@
 				ED09558AE6E393CC3C82A644 /* AddTaskSheet.swift */,
 				4809D5B4FDF66DB78EDF82F9 /* AppLogoView.swift */,
 				FA9FDF090C318BD5125F23C8 /* BragCardView.swift */,
+				931A23C8409947D0A59E7C97 /* CameraPickerView.swift */,
 				8DA8508B7B12A648EC90F634 /* EmptyStateView.swift */,
+				CBF932606CC44BDB8BC67520 /* PhotoPickerView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -190,6 +198,7 @@
 			children = (
 				ED183CD1E160ACA3A2B0A17B /* PlannerEngine.swift */,
 				0E5DFC01F2DB0F3EA9D97F15 /* RolloverEngine.swift */,
+				90845531E10E48FFB504570C /* TaskOCREngine.swift */,
 			);
 			path = Engines;
 			sourceTree = "<group>";
@@ -364,6 +373,9 @@
 				001E75D01EF4BE41E0F863B6 /* SplashView.swift in Sources */,
 				DDCB9536EE872234D6653659 /* TermsOfUseView.swift in Sources */,
 				367DBEF10FCF389C0989AE2D /* TodayView.swift in Sources */,
+				5E0E32A210EE49BA85E840C5 /* TaskOCREngine.swift in Sources */,
+				CA13A2A1DEF64D6EB5C921C4 /* CameraPickerView.swift in Sources */,
+				4872DA2C8B3E4A468C07472B /* PhotoPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
