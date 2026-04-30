@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import UniformTypeIdentifiers
+import UIKit
 
 struct BacklogView: View {
     @Environment(\.modelContext) private var modelContext
@@ -13,6 +14,12 @@ struct BacklogView: View {
     @State private var showDeleteConfirm: JDTask? = nil
     @State private var showFileImporter = false
     @State private var showPasteSheet = false
+    @State private var showCameraPicker = false
+    @State private var showPhotoPicker = false
+    @State private var pendingOCRImage: UIImage? = nil
+    @State private var isProcessingOCR = false
+    @State private var ocrInitialText = ""
+    @State private var ocrHint: String? = nil
     @State private var importResult: ImportResult? = nil
     @State private var searchText = ""
 
@@ -70,6 +77,16 @@ struct BacklogView: View {
                     .environment(\.editMode, .constant(searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? .active : .inactive))
                 }
             }
+            .overlay {
+                if isProcessingOCR {
+                    ZStack {
+                        Color(.systemBackground).opacity(0.6)
+                        ProgressView("Scanning…")
+                            .padding()
+                            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+                    }
+                }
+            }
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText, prompt: "Search backlog")
             .safeAreaInset(edge: .bottom) {
@@ -84,6 +101,17 @@ struct BacklogView: View {
                             showFileImporter = true
                         } label: {
                             Label("Import File", systemImage: "doc.badge.plus")
+                        }
+                        Divider()
+                        Button {
+                            showCameraPicker = true
+                        } label: {
+                            Label("Scan with Camera", systemImage: "camera")
+                        }
+                        Button {
+                            showPhotoPicker = true
+                        } label: {
+                            Label("Import from Photos", systemImage: "photo")
                         }
                     } label: {
                         Label("Import", systemImage: "square.and.arrow.down")
@@ -118,8 +146,31 @@ struct BacklogView: View {
         .sheet(isPresented: $showAddSheet) {
             AddTaskSheet()
         }
-        .sheet(isPresented: $showPasteSheet) {
-            PasteTasksSheet()
+        .sheet(isPresented: $showPasteSheet, onDismiss: {
+            ocrInitialText = ""
+            ocrHint = nil
+        }) {
+            PasteTasksSheet(initialText: ocrInitialText, hint: ocrHint)
+        }
+        .sheet(isPresented: $showCameraPicker) {
+            CameraPickerView(isPresented: $showCameraPicker) { image in
+                pendingOCRImage = image
+            }
+        }
+        .sheet(isPresented: $showPhotoPicker) {
+            PhotoPickerView(isPresented: $showPhotoPicker) { image in
+                pendingOCRImage = image
+            }
+        }
+        .task(id: pendingOCRImage?.hashValue) {
+            guard let image = pendingOCRImage else { return }
+            isProcessingOCR = true
+            let lines = await TaskOCREngine.recognizeLines(in: image)
+            ocrInitialText = lines.joined(separator: "\n")
+            ocrHint = lines.isEmpty ? "Nothing recognized — try again or type tasks manually." : nil
+            pendingOCRImage = nil
+            isProcessingOCR = false
+            showPasteSheet = true
         }
         .sheet(item: $editingTask) { task in
             AddTaskSheet(existingTask: task)
