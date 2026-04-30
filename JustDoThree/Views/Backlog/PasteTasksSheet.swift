@@ -6,9 +6,16 @@ struct PasteTasksSheet: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
 
-    @State private var text = ""
+    @State private var text: String
     @State private var importResult: String? = nil
     @FocusState private var focused: Bool
+
+    private let hint: String?
+
+    init(initialText: String = "", hint: String? = nil) {
+        self._text = State(initialValue: initialText)
+        self.hint = hint
+    }
 
     private var nonBlankLines: [String] {
         text.components(separatedBy: .newlines)
@@ -24,7 +31,15 @@ struct PasteTasksSheet: View {
                     .foregroundStyle(.secondary)
                     .padding(.horizontal)
                     .padding(.top, 16)
-                    .padding(.bottom, 8)
+                    .padding(.bottom, hint == nil ? 8 : 2)
+
+                if let hint {
+                    Text(hint)
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                        .padding(.horizontal)
+                        .padding(.bottom, 8)
+                }
 
                 TextEditor(text: $text)
                     .focused($focused)
