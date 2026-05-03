@@ -7,6 +7,8 @@ struct SettingsView: View {
     @AppStorage("jdt_autoScheduleRecurring") private var autoScheduleRecurring = false
     @AppStorage("jdt_enableTaskDates") private var enableTaskDates = false
 
+    @State private var showExportSheet = false
+
     // Notification bindings backed by NotificationManager
     @State private var morningOn: Bool = NotificationManager.shared.morningEnabled
     @State private var eveningOn: Bool = NotificationManager.shared.eveningEnabled
@@ -90,6 +92,17 @@ struct SettingsView: View {
                     Text("Features")
                 }
 
+                // MARK: - Data
+                Section {
+                    Button {
+                        showExportSheet = true
+                    } label: {
+                        Label("Export Tasks", systemImage: "arrow.up.doc")
+                    }
+                } header: {
+                    Text("Data")
+                }
+
                 // MARK: - About
                 Section {
                     HStack {
@@ -125,6 +138,9 @@ struct SettingsView: View {
                 #endif
             }
             .navigationTitle("Settings")
+            .sheet(isPresented: $showExportSheet) {
+                ExportTasksSheet()
+            }
         }
     }
 
