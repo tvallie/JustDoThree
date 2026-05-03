@@ -17,14 +17,17 @@ final class JDTask {
     var completionDate: Date?
     /// JSON-encoded RecurringRule. Nil for non-recurring tasks (premium only).
     var recurringRuleData: Data?
+    /// True for work-context tasks; false (default) for personal tasks.
+    var isWork: Bool = false
 
-    init(title: String, sortOrder: Int = 0) {
+    init(title: String, sortOrder: Int = 0, isWork: Bool = false) {
         self.id = UUID()
         self.title = title
         self.createdDate = Date()
         self.taskDate = nil
         self.rolloverCount = 0
         self.sortOrder = sortOrder
+        self.isWork = isWork
         self.isCompleted = false
         self.completionDate = nil
         self.recurringRuleData = nil
