@@ -23,6 +23,20 @@ final class AppState {
         didSet { UserDefaults.standard.set(hasSeenOnboarding, forKey: "jdt_hasSeenOnboarding") }
     }
 
+    var workModeEnabled: Bool {
+        get { UserDefaults.standard.bool(forKey: "jdt_workModeEnabled") }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "jdt_workModeEnabled")
+            if !newValue { activeContext = false } // reset to personal when disabled
+        }
+    }
+
+    /// false = Personal, true = Work. Persisted so last context is restored on relaunch.
+    var activeContext: Bool {
+        get { UserDefaults.standard.bool(forKey: "jdt_activeContext") }
+        set { UserDefaults.standard.set(newValue, forKey: "jdt_activeContext") }
+    }
+
     // MARK: - Day transition
 
     /// Prevents duplicate rollover checks within a single app session day.
@@ -32,51 +46,62 @@ final class AppState {
     /// Creates today's plan if it doesn't exist, then surfaces any rollover items.
     func checkDayTransition(context: ModelContext) {
         let today = Date().startOfDay
-
-        // Guard: already checked today in this session
         if let last = lastCheckedDate, last.isSameDay(as: today) { return }
         lastCheckedDate = today
 
-        // Ensure today's plan exists
-        let todayPlan = PlannerEngine.fetchOrCreateTodayPlan(context: context)
-
-        // Auto-schedule recurring tasks if enabled
-        if autoScheduleRecurring {
-            PlannerEngine.autoScheduleRecurring(for: Date(), context: context)
+        PlannerEngine.fetchOrCreateTodayPlan(isWork: false, context: context)
+        if workModeEnabled {
+            PlannerEngine.fetchOrCreateTodayPlan(isWork: true, context: context)
         }
 
-        // Guard: rollover already resolved today (persisted across sessions)
-        let resolvedKey = "jdt_rolloverResolved"
+        if autoScheduleRecurring {
+            PlannerEngine.autoScheduleRecurring(for: Date(), isWork: false, context: context)
+            if workModeEnabled {
+                PlannerEngine.autoScheduleRecurring(for: Date(), isWork: true, context: context)
+            }
+        }
+
+        // Personal rollover always checked on app open
+        checkContextRollover(isWork: false, context: context)
+    }
+
+    /// Called on app open for personal, and on first work-context switch of the day.
+    func checkContextRollover(isWork: Bool, context: ModelContext) {
+        let today = Date().startOfDay
+        let resolvedKey = isWork ? "jdt_rolloverResolved_work" : "jdt_rolloverResolved_personal"
         if let resolved = UserDefaults.standard.object(forKey: resolvedKey) as? Date,
            resolved.isSameDay(as: today) { return }
 
-        // Find pending rollover tasks
+        let todayPlan = PlannerEngine.fetchOrCreateTodayPlan(isWork: isWork, context: context)
         let pending = RolloverEngine.findPendingItems(todayPlan: todayPlan, context: context)
         if !pending.isEmpty {
             rolloverItems = pending
             showRolloverSheet = true
         } else {
-            markRolloverResolved()
+            markRolloverResolved(isWork: isWork)
         }
     }
 
     /// Applies user's choices from the rollover sheet and dismisses it.
     func applyRolloverChoices(context: ModelContext) {
-        let todayPlan = PlannerEngine.fetchOrCreateTodayPlan(context: context)
+        let isWork = rolloverItems.first?.fromPlan.isWork ?? false
+        let todayPlan = PlannerEngine.fetchOrCreateTodayPlan(isWork: isWork, context: context)
         RolloverEngine.applyChoices(rolloverItems, todayPlan: todayPlan, context: context)
         rolloverItems = []
         showRolloverSheet = false
-        markRolloverResolved()
+        markRolloverResolved(isWork: isWork)
     }
 
     func dismissRolloverWithoutChanges() {
+        let isWork = rolloverItems.first?.fromPlan.isWork ?? false
         rolloverItems = []
         showRolloverSheet = false
-        markRolloverResolved()
+        markRolloverResolved(isWork: isWork)
     }
 
-    private func markRolloverResolved() {
-        UserDefaults.standard.set(Date(), forKey: "jdt_rolloverResolved")
+    private func markRolloverResolved(isWork: Bool = false) {
+        let key = isWork ? "jdt_rolloverResolved_work" : "jdt_rolloverResolved_personal"
+        UserDefaults.standard.set(Date(), forKey: key)
     }
 
     #if DEBUG
