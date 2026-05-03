@@ -5,6 +5,7 @@ import UIKit
 
 struct BacklogView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(AppState.self) private var appState
 
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
     @Query(sort: \DailyPlan.date) private var plans: [DailyPlan]
@@ -24,12 +25,18 @@ struct BacklogView: View {
     @State private var searchText = ""
 
     private var todayTaskIDs: Set<UUID> {
-        let plan = plans.first { $0.date.isSameDay(as: Date()) }
+        let plan = plans.first {
+            $0.date.isSameDay(as: Date()) && $0.isWork == appState.activeContext
+        }
         return Set((plan?.taskIDs ?? []) + (plan?.stretchTaskIDs ?? []))
     }
 
     private var backlogTasks: [JDTask] {
-        allTasks.filter { ($0.recurringRule != nil || !$0.isCompleted) && !todayTaskIDs.contains($0.id) }
+        allTasks.filter {
+            $0.isWork == appState.activeContext &&
+            ($0.recurringRule != nil || !$0.isCompleted) &&
+            !todayTaskIDs.contains($0.id)
+        }
     }
 
     private var filteredBacklogTasks: [JDTask] {
@@ -135,10 +142,14 @@ struct BacklogView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    HStack(spacing: 6) {
-                        AppLogoView(size: 26)
-                        Text("Just Do Three")
-                            .font(.headline)
+                    if appState.workModeEnabled {
+                        WorkContextPicker()
+                    } else {
+                        HStack(spacing: 6) {
+                            AppLogoView(size: 26)
+                            Text("Just Do Three")
+                                .font(.headline)
+                        }
                     }
                 }
             }
@@ -273,7 +284,7 @@ struct BacklogView: View {
                 continue
             }
 
-            let task = JDTask(title: title, sortOrder: startSortOrder + imported)
+            let task = JDTask(title: title, sortOrder: startSortOrder + imported, isWork: appState.activeContext)
             modelContext.insert(task)
             imported += 1
         }
