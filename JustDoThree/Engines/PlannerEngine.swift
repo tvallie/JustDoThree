@@ -8,17 +8,17 @@ enum PlannerEngine {
 
     /// Returns today's DailyPlan, creating it if it doesn't exist yet.
     @discardableResult
-    static func fetchOrCreateTodayPlan(context: ModelContext) -> DailyPlan {
-        fetchOrCreatePlan(for: Date(), context: context)
+    static func fetchOrCreateTodayPlan(isWork: Bool = false, context: ModelContext) -> DailyPlan {
+        fetchOrCreatePlan(for: Date(), isWork: isWork, context: context)
     }
 
     @discardableResult
-    static func fetchOrCreatePlan(for date: Date, context: ModelContext) -> DailyPlan {
+    static func fetchOrCreatePlan(for date: Date, isWork: Bool = false, context: ModelContext) -> DailyPlan {
         let all = allPlans(context: context)
-        if let existing = all.first(where: { $0.date.isSameDay(as: date) }) {
+        if let existing = all.first(where: { $0.date.isSameDay(as: date) && $0.isWork == isWork }) {
             return existing
         }
-        let plan = DailyPlan(date: date)
+        let plan = DailyPlan(date: date, isWork: isWork)
         context.insert(plan)
         save(context: context)
         return plan
@@ -31,15 +31,15 @@ enum PlannerEngine {
         return (try? context.fetch(descriptor)) ?? []
     }
 
-    static func plan(for date: Date, context: ModelContext) -> DailyPlan? {
-        allPlans(context: context).first { $0.date.isSameDay(as: date) }
+    static func plan(for date: Date, isWork: Bool = false, context: ModelContext) -> DailyPlan? {
+        allPlans(context: context).first { $0.date.isSameDay(as: date) && $0.isWork == isWork }
     }
 
     /// Most recent plan BEFORE today that has at least one task.
-    static func mostRecentPreviousPlan(context: ModelContext) -> DailyPlan? {
+    static func mostRecentPreviousPlan(isWork: Bool = false, context: ModelContext) -> DailyPlan? {
         let today = Date().startOfDay
         return allPlans(context: context)
-            .filter { $0.date < today && !$0.taskIDs.isEmpty }
+            .filter { $0.date < today && !$0.taskIDs.isEmpty && $0.isWork == isWork }
             .max(by: { $0.date < $1.date })
     }
 
@@ -142,9 +142,9 @@ enum PlannerEngine {
 
     /// Adds any recurring tasks whose rule matches the given date into that day's plan.
     /// Respects the 3-task primary limit. Safe to call multiple times (idempotent).
-    static func autoScheduleRecurring(for date: Date, context: ModelContext) {
-        let plan = fetchOrCreatePlan(for: date, context: context)
-        let tasks = allTasks(context: context)
+    static func autoScheduleRecurring(for date: Date, isWork: Bool = false, context: ModelContext) {
+        let plan = fetchOrCreatePlan(for: date, isWork: isWork, context: context)
+        let tasks = allTasks(context: context).filter { $0.isWork == isWork }
         let cal = Calendar.current
         let weekday = cal.component(.weekday, from: date)
         let dayOfMonth = cal.component(.day, from: date)
