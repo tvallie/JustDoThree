@@ -30,6 +30,7 @@ struct AddTaskSheet: View {
     @State private var recurringDayOfMonth: Int = 1
     @State private var taskDateEnabled = false
     @State private var selectedTaskDate: Date? = nil
+    @State private var showAddToCalendar = false
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
 
     var isEditing: Bool { existingTask != nil }
@@ -92,6 +93,17 @@ struct AddTaskSheet: View {
                     Text("Recurring tasks reset automatically after completion.")
                 }
 
+                if isEditing, let existing = existingTask {
+                    Section {
+                        Button {
+                            showAddToCalendar = true
+                        } label: {
+                            Label("Add to iPhone Calendar", systemImage: "calendar.badge.plus")
+                        }
+                    }
+                    .id(existing.id)
+                }
+
                 if enableTaskDates {
                     Section("Task Date") {
                         if taskDateEnabled {
@@ -136,6 +148,11 @@ struct AddTaskSheet: View {
         }
         .sheet(isPresented: $showPasteSheet) {
             PasteTasksSheet()
+        }
+        .sheet(isPresented: $showAddToCalendar) {
+            if let existing = existingTask {
+                AddToCalendarSheet(task: existing)
+            }
         }
         .onAppear(perform: loadExistingState)
     }
