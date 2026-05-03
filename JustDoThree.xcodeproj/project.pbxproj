@@ -23,6 +23,7 @@
 		4D8234778C8DB87FD84A7796 /* BragCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9FDF090C318BD5125F23C8 /* BragCardView.swift */; };
 		4E2AC04F8F9E6A817A935DF4 /* RecurringRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D292CCCB9DAC9025273552B /* RecurringRule.swift */; };
 		551A96132FF1FAFC785FC84D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626E0E7798EB25E07D13923B /* OnboardingView.swift */; };
+		55DAB6253E5EFDA204FF73E9 /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D65449D1F9B4161A5E6712 /* CalendarService.swift */; };
 		5EB9B2718B99036A1024CB3E /* BragSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558CABE5A57DCE84BABD826A /* BragSheet.swift */; };
 		6D6F37FE60B39347DEBAF9C6 /* PasteTasksSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44CF2DAF0A82BF20E9F1F37 /* PasteTasksSheet.swift */; };
 		6DBB4B75E35DEFF8BF84925A /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA8508B7B12A648EC90F634 /* EmptyStateView.swift */; };
@@ -74,6 +75,7 @@
 		9244D2D09EFC3363D6A4D835 /* JDTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDTask.swift; sourceTree = "<group>"; };
 		95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9D292CCCB9DAC9025273552B /* RecurringRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurringRule.swift; sourceTree = "<group>"; };
+		A4D65449D1F9B4161A5E6712 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
 		B44CF2DAF0A82BF20E9F1F37 /* PasteTasksSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteTasksSheet.swift; sourceTree = "<group>"; };
 		CC06642F4BD10ED917C1C813 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		ED09558AE6E393CC3C82A644 /* AddTaskSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskSheet.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				24AD9CC2272CFB85324116FB /* Managers */,
 				75E7BA01F248082CFC8567CD /* Models */,
 				1E4D7B143F368BCA68781F7E /* Preview */,
+				E04EBF2E6EBEF16C0D373FD1 /* Services */,
 				865F29A880246BD044357F98 /* State */,
 				57487932AA27D58ADD31E4B5 /* Views */,
 			);
@@ -239,6 +242,14 @@
 				626E0E7798EB25E07D13923B /* OnboardingView.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		E04EBF2E6EBEF16C0D373FD1 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A4D65449D1F9B4161A5E6712 /* CalendarService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		E23B9841177841D70BC6B645 /* History */ = {
@@ -354,6 +365,7 @@
 				33829380BFE55FA51B44124C /* BacklogView.swift in Sources */,
 				4D8234778C8DB87FD84A7796 /* BragCardView.swift in Sources */,
 				5EB9B2718B99036A1024CB3E /* BragSheet.swift in Sources */,
+				55DAB6253E5EFDA204FF73E9 /* CalendarService.swift in Sources */,
 				10F847104475B478835610E6 /* CameraPickerView.swift in Sources */,
 				F5802032DDA1C268D3A7E6CD /* CompletionLog.swift in Sources */,
 				EB1DE899D5FED9E78C222E64 /* DailyPlan.swift in Sources */,
