@@ -15,9 +15,12 @@ final class DailyPlan {
     var stretchTaskIDs: [UUID]
     /// Subset of stretchTaskIDs that the user completed.
     var completedStretchIDs: [UUID]
+    /// True for work-context plans; false (default) for personal plans.
+    var isWork: Bool = false
 
-    init(date: Date) {
+    init(date: Date, isWork: Bool = false) {
         self.date = Calendar.current.startOfDay(for: date)
+        self.isWork = isWork
         self.taskIDs = []
         self.completedTaskIDs = []
         self.stretchTaskIDs = []
