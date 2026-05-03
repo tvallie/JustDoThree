@@ -25,7 +25,7 @@ struct TodayView: View {
     // MARK: - Computed
 
     private var todayPlan: DailyPlan? {
-        plans.first { $0.date.isSameDay(as: Date()) }
+        plans.first { $0.date.isSameDay(as: Date()) && $0.isWork == appState.activeContext }
     }
 
     private var todayTasks: [JDTask] {
@@ -41,7 +41,9 @@ struct TodayView: View {
     private var backlogTasks: [JDTask] {
         let excludeIDs = Set((todayPlan?.taskIDs ?? []) + (todayPlan?.stretchTaskIDs ?? []))
         return allTasks.filter { task in
-            !excludeIDs.contains(task.id) && (!task.isCompleted || task.recurringRule != nil)
+            task.isWork == appState.activeContext &&
+            !excludeIDs.contains(task.id) &&
+            (!task.isCompleted || task.recurringRule != nil)
         }
     }
 
@@ -145,9 +147,17 @@ struct TodayView: View {
                 appState.checkDayTransition(context: modelContext)
             }
         }
+        .onChange(of: appState.activeContext) { _, isWork in
+            if isWork {
+                appState.checkContextRollover(isWork: true, context: modelContext)
+            }
+        }
         .onChange(of: autoScheduleRecurring) { _, enabled in
             if enabled {
-                PlannerEngine.autoScheduleRecurring(for: Date(), context: modelContext)
+                PlannerEngine.autoScheduleRecurring(for: Date(), isWork: false, context: modelContext)
+                if appState.workModeEnabled {
+                    PlannerEngine.autoScheduleRecurring(for: Date(), isWork: true, context: modelContext)
+                }
             }
         }
     }
@@ -301,10 +311,14 @@ struct TodayView: View {
     @ToolbarContentBuilder
     private var toolbar: some ToolbarContent {
         ToolbarItem(placement: .principal) {
-            HStack(spacing: 6) {
-                AppLogoView(size: 26)
-                Text("Just Do Three")
-                    .font(.headline)
+            if appState.workModeEnabled {
+                WorkContextPicker()
+            } else {
+                HStack(spacing: 6) {
+                    AppLogoView(size: 26)
+                    Text("Just Do Three")
+                        .font(.headline)
+                }
             }
         }
     }
@@ -312,8 +326,10 @@ struct TodayView: View {
     // MARK: - Actions
 
     private func addToToday(_ task: JDTask) {
-        let plan = todayPlan ?? PlannerEngine.fetchOrCreateTodayPlan(context: modelContext)
-        // Remove any IDs that no longer correspond to a real task (defensive cleanup)
+        let plan = todayPlan ?? PlannerEngine.fetchOrCreateTodayPlan(
+            isWork: appState.activeContext,
+            context: modelContext
+        )
         let validIDs = Set(allTasks.map(\.id))
         plan.taskIDs.removeAll { !validIDs.contains($0) }
         PlannerEngine.addToToday(task: task, plan: plan, context: modelContext)
