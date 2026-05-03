@@ -14,9 +14,11 @@ struct ExportTasksSheet: View {
     }
 
     @State private var contextFilter: ContextFilter = .both
+    @State private var includeCompleted = false
     @State private var includeDate = true
     @State private var includeContext = true
     @State private var includeRecurring = true
+    @State private var includeCompletedColumn = true
 
     var body: some View {
         NavigationStack {
@@ -30,12 +32,19 @@ struct ExportTasksSheet: View {
                     }
                 }
 
+                Section("Tasks") {
+                    Toggle("Include completed tasks", isOn: $includeCompleted)
+                }
+
                 Section("Columns") {
                     Toggle("Date", isOn: $includeDate)
                     if contextFilter == .both && appState.workModeEnabled {
                         Toggle("Context", isOn: $includeContext)
                     }
                     Toggle("Recurring", isOn: $includeRecurring)
+                    if includeCompleted {
+                        Toggle("Completed", isOn: $includeCompletedColumn)
+                    }
                 }
 
                 Section {
@@ -84,14 +93,20 @@ struct ExportTasksSheet: View {
         if includeDate { headers.append("Date") }
         if includeContext && contextFilter == .both && appState.workModeEnabled { headers.append("Context") }
         if includeRecurring { headers.append("Recurring") }
+        if includeCompleted && includeCompletedColumn { headers.append("Completed") }
         rows.append(headers.joined(separator: ","))
 
-        // Filter tasks
-        let filtered: [JDTask]
+        // Filter tasks by context
+        var filtered: [JDTask]
         switch contextFilter {
         case .personal: filtered = allTasks.filter { !$0.isWork }
         case .work:     filtered = allTasks.filter {  $0.isWork }
         case .both:     filtered = allTasks
+        }
+
+        // Filter out completed tasks unless user opted in
+        if !includeCompleted {
+            filtered = filtered.filter { !$0.isCompleted }
         }
 
         // Date formatter
@@ -109,6 +124,13 @@ struct ExportTasksSheet: View {
             }
             if includeRecurring {
                 fields.append(task.recurringRule.map { csvEscape($0.displayString) } ?? "")
+            }
+            if includeCompleted && includeCompletedColumn {
+                if task.isCompleted {
+                    fields.append(task.completionDate.map { dateFormatter.string(from: $0) } ?? "Yes")
+                } else {
+                    fields.append("")
+                }
             }
             rows.append(fields.joined(separator: ","))
         }
