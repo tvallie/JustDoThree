@@ -576,10 +576,13 @@ struct BacklogPickerSheet: View {
     /// Tasks scheduled on any OTHER day — shown disabled with the day name.
     private var scheduledElsewhere: [(task: JDTask, dayLabel: String)] {
         allTasks.compactMap { task -> (JDTask, String)? in
+            guard task.isWork == appState.activeContext else { return nil }
             guard !task.isCompleted || task.recurringRule != nil else { return nil }
             guard !inTargetPlanIDs.contains(task.id) else { return nil }
             let today = Date().startOfDay
-            for plan in plans where !plan.date.isSameDay(as: forDate) && plan.date >= today {
+            for plan in plans where !plan.date.isSameDay(as: forDate)
+                && plan.date >= today
+                && plan.isWork == appState.activeContext {
                 if plan.taskIDs.contains(task.id) || plan.stretchTaskIDs.contains(task.id) {
                     let label = plan.date.isSameDay(as: Date()) ? "Today" : plan.date.shortDayString
                     return (task, label)

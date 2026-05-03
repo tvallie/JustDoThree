@@ -247,7 +247,11 @@ struct BacklogView: View {
     private func nearestFuturePlanLabel(for task: JDTask) -> String? {
         let today = Date().startOfDay
         let nearest = plans
-            .filter { $0.date > today && ($0.taskIDs.contains(task.id) || $0.stretchTaskIDs.contains(task.id)) }
+            .filter {
+                $0.date > today
+                && $0.isWork == appState.activeContext
+                && ($0.taskIDs.contains(task.id) || $0.stretchTaskIDs.contains(task.id))
+            }
             .min(by: { $0.date < $1.date })
 
         guard let nearest else { return nil }
