@@ -2,16 +2,22 @@ import SwiftUI
 import SwiftData
 
 struct PlanView: View {
+    @Environment(AppState.self) private var appState
+
     var body: some View {
         NavigationStack {
             WeekPlannerView()
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        HStack(spacing: 6) {
-                            AppLogoView(size: 26)
-                            Text("Just Do Three")
-                                .font(.headline)
+                        if appState.workModeEnabled {
+                            WorkContextPicker()
+                        } else {
+                            HStack(spacing: 6) {
+                                AppLogoView(size: 26)
+                                Text("Just Do Three")
+                                    .font(.headline)
+                            }
                         }
                     }
                 }
@@ -23,6 +29,7 @@ struct PlanView: View {
 
 struct WeekPlannerView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(AppState.self) private var appState
     @Query(sort: \DailyPlan.date) private var plans: [DailyPlan]
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
 
@@ -42,7 +49,7 @@ struct WeekPlannerView: View {
     }
 
     private var selectedPlan: DailyPlan? {
-        plans.first { $0.date.isSameDay(as: selectedDay) }
+        plans.first { $0.date.isSameDay(as: selectedDay) && $0.isWork == appState.activeContext }
     }
 
     private var selectedPlanTasks: [JDTask] {
@@ -98,7 +105,11 @@ struct WeekPlannerView: View {
                 forDate: selectedDay,
                 title: addingStretch ? "Add a Stretch Goal" : "Add to \(selectedDay.shortDayString)",
                 onSelect: { task in
-                    let plan = PlannerEngine.fetchOrCreatePlan(for: selectedDay, context: modelContext)
+                    let plan = PlannerEngine.fetchOrCreatePlan(
+                        for: selectedDay,
+                        isWork: appState.activeContext,
+                        context: modelContext
+                    )
                     if addingStretch {
                         PlannerEngine.addStretch(task: task, plan: plan, context: modelContext)
                     } else {
@@ -136,19 +147,19 @@ struct WeekPlannerView: View {
         .onAppear {
             if autoScheduleRecurring {
                 for day in upcomingDays {
-                    PlannerEngine.autoScheduleRecurring(for: day, context: modelContext)
+                    PlannerEngine.autoScheduleRecurring(for: day, isWork: appState.activeContext, context: modelContext)
                 }
             }
         }
         .onChange(of: selectedDay) { _, day in
             if autoScheduleRecurring {
-                PlannerEngine.autoScheduleRecurring(for: day, context: modelContext)
+                PlannerEngine.autoScheduleRecurring(for: day, isWork: appState.activeContext, context: modelContext)
             }
         }
         .onChange(of: autoScheduleRecurring) { _, enabled in
             if enabled {
                 for day in upcomingDays {
-                    PlannerEngine.autoScheduleRecurring(for: day, context: modelContext)
+                    PlannerEngine.autoScheduleRecurring(for: day, isWork: appState.activeContext, context: modelContext)
                 }
             }
         }
