@@ -6,6 +6,7 @@ struct SettingsView: View {
     @State private var notifManager = NotificationManager.shared
     @AppStorage("jdt_autoScheduleRecurring") private var autoScheduleRecurring = false
     @AppStorage("jdt_enableTaskDates") private var enableTaskDates = false
+    @AppStorage("jdt_workModeEnabled") private var workModeEnabled = false
 
     // Notification bindings backed by NotificationManager
     @State private var morningOn: Bool = NotificationManager.shared.morningEnabled
@@ -72,6 +73,15 @@ struct SettingsView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text("Enable Task Dates")
                             Text("Shows an optional date field in backlog task details.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+
+                    Toggle(isOn: $workModeEnabled) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("JDT at Work")
+                            Text("Separate your work and personal tasks with independent daily plans.")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
