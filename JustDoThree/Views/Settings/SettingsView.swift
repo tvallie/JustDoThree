@@ -6,7 +6,6 @@ struct SettingsView: View {
     @State private var notifManager = NotificationManager.shared
     @AppStorage("jdt_autoScheduleRecurring") private var autoScheduleRecurring = false
     @AppStorage("jdt_enableTaskDates") private var enableTaskDates = false
-    @AppStorage("jdt_workModeEnabled") private var workModeEnabled = false
 
     // Notification bindings backed by NotificationManager
     @State private var morningOn: Bool = NotificationManager.shared.morningEnabled
@@ -21,6 +20,7 @@ struct SettingsView: View {
     }
 
     var body: some View {
+        @Bindable var state = appState
         NavigationStack {
             Form {
                 // MARK: - Notifications
@@ -78,7 +78,7 @@ struct SettingsView: View {
                         }
                     }
 
-                    Toggle(isOn: $workModeEnabled) {
+                    Toggle(isOn: $state.workModeEnabled) {
                         VStack(alignment: .leading, spacing: 2) {
                             Text("JDT at Work")
                             Text("Separate your work and personal tasks with independent daily plans.")

@@ -23,18 +23,16 @@ final class AppState {
         didSet { UserDefaults.standard.set(hasSeenOnboarding, forKey: "jdt_hasSeenOnboarding") }
     }
 
-    var workModeEnabled: Bool {
-        get { UserDefaults.standard.bool(forKey: "jdt_workModeEnabled") }
-        set {
-            UserDefaults.standard.set(newValue, forKey: "jdt_workModeEnabled")
-            if !newValue { activeContext = false } // reset to personal when disabled
+    var workModeEnabled: Bool = UserDefaults.standard.bool(forKey: "jdt_workModeEnabled") {
+        didSet {
+            UserDefaults.standard.set(workModeEnabled, forKey: "jdt_workModeEnabled")
+            if !workModeEnabled { activeContext = false } // reset to personal when disabled
         }
     }
 
     /// false = Personal, true = Work. Persisted so last context is restored on relaunch.
-    var activeContext: Bool {
-        get { UserDefaults.standard.bool(forKey: "jdt_activeContext") }
-        set { UserDefaults.standard.set(newValue, forKey: "jdt_activeContext") }
+    var activeContext: Bool = UserDefaults.standard.bool(forKey: "jdt_activeContext") {
+        didSet { UserDefaults.standard.set(activeContext, forKey: "jdt_activeContext") }
     }
 
     // MARK: - Day transition
