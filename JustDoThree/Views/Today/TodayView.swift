@@ -18,6 +18,7 @@ struct TodayView: View {
     @State private var taskToDelete: UUID? = nil
     @State private var showDeleteConfirm = false
     @State private var showEditSheet: JDTask? = nil
+    @State private var calendarSheetTask: JDTask? = nil
     @State private var showConfetti = false
     @State private var confettiBurstID = UUID()
     @AppStorage("jdt_autoScheduleRecurring") private var autoScheduleRecurring = false
@@ -110,6 +111,9 @@ struct TodayView: View {
         }
         .sheet(item: $showEditSheet) { task in
             AddTaskSheet(existingTask: task)
+        }
+        .sheet(item: $calendarSheetTask) { task in
+            AddToCalendarSheet(task: task)
         }
         .sheet(isPresented: $showTomorrowPicker) {
             TomorrowPickerSheet(onSelect: addStretch)
@@ -219,7 +223,8 @@ struct TodayView: View {
                             removeFromToday(task.id)
                             addingStretch = false
                             showBacklogPicker = true
-                        }
+                        },
+                        onAddToCalendar: { calendarSheetTask = task }
                     )
                 }
             }
@@ -301,7 +306,8 @@ struct TodayView: View {
                                 PlannerEngine.removeStretch(taskID: task.id, plan: plan, context: modelContext)
                             }
                         },
-                        onEdit: { showEditSheet = task }
+                        onEdit: { showEditSheet = task },
+                        onAddToCalendar: { calendarSheetTask = task }
                     )
                 }
             }
@@ -418,6 +424,7 @@ struct TaskCard: View {
     var removeActionTitle: String = "Remove from Today"
     /// Provide this to show a "Replace Task" option in the menu (today primary tasks only).
     var onReplace: (() -> Void)? = nil
+    var onAddToCalendar: (() -> Void)? = nil
 
     var body: some View {
         HStack(spacing: 14) {
@@ -457,6 +464,9 @@ struct TaskCard: View {
                 Button("Edit", systemImage: "pencil") { onEdit() }
                 if let onReplace, !isCompleted {
                     Button("Replace Task", systemImage: "arrow.left.arrow.right") { onReplace() }
+                }
+                if let onAddToCalendar {
+                    Button("Add to iPhone Calendar", systemImage: "calendar.badge.plus") { onAddToCalendar() }
                 }
                 Divider()
                 Button(removeActionTitle, systemImage: "xmark", role: .destructive) { onDelete() }
