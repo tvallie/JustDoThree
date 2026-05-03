@@ -4,6 +4,7 @@ import SwiftData
 struct PasteTasksSheet: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @Environment(AppState.self) private var appState
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
 
     @State private var text: String
@@ -88,7 +89,7 @@ struct PasteTasksSheet: View {
                 skipped += 1
                 continue
             }
-            modelContext.insert(JDTask(title: title, sortOrder: startSortOrder + imported))
+            modelContext.insert(JDTask(title: title, sortOrder: startSortOrder + imported, isWork: appState.activeContext))
             imported += 1
         }
 

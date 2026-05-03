@@ -12,6 +12,7 @@ private let addTaskSheetOrdinalFormatter: NumberFormatter = {
 struct AddTaskSheet: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(AppState.self) private var appState
 
     @AppStorage("jdt_enableTaskDates") private var enableTaskDates = false
 
@@ -185,7 +186,7 @@ struct AddTaskSheet: View {
             try? modelContext.save()
         } else {
             let startOrder = PlannerEngine.topInsertionStartOrder(existingTasks: allTasks, count: 1)
-            let task = JDTask(title: trimmedTitle, sortOrder: startOrder)
+            let task = JDTask(title: trimmedTitle, sortOrder: startOrder, isWork: appState.activeContext)
             task.recurringRule = builtRecurringRule
             task.taskDate = normalizedTaskDate
             modelContext.insert(task)
@@ -203,6 +204,7 @@ struct AddTaskSheet: View {
 struct ImportInstructionsSheet: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(AppState.self) private var appState
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
 
     @State private var showFileImporter = false
@@ -305,7 +307,7 @@ struct ImportInstructionsSheet: View {
             let title = raw.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !title.isEmpty else { continue }
             guard !existingTitles.contains(title.lowercased()) else { skipped += 1; continue }
-            modelContext.insert(JDTask(title: title, sortOrder: startSortOrder + imported))
+            modelContext.insert(JDTask(title: title, sortOrder: startSortOrder + imported, isWork: appState.activeContext))
             imported += 1
         }
 
