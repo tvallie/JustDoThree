@@ -33,7 +33,7 @@ enum RolloverEngine {
         let allTasks = PlannerEngine.allTasks(context: context)
 
         let previousPlans = allPlans
-            .filter { $0.date < today && !$0.taskIDs.isEmpty }
+            .filter { $0.date < today && !$0.taskIDs.isEmpty && $0.isWork == todayPlan.isWork }
             .sorted { $0.date > $1.date } // newest first for dedup
 
         var seen = Set<UUID>()
@@ -107,7 +107,11 @@ enum RolloverEngine {
                 item.task.rolloverCount += 1
 
             case .scheduleFor(let date):
-                let plan = PlannerEngine.fetchOrCreatePlan(for: date, context: context)
+                let plan = PlannerEngine.fetchOrCreatePlan(
+                    for: date,
+                    isWork: item.fromPlan.isWork,
+                    context: context
+                )
                 if plan.taskIDs.count < 3, !plan.taskIDs.contains(item.task.id) {
                     plan.taskIDs.append(item.task.id)
                 }
