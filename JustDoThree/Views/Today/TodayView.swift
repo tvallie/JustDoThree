@@ -545,6 +545,7 @@ private struct CelebrationConfettiPiece: Identifiable {
 struct BacklogPickerSheet: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(AppState.self) private var appState
 
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
     @Query(sort: \DailyPlan.date) private var plans: [DailyPlan]
@@ -561,7 +562,9 @@ struct BacklogPickerSheet: View {
 
     /// Tasks already in the target day's plan — shown disabled, not selectable.
     private var inTargetPlanItems: [JDTask] {
-        guard let plan = plans.first(where: { $0.date.isSameDay(as: forDate) }) else { return [] }
+        guard let plan = plans.first(where: {
+            $0.date.isSameDay(as: forDate) && $0.isWork == appState.activeContext
+        }) else { return [] }
         let ids = Set(plan.taskIDs + plan.stretchTaskIDs)
         return allTasks.filter { ids.contains($0.id) }
     }
@@ -596,7 +599,9 @@ struct BacklogPickerSheet: View {
     private var backlogTasks: [JDTask] {
         let busy = inTargetPlanIDs.union(scheduledElsewhereIDs)
         return allTasks.filter { task in
-            !busy.contains(task.id) && (!task.isCompleted || task.recurringRule != nil)
+            task.isWork == appState.activeContext &&
+            !busy.contains(task.id) &&
+            (!task.isCompleted || task.recurringRule != nil)
         }
     }
 
@@ -726,7 +731,7 @@ struct BacklogPickerSheet: View {
     private func createAndAdd() {
         guard !trimmed.isEmpty else { return }
         let startOrder = PlannerEngine.topInsertionStartOrder(existingTasks: allTasks, count: 1)
-        let task = JDTask(title: trimmed, sortOrder: startOrder)
+        let task = JDTask(title: trimmed, sortOrder: startOrder, isWork: appState.activeContext)
         modelContext.insert(task)
         try? modelContext.save()
         onSelect(task)
@@ -741,6 +746,7 @@ struct BacklogPickerSheet: View {
 struct TomorrowPickerSheet: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @Environment(AppState.self) private var appState
 
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
     @Query(sort: \DailyPlan.date) private var plans: [DailyPlan]
@@ -758,7 +764,9 @@ struct TomorrowPickerSheet: View {
 
     /// Tasks in tomorrow's plan that aren't already in today's list and aren't completed.
     private var tomorrowTasks: [JDTask] {
-        guard let plan = plans.first(where: { $0.date.isSameDay(as: tomorrow) }) else { return [] }
+        guard let plan = plans.first(where: {
+            $0.date.isSameDay(as: tomorrow) && $0.isWork == appState.activeContext
+        }) else { return [] }
         return plan.taskIDs.compactMap { id -> JDTask? in
             guard let task = allTasks.first(where: { $0.id == id }) else { return nil }
             guard !todayExcludedIDs.contains(id) else { return nil }
@@ -789,7 +797,9 @@ struct TomorrowPickerSheet: View {
                         Section {
                             ForEach(tomorrowTasks) { task in
                                 Button {
-                                    if let tomorrowPlan = plans.first(where: { $0.date.isSameDay(as: tomorrow) }) {
+                                    if let tomorrowPlan = plans.first(where: {
+                                        $0.date.isSameDay(as: tomorrow) && $0.isWork == appState.activeContext
+                                    }) {
                                         PlannerEngine.removeFromToday(taskID: task.id, plan: tomorrowPlan, context: modelContext)
                                     }
                                     onSelect(task)
