@@ -23,6 +23,8 @@ struct AddTaskSheet: View {
     var onCreated: ((JDTask) -> Void)? = nil
 
     @State private var title: String = ""
+    @FocusState private var focus: Field?
+    private enum Field: Hashable { case title, save }
     @State private var showImportInfo = false
     @State private var showPasteSheet = false
     @State private var recurringPattern: RecurringRule.Pattern? = nil
@@ -40,8 +42,15 @@ struct AddTaskSheet: View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("What do you need to do?", text: $title, axis: .vertical)
-                        .lineLimit(1...4)
+                    HStack(alignment: .top, spacing: 8) {
+                        TextField("What do you need to do?", text: $title, axis: .vertical)
+                            .lineLimit(1...4)
+                            .focused($focus, equals: .title)
+                        MicButton(text: $title) {
+                            focus = .save
+                        }
+                        .padding(.top, 2)
+                    }
                 }
 
                 // File import row — only shown when creating (not editing)
@@ -139,6 +148,7 @@ struct AddTaskSheet: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button(isEditing ? "Save" : "Add") { save() }
                         .disabled(trimmedTitle.isEmpty)
+                        .focused($focus, equals: .save)
                 }
             }
         }
