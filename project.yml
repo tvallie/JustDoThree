@@ -47,6 +47,8 @@ targets:
         NSUserNotificationUsageDescription: "Just Do Three uses notifications to send optional morning and evening reminders."
         NSCalendarsFullAccessUsageDescription: "Just Do Three uses calendar access to add tasks as iPhone Calendar events."
         NSRemindersFullAccessUsageDescription: "Just Do Three uses reminders access to add tasks as iPhone reminders."
+        NSMicrophoneUsageDescription: "Just Do Three uses the microphone so you can dictate tasks instead of typing."
+        NSSpeechRecognitionUsageDescription: "Just Do Three uses speech recognition to turn your dictation into task text."
         ITSAppUsesNonExemptEncryption: false
     settings:
       base:

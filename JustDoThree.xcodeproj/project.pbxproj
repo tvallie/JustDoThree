@@ -51,6 +51,7 @@
 		EE6AF0E1F419DEDA70E1A551 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A97212AC99E4DB48E549 /* PlanView.swift */; };
 		F5802032DDA1C268D3A7E6CD /* CompletionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5591CE2E6C25FF3BC2724346 /* CompletionLog.swift */; };
 		FDAD673500A62507C045EC31 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */; };
+		FE4D46E258286F2ED0D73873 /* AppleSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879DA5726DDC85F8DD76A40D /* AppleSpeechRecognizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		7A18CF8B31A2FD5943E8AE24 /* AddToCalendarSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCalendarSheet.swift; sourceTree = "<group>"; };
 		7FE5D6690047093E4F38B2ED /* JustDoThreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustDoThreeApp.swift; sourceTree = "<group>"; };
 		8418C51F6810F98094045D69 /* DailyPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPlan.swift; sourceTree = "<group>"; };
+		879DA5726DDC85F8DD76A40D /* AppleSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeechRecognizer.swift; sourceTree = "<group>"; };
 		8A50918BD04B398D5D467190 /* Date+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
 		8B67C8C0DEBF1F209E23D49D /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		8DA8508B7B12A648EC90F634 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 		830FE1D7AE7DA8C34B02F27A /* Speech */ = {
 			isa = PBXGroup;
 			children = (
+				879DA5726DDC85F8DD76A40D /* AppleSpeechRecognizer.swift */,
 				BD4717892D1F310E01E5C74B /* SpeechDictationController.swift */,
 				6CBE7EDADCF5313FCF1B4148 /* SpeechRecognizing.swift */,
 			);
@@ -442,6 +445,7 @@
 				1B62173C7949977F687F02B8 /* AddToCalendarSheet.swift in Sources */,
 				DFE3D86AAA6332D7DFF3DCC2 /* AppLogoView.swift in Sources */,
 				CCA14A0EE8CA27BCAC98783A /* AppState.swift in Sources */,
+				FE4D46E258286F2ED0D73873 /* AppleSpeechRecognizer.swift in Sources */,
 				33829380BFE55FA51B44124C /* BacklogView.swift in Sources */,
 				4D8234778C8DB87FD84A7796 /* BragCardView.swift in Sources */,
 				5EB9B2718B99036A1024CB3E /* BragSheet.swift in Sources */,
