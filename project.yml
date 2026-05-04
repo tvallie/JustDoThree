@@ -17,10 +17,13 @@ schemes:
     build:
       targets:
         JustDoThree: all
+        JustDoThreeTests: [test]
     run:
       config: Debug
     test:
       config: Debug
+      targets:
+        - JustDoThreeTests
     archive:
       config: Release
 
@@ -67,3 +70,19 @@ targets:
           DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
           SWIFT_OPTIMIZATION_LEVEL: "-O"
           DEAD_CODE_STRIPPING: YES
+
+  JustDoThreeTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: JustDoThreeTests
+    dependencies:
+      - target: JustDoThree
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.todd.justdothree.tests
+        DEVELOPMENT_TEAM: 3ZAS78KQUH
+        SWIFT_VERSION: "5.9"
+        TARGETED_DEVICE_FAMILY: "1"
+        GENERATE_INFOPLIST_FILE: YES

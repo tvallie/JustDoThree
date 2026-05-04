@@ -35,6 +35,7 @@
 		B2918E9C78BA897EC9CB9066 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0907822FE5FC342A97C4C987 /* Assets.xcassets */; };
 		BA61F0F0C90B89EE87E85631 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74FB303A18EEE20516FC52AE /* RootView.swift */; };
 		C1922061DBBD5E7F38A5E45C /* AddTaskSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED09558AE6E393CC3C82A644 /* AddTaskSheet.swift */; };
+		CA8C0706E7635133F694A705 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C50203D55B07B2A540621 /* SmokeTests.swift */; };
 		CB98969E140ABC2E2D625114 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB60C431BF2FA2AD3B716A /* ReviewManager.swift */; };
 		CC40CB8D39B6E1A306DC475D /* RolloverSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE15746757A5C3EE27834EB /* RolloverSheet.swift */; };
 		CCA14A0EE8CA27BCAC98783A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084EB54D11EE6B0F1D53B735 /* AppState.swift */; };
@@ -48,13 +49,23 @@
 		FDAD673500A62507C045EC31 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3A1AB695A6AA52B5A351B27E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A1CF9C4F297D857F2C38F2E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B11DE67A5195782FC798767;
+			remoteInfo = JustDoThree;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		084EB54D11EE6B0F1D53B735 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0907822FE5FC342A97C4C987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E5DFC01F2DB0F3EA9D97F15 /* RolloverEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolloverEngine.swift; sourceTree = "<group>"; };
-		200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		23DDC91FF776B108ACFA0B96 /* CameraPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerView.swift; sourceTree = "<group>"; };
-		3854F531D88F2596847BE463 /* JustDoThree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustDoThree.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3854F531D88F2596847BE463 /* JustDoThree.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = JustDoThree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD3A97212AC99E4DB48E549 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
 		4809D5B4FDF66DB78EDF82F9 /* AppLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogoView.swift; sourceTree = "<group>"; };
 		48B577A258EF0DBDD29DAC2A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -68,8 +79,10 @@
 		66B12D5E74B9E9EC21C72282 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6AE15746757A5C3EE27834EB /* RolloverSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolloverSheet.swift; sourceTree = "<group>"; };
 		6BDE404626CBC00AE4E4CE8E /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		701DA5BB3B2495FCD3716916 /* JustDoThreeTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = JustDoThreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		74FB303A18EEE20516FC52AE /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		7566033A465FE0CF18103DDA /* ExportTasksSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportTasksSheet.swift; sourceTree = "<group>"; };
+		790C50203D55B07B2A540621 /* SmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeTests.swift; sourceTree = "<group>"; };
 		7A18CF8B31A2FD5943E8AE24 /* AddToCalendarSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCalendarSheet.swift; sourceTree = "<group>"; };
 		7FE5D6690047093E4F38B2ED /* JustDoThreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustDoThreeApp.swift; sourceTree = "<group>"; };
 		8418C51F6810F98094045D69 /* DailyPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPlan.swift; sourceTree = "<group>"; };
@@ -121,8 +134,17 @@
 			isa = PBXGroup;
 			children = (
 				4E7B741D069B8FC3B34BBA70 /* JustDoThree */,
+				157BFE4D4631C9B538EA4340 /* JustDoThreeTests */,
 				E6F71FE0CFFE275AFAAA87A7 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		157BFE4D4631C9B538EA4340 /* JustDoThreeTests */ = {
+			isa = PBXGroup;
+			children = (
+				790C50203D55B07B2A540621 /* SmokeTests.swift */,
+			);
+			path = JustDoThreeTests;
 			sourceTree = "<group>";
 		};
 		1E4D7B143F368BCA68781F7E /* Preview */ = {
@@ -270,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				3854F531D88F2596847BE463 /* JustDoThree.app */,
+				701DA5BB3B2495FCD3716916 /* JustDoThreeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -313,6 +336,24 @@
 			productReference = 3854F531D88F2596847BE463 /* JustDoThree.app */;
 			productType = "com.apple.product-type.application";
 		};
+		CB7EDCAA181BB7049960AEC7 /* JustDoThreeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAB560D5A9142E073B4EE20D /* Build configuration list for PBXNativeTarget "JustDoThreeTests" */;
+			buildPhases = (
+				CEEF5D87388C55169AE7FF64 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0EC14D5DDFC5C3DC99900B2A /* PBXTargetDependency */,
+			);
+			name = JustDoThreeTests;
+			packageProductDependencies = (
+			);
+			productName = JustDoThreeTests;
+			productReference = 701DA5BB3B2495FCD3716916 /* JustDoThreeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -320,11 +361,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2640;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					9B11DE67A5195782FC798767 = {
 						DevelopmentTeam = 3ZAS78KQUH;
 						ProvisioningStyle = Automatic;
+					};
+					CB7EDCAA181BB7049960AEC7 = {
+						DevelopmentTeam = 3ZAS78KQUH;
 					};
 				};
 			};
@@ -343,6 +387,7 @@
 			projectRoot = "";
 			targets = (
 				9B11DE67A5195782FC798767 /* JustDoThree */,
+				CB7EDCAA181BB7049960AEC7 /* JustDoThreeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -404,7 +449,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CEEF5D87388C55169AE7FF64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA8C0706E7635133F694A705 /* SmokeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0EC14D5DDFC5C3DC99900B2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B11DE67A5195782FC798767 /* JustDoThree */;
+			targetProxy = 3A1AB695A6AA52B5A351B27E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		00147CFD8377DCFE082EB18E /* Release */ = {
@@ -442,10 +503,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 3ZAS78KQUH;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -459,7 +518,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -503,10 +561,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 3ZAS78KQUH;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -527,7 +583,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -546,6 +601,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3ZAS78KQUH;
 				INFOPLIST_FILE = JustDoThree/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -553,7 +609,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.todd.justdothree;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -571,6 +627,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3ZAS78KQUH;
 				INFOPLIST_FILE = JustDoThree/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -578,13 +635,53 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.todd.justdothree;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		93D72358D2C69256F503FBE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 3ZAS78KQUH;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.todd.justdothree.tests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JustDoThree.app/JustDoThree";
+			};
+			name = Release;
+		};
+		E4CF0FAE8221919905F059B9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 3ZAS78KQUH;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.todd.justdothree.tests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JustDoThree.app/JustDoThree";
 			};
 			name = Debug;
 		};
@@ -605,6 +702,15 @@
 			buildConfigurations = (
 				7AF82887E167671CE8C779A5 /* Debug */,
 				4223E8E4A1D16A44C60BED33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CAB560D5A9142E073B4EE20D /* Build configuration list for PBXNativeTarget "JustDoThreeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4CF0FAE8221919905F059B9 /* Debug */,
+				93D72358D2C69256F503FBE5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
