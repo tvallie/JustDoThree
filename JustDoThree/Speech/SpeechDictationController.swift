@@ -6,7 +6,7 @@ final class SpeechDictationController: ObservableObject {
     @Published private(set) var state: DictationState = .idle
     @Published private(set) var transcript: String = ""
 
-    private let recognizer: SpeechRecognizing
+    private nonisolated let recognizer: SpeechRecognizing
 
     init(recognizer: SpeechRecognizing) {
         self.recognizer = recognizer
