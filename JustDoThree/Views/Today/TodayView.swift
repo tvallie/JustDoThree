@@ -648,6 +648,10 @@ struct BacklogPickerSheet: View {
                             .focused($fieldFocused)
                             .onSubmit { createAndAdd() }
 
+                        MicButton(text: $newTaskTitle) {
+                            fieldFocused = false
+                        }
+
                         if !trimmed.isEmpty {
                             Button("Add") { createAndAdd() }
                                 .bold()
