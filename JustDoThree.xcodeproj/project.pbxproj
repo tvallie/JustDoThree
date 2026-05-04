@@ -50,6 +50,7 @@
 		EB1DE899D5FED9E78C222E64 /* DailyPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418C51F6810F98094045D69 /* DailyPlan.swift */; };
 		EE6AF0E1F419DEDA70E1A551 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A97212AC99E4DB48E549 /* PlanView.swift */; };
 		F5802032DDA1C268D3A7E6CD /* CompletionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5591CE2E6C25FF3BC2724346 /* CompletionLog.swift */; };
+		F89F3DF97F9396FDD4A13DAB /* MicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA9F194F91FB07FFB82B45 /* MicButton.swift */; };
 		FDAD673500A62507C045EC31 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */; };
 		FE4D46E258286F2ED0D73873 /* AppleSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879DA5726DDC85F8DD76A40D /* AppleSpeechRecognizer.swift */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 /* Begin PBXFileReference section */
 		084EB54D11EE6B0F1D53B735 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0907822FE5FC342A97C4C987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0ABA9F194F91FB07FFB82B45 /* MicButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicButton.swift; sourceTree = "<group>"; };
 		0E5DFC01F2DB0F3EA9D97F15 /* RolloverEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolloverEngine.swift; sourceTree = "<group>"; };
 		11628E60851069EE66ECAD3B /* FakeSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSpeechRecognizer.swift; sourceTree = "<group>"; };
 		200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				FA9FDF090C318BD5125F23C8 /* BragCardView.swift */,
 				23DDC91FF776B108ACFA0B96 /* CameraPickerView.swift */,
 				8DA8508B7B12A648EC90F634 /* EmptyStateView.swift */,
+				0ABA9F194F91FB07FFB82B45 /* MicButton.swift */,
 				F4B11E4BEB45375548FECF1E /* PhotoPickerView.swift */,
 				F0E069FE3E539274087C3285 /* WorkContextPicker.swift */,
 			);
@@ -459,6 +462,7 @@
 				D1C31CF2079F9513F1EDAD73 /* HistoryView.swift in Sources */,
 				A0733137D2E07D0202551F80 /* JDTask.swift in Sources */,
 				36E3C62447CDDE0407B3EFB4 /* JustDoThreeApp.swift in Sources */,
+				F89F3DF97F9396FDD4A13DAB /* MicButton.swift in Sources */,
 				FDAD673500A62507C045EC31 /* NotificationManager.swift in Sources */,
 				551A96132FF1FAFC785FC84D /* OnboardingView.swift in Sources */,
 				6D6F37FE60B39347DEBAF9C6 /* PasteTasksSheet.swift in Sources */,
