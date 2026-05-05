@@ -37,4 +37,23 @@ final class AddTaskIntentTests: XCTestCase {
         // Work backlog untouched.
         XCTAssertEqual(all.filter { $0.isWork }.count, 1)
     }
+
+    @MainActor
+    func test_perform_emptyTitle_throwsAndDoesNotInsert() async throws {
+        let container = try makeContainer()
+        let context = ModelContext(container)
+
+        var intent = AddTaskIntent()
+        intent.title = "   "
+
+        do {
+            _ = try await intent.perform(in: container)
+            XCTFail("Expected error for empty title")
+        } catch {
+            // expected
+        }
+
+        let all = try context.fetch(FetchDescriptor<JDTask>())
+        XCTAssertTrue(all.isEmpty, "Should not insert a task for empty/whitespace title")
+    }
 }
