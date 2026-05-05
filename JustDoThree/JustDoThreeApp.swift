@@ -33,6 +33,6 @@ struct JustDoThreeApp: App {
                 }
             }
         }
-        .modelContainer(for: [JDTask.self, DailyPlan.self, CompletionLog.self])
+        .modelContainer(JDTModelContainer.shared)
     }
 }
