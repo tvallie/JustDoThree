@@ -13,6 +13,7 @@
 		102BDFA9DD64CAF27D61BD8F /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A50918BD04B398D5D467190 /* Date+Helpers.swift */; };
 		10F847104475B478835610E6 /* CameraPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DDC91FF776B108ACFA0B96 /* CameraPickerView.swift */; };
 		13443B978C2153A6C99EE44D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F11214952D339BF6C1FF1DF6 /* LaunchScreen.storyboard */; };
+		183DBEBA57078C14BF360C1C /* AddWorkTaskIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84219398FCCC27D193205F95 /* AddWorkTaskIntent.swift */; };
 		1AFAB69303ADB7A2BFBDBC8C /* WorkContextPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E069FE3E539274087C3285 /* WorkContextPicker.swift */; };
 		1B62173C7949977F687F02B8 /* AddToCalendarSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A18CF8B31A2FD5943E8AE24 /* AddToCalendarSheet.swift */; };
 		25E22C20BAA01CD8D678B476 /* FakeSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11628E60851069EE66ECAD3B /* FakeSpeechRecognizer.swift */; };
@@ -103,6 +104,7 @@
 		7A18CF8B31A2FD5943E8AE24 /* AddToCalendarSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCalendarSheet.swift; sourceTree = "<group>"; };
 		7FE5D6690047093E4F38B2ED /* JustDoThreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustDoThreeApp.swift; sourceTree = "<group>"; };
 		8418C51F6810F98094045D69 /* DailyPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPlan.swift; sourceTree = "<group>"; };
+		84219398FCCC27D193205F95 /* AddWorkTaskIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkTaskIntent.swift; sourceTree = "<group>"; };
 		879DA5726DDC85F8DD76A40D /* AppleSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeechRecognizer.swift; sourceTree = "<group>"; };
 		87EAA9DA701464716E53954A /* AddTaskIntentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskIntentTests.swift; sourceTree = "<group>"; };
 		8A50918BD04B398D5D467190 /* Date+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				AFA1CCCCBB37276856E7B393 /* AddTaskIntent.swift */,
+				84219398FCCC27D193205F95 /* AddWorkTaskIntent.swift */,
 				B2DDCCCA7A9255944BD7DCAC /* BacklogInsert.swift */,
 				396430B977949B6C6A6C531F /* JDTAppShortcuts.swift */,
 			);
@@ -473,6 +476,7 @@
 				C1371FB77DE6D8188EDC5662 /* AddTaskIntent.swift in Sources */,
 				C1922061DBBD5E7F38A5E45C /* AddTaskSheet.swift in Sources */,
 				1B62173C7949977F687F02B8 /* AddToCalendarSheet.swift in Sources */,
+				183DBEBA57078C14BF360C1C /* AddWorkTaskIntent.swift in Sources */,
 				DFE3D86AAA6332D7DFF3DCC2 /* AppLogoView.swift in Sources */,
 				CCA14A0EE8CA27BCAC98783A /* AppState.swift in Sources */,
 				FE4D46E258286F2ED0D73873 /* AppleSpeechRecognizer.swift in Sources */,
