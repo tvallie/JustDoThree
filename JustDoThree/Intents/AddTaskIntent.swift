@@ -35,14 +35,7 @@ struct AddTaskIntent: AppIntent {
     /// Test seam: lets tests inject an in-memory container.
     @MainActor
     func perform(in container: ModelContainer) async throws -> some IntentResult & ProvidesDialog {
-        let trimmed = title.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { throw AddTaskIntentError.emptyTitle }
-        let context = ModelContext(container)
-        let existing = try context.fetch(FetchDescriptor<JDTask>())
-        let minOrder = existing.map(\.sortOrder).min() ?? 0
-        let task = JDTask(title: trimmed, sortOrder: minOrder - 1, isWork: false)
-        context.insert(task)
-        try context.save()
+        let trimmed = try insertAtTopOfBacklog(title: title, isWork: false, in: container)
         return .result(dialog: IntentDialog("Added '\(trimmed)' to your backlog."))
     }
 }

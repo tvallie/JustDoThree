@@ -48,6 +48,7 @@
 		CC40CB8D39B6E1A306DC475D /* RolloverSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE15746757A5C3EE27834EB /* RolloverSheet.swift */; };
 		CCA14A0EE8CA27BCAC98783A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084EB54D11EE6B0F1D53B735 /* AppState.swift */; };
 		D1C31CF2079F9513F1EDAD73 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDE404626CBC00AE4E4CE8E /* HistoryView.swift */; };
+		D97E135DED677C3F1F09742C /* BacklogInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DDCCCA7A9255944BD7DCAC /* BacklogInsert.swift */; };
 		DDCB9536EE872234D6653659 /* TermsOfUseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D1C067F49CCE195EC61C92 /* TermsOfUseView.swift */; };
 		DFB4F98EE48E3D45D3CE3E4F /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B11E4BEB45375548FECF1E /* PhotoPickerView.swift */; };
 		DFE3D86AAA6332D7DFF3DCC2 /* AppLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4809D5B4FDF66DB78EDF82F9 /* AppLogoView.swift */; };
@@ -111,6 +112,7 @@
 		9D292CCCB9DAC9025273552B /* RecurringRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurringRule.swift; sourceTree = "<group>"; };
 		A4D65449D1F9B4161A5E6712 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
 		AFA1CCCCBB37276856E7B393 /* AddTaskIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskIntent.swift; sourceTree = "<group>"; };
+		B2DDCCCA7A9255944BD7DCAC /* BacklogInsert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BacklogInsert.swift; sourceTree = "<group>"; };
 		B44CF2DAF0A82BF20E9F1F37 /* PasteTasksSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteTasksSheet.swift; sourceTree = "<group>"; };
 		BD4717892D1F310E01E5C74B /* SpeechDictationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechDictationController.swift; sourceTree = "<group>"; };
 		CC06642F4BD10ED917C1C813 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				AFA1CCCCBB37276856E7B393 /* AddTaskIntent.swift */,
+				B2DDCCCA7A9255944BD7DCAC /* BacklogInsert.swift */,
 				396430B977949B6C6A6C531F /* JDTAppShortcuts.swift */,
 			);
 			path = Intents;
@@ -470,6 +473,7 @@
 				DFE3D86AAA6332D7DFF3DCC2 /* AppLogoView.swift in Sources */,
 				CCA14A0EE8CA27BCAC98783A /* AppState.swift in Sources */,
 				FE4D46E258286F2ED0D73873 /* AppleSpeechRecognizer.swift in Sources */,
+				D97E135DED677C3F1F09742C /* BacklogInsert.swift in Sources */,
 				33829380BFE55FA51B44124C /* BacklogView.swift in Sources */,
 				4D8234778C8DB87FD84A7796 /* BragCardView.swift in Sources */,
 				5EB9B2718B99036A1024CB3E /* BragSheet.swift in Sources */,
