@@ -2,6 +2,16 @@ import AppIntents
 import SwiftData
 import Foundation
 
+enum AddTaskIntentError: Swift.Error, CustomLocalizedStringResourceConvertible {
+    case emptyTitle
+
+    var localizedStringResource: LocalizedStringResource {
+        switch self {
+        case .emptyTitle: return "I didn't catch a task — try again."
+        }
+    }
+}
+
 struct AddTaskIntent: AppIntent {
     static var title: LocalizedStringResource = "Add Task to JustDoThree"
     static var description = IntentDescription(
@@ -26,6 +36,7 @@ struct AddTaskIntent: AppIntent {
     @MainActor
     func perform(in container: ModelContainer) async throws -> some IntentResult & ProvidesDialog {
         let trimmed = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { throw AddTaskIntentError.emptyTitle }
         let context = ModelContext(container)
         let existing = try context.fetch(FetchDescriptor<JDTask>())
         let minOrder = existing.map(\.sortOrder).min() ?? 0
