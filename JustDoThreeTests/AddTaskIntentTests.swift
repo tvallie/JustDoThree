@@ -39,6 +39,29 @@ final class AddTaskIntentTests: XCTestCase {
     }
 
     @MainActor
+    func test_perform_personalSortOrder_scopedToPersonalBacklog() async throws {
+        let container = try makeContainer()
+        let context = ModelContext(container)
+        // Work backlog has a deeply-negative sortOrder; new personal task must
+        // ignore it and only sort relative to other personal items.
+        let work = JDTask(title: "deep work", sortOrder: -100, isWork: true)
+        let personal = JDTask(title: "old personal", sortOrder: 5, isWork: false)
+        context.insert(work)
+        context.insert(personal)
+        try context.save()
+
+        var intent = AddTaskIntent()
+        intent.title = "buy milk"
+        _ = try await intent.perform(in: container)
+
+        let all = try context.fetch(FetchDescriptor<JDTask>())
+        let personalSorted = all.filter { !$0.isWork }.sorted { $0.sortOrder < $1.sortOrder }
+        XCTAssertEqual(personalSorted.first?.title, "buy milk")
+        // Should be 4 (one less than the existing personal min of 5), NOT -101.
+        XCTAssertEqual(personalSorted.first?.sortOrder, 4)
+    }
+
+    @MainActor
     func test_perform_emptyTitle_throwsAndDoesNotInsert() async throws {
         let container = try makeContainer()
         let context = ModelContext(container)
