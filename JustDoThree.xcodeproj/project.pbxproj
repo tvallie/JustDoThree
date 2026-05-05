@@ -39,6 +39,7 @@
 		AAC534CD7D94F367BDC231C3 /* AddTaskIntentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EAA9DA701464716E53954A /* AddTaskIntentTests.swift */; };
 		B2918E9C78BA897EC9CB9066 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0907822FE5FC342A97C4C987 /* Assets.xcassets */; };
 		BA61F0F0C90B89EE87E85631 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74FB303A18EEE20516FC52AE /* RootView.swift */; };
+		C1371FB77DE6D8188EDC5662 /* AddTaskIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA1CCCCBB37276856E7B393 /* AddTaskIntent.swift */; };
 		C1922061DBBD5E7F38A5E45C /* AddTaskSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED09558AE6E393CC3C82A644 /* AddTaskSheet.swift */; };
 		C8F4BC7F74BD0CDB5A56F371 /* JDTModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A02BD4D4A978E7EE9CF0AD /* JDTModelContainer.swift */; };
 		CA8C0706E7635133F694A705 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C50203D55B07B2A540621 /* SmokeTests.swift */; };
@@ -107,6 +108,7 @@
 		95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9D292CCCB9DAC9025273552B /* RecurringRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurringRule.swift; sourceTree = "<group>"; };
 		A4D65449D1F9B4161A5E6712 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
+		AFA1CCCCBB37276856E7B393 /* AddTaskIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskIntent.swift; sourceTree = "<group>"; };
 		B44CF2DAF0A82BF20E9F1F37 /* PasteTasksSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteTasksSheet.swift; sourceTree = "<group>"; };
 		BD4717892D1F310E01E5C74B /* SpeechDictationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechDictationController.swift; sourceTree = "<group>"; };
 		CC06642F4BD10ED917C1C813 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */,
 				63F44908A86AD512B6113950 /* Engines */,
 				75B1A75FB58FA02AAFD989FD /* Extensions */,
+				BEC27638FD2516E697335F19 /* Intents */,
 				24AD9CC2272CFB85324116FB /* Managers */,
 				75E7BA01F248082CFC8567CD /* Models */,
 				1E4D7B143F368BCA68781F7E /* Preview */,
@@ -302,6 +305,14 @@
 				626E0E7798EB25E07D13923B /* OnboardingView.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		BEC27638FD2516E697335F19 /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				AFA1CCCCBB37276856E7B393 /* AddTaskIntent.swift */,
+			);
+			path = Intents;
 			sourceTree = "<group>";
 		};
 		E04EBF2E6EBEF16C0D373FD1 /* Services */ = {
@@ -450,6 +461,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1371FB77DE6D8188EDC5662 /* AddTaskIntent.swift in Sources */,
 				C1922061DBBD5E7F38A5E45C /* AddTaskSheet.swift in Sources */,
 				1B62173C7949977F687F02B8 /* AddToCalendarSheet.swift in Sources */,
 				DFE3D86AAA6332D7DFF3DCC2 /* AppLogoView.swift in Sources */,
