@@ -23,7 +23,6 @@ final class SpeechDictationController: ObservableObject {
                 }
                 self.transcript = ""
                 self.recognizer.start(
-                    requireOnDevice: self.recognizer.supportsOnDevice,
                     onPartial: { [weak self] text in
                         MainActor.assumeIsolated { self?.transcript = text }
                     },

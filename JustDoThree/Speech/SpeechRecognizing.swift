@@ -16,12 +16,10 @@ enum DictationState: Equatable {
 
 protocol SpeechRecognizing: AnyObject {
     var isAvailable: Bool { get }
-    var supportsOnDevice: Bool { get }
 
     func requestAuthorization(_ completion: @escaping (SpeechAuthState) -> Void)
 
     func start(
-        requireOnDevice: Bool,
         onPartial: @escaping (String) -> Void,
         onFinish: @escaping () -> Void,
         onError: @escaping (Error) -> Void

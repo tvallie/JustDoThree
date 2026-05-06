@@ -3,7 +3,6 @@ import Foundation
 
 final class FakeSpeechRecognizer: SpeechRecognizing {
     var isAvailable = true
-    var supportsOnDevice = true
 
     var stubAuth: SpeechAuthState = .authorized
     var startCallCount = 0
@@ -18,7 +17,6 @@ final class FakeSpeechRecognizer: SpeechRecognizing {
     }
 
     func start(
-        requireOnDevice: Bool,
         onPartial: @escaping (String) -> Void,
         onFinish: @escaping () -> Void,
         onError: @escaping (Error) -> Void

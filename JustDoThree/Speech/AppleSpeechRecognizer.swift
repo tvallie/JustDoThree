@@ -10,7 +10,6 @@ final class AppleSpeechRecognizer: SpeechRecognizing {
     private var silenceTimer: Timer?
 
     var isAvailable: Bool { recognizer?.isAvailable ?? false }
-    var supportsOnDevice: Bool { recognizer?.supportsOnDeviceRecognition ?? false }
 
     func requestAuthorization(_ completion: @escaping (SpeechAuthState) -> Void) {
         SFSpeechRecognizer.requestAuthorization { speechStatus in
@@ -28,7 +27,6 @@ final class AppleSpeechRecognizer: SpeechRecognizing {
     }
 
     func start(
-        requireOnDevice: Bool,
         onPartial: @escaping (String) -> Void,
         onFinish: @escaping () -> Void,
         onError: @escaping (Error) -> Void
@@ -46,9 +44,6 @@ final class AppleSpeechRecognizer: SpeechRecognizing {
 
             let req = SFSpeechAudioBufferRecognitionRequest()
             req.shouldReportPartialResults = true
-            if requireOnDevice && recognizer.supportsOnDeviceRecognition {
-                req.requiresOnDeviceRecognition = true
-            }
             self.request = req
 
             let inputNode = audioEngine.inputNode
