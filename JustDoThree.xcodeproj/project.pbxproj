@@ -17,14 +17,13 @@
 		1AFAB69303ADB7A2BFBDBC8C /* WorkContextPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E069FE3E539274087C3285 /* WorkContextPicker.swift */; };
 		1B62173C7949977F687F02B8 /* AddToCalendarSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A18CF8B31A2FD5943E8AE24 /* AddToCalendarSheet.swift */; };
 		25E22C20BAA01CD8D678B476 /* FakeSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11628E60851069EE66ECAD3B /* FakeSpeechRecognizer.swift */; };
+		271EEBAE1F95198799E82AAD /* PlannerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE21D9D2A79CA1A4FE85CE1 /* PlannerEngine.swift */; };
 		2BAF2D82BB2B1A08149B8C59 /* SpeechRecognizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBE7EDADCF5313FCF1B4148 /* SpeechRecognizing.swift */; };
 		32BBABAC71A877B7A338AB8C /* JDTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C4B8083DB9B51FA84FC60C /* JDTask.swift */; };
 		33829380BFE55FA51B44124C /* BacklogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CCAFC9BADC343232127109 /* BacklogView.swift */; };
 		3569F589DFF4BB8CD0FCB8BA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B577A258EF0DBDD29DAC2A /* SettingsView.swift */; };
 		367DBEF10FCF389C0989AE2D /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B76C173D328083435B6A3 /* TodayView.swift */; };
 		36E3C62447CDDE0407B3EFB4 /* JustDoThreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE5D6690047093E4F38B2ED /* JustDoThreeApp.swift */; };
-		3968C06BDE378CB1050EB99C /* RolloverEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5DFC01F2DB0F3EA9D97F15 /* RolloverEngine.swift */; };
-		3AAB1CD1DD0456DD73061792 /* PlannerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED183CD1E160ACA3A2B0A17B /* PlannerEngine.swift */; };
 		49086379DF713ADD2DFA0CDD /* TaskOCREngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB78204D3C1EDDC2B15B97F /* TaskOCREngine.swift */; };
 		4D8234778C8DB87FD84A7796 /* BragCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9FDF090C318BD5125F23C8 /* BragCardView.swift */; };
 		551A96132FF1FAFC785FC84D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626E0E7798EB25E07D13923B /* OnboardingView.swift */; };
@@ -34,6 +33,7 @@
 		6DBB4B75E35DEFF8BF84925A /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA8508B7B12A648EC90F634 /* EmptyStateView.swift */; };
 		70E90151395EDF7AD00C826B /* AddWorkTaskIntentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A615306C65920167575D1CE /* AddWorkTaskIntentTests.swift */; };
 		736FAEB035B47AB9D40114A9 /* SpeechDictationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4717892D1F310E01E5C74B /* SpeechDictationController.swift */; };
+		90B83668ED9CD916D38A0F3B /* RolloverEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9EBDAE410E52DD829623B /* RolloverEngine.swift */; };
 		95A6017862AABA1919DA1B28 /* JDTAppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396430B977949B6C6A6C531F /* JDTAppShortcuts.swift */; };
 		9F7593E9B47F1F9A7EED1763 /* SpeechDictationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091FF4C0FE4A21D05674C4D /* SpeechDictationControllerTests.swift */; };
 		A4338A6534BCDAACCB6435EC /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC06642F4BD10ED917C1C813 /* PreviewContainer.swift */; };
@@ -76,7 +76,6 @@
 		084EB54D11EE6B0F1D53B735 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0907822FE5FC342A97C4C987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0ABA9F194F91FB07FFB82B45 /* MicButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicButton.swift; sourceTree = "<group>"; };
-		0E5DFC01F2DB0F3EA9D97F15 /* RolloverEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolloverEngine.swift; sourceTree = "<group>"; };
 		11628E60851069EE66ECAD3B /* FakeSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSpeechRecognizer.swift; sourceTree = "<group>"; };
 		200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		23DDC91FF776B108ACFA0B96 /* CameraPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerView.swift; sourceTree = "<group>"; };
@@ -118,10 +117,11 @@
 		B44CF2DAF0A82BF20E9F1F37 /* PasteTasksSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteTasksSheet.swift; sourceTree = "<group>"; };
 		BC3733A0D922C57C9E52F2CA /* DailyPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPlan.swift; sourceTree = "<group>"; };
 		BD4717892D1F310E01E5C74B /* SpeechDictationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechDictationController.swift; sourceTree = "<group>"; };
+		BDE21D9D2A79CA1A4FE85CE1 /* PlannerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerEngine.swift; sourceTree = "<group>"; };
 		C625CCF1C6758DC6E2D0B597 /* RecurringRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurringRule.swift; sourceTree = "<group>"; };
 		CC06642F4BD10ED917C1C813 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
+		E6D9EBDAE410E52DD829623B /* RolloverEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolloverEngine.swift; sourceTree = "<group>"; };
 		ED09558AE6E393CC3C82A644 /* AddTaskSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskSheet.swift; sourceTree = "<group>"; };
-		ED183CD1E160ACA3A2B0A17B /* PlannerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerEngine.swift; sourceTree = "<group>"; };
 		F0E069FE3E539274087C3285 /* WorkContextPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkContextPicker.swift; sourceTree = "<group>"; };
 		F11214952D339BF6C1FF1DF6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F1EB60C431BF2FA2AD3B716A /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
@@ -160,6 +160,7 @@
 		06E0B03CA63365316F8C71DC /* JustDoThreeShared */ = {
 			isa = PBXGroup;
 			children = (
+				6A2837D6BC96C2B9C5B506B6 /* Engines */,
 				E8F252750B49B20C63741D4E /* Models */,
 			);
 			path = JustDoThreeShared;
@@ -271,9 +272,16 @@
 		63F44908A86AD512B6113950 /* Engines */ = {
 			isa = PBXGroup;
 			children = (
-				ED183CD1E160ACA3A2B0A17B /* PlannerEngine.swift */,
-				0E5DFC01F2DB0F3EA9D97F15 /* RolloverEngine.swift */,
 				4FB78204D3C1EDDC2B15B97F /* TaskOCREngine.swift */,
+			);
+			path = Engines;
+			sourceTree = "<group>";
+		};
+		6A2837D6BC96C2B9C5B506B6 /* Engines */ = {
+			isa = PBXGroup;
+			children = (
+				BDE21D9D2A79CA1A4FE85CE1 /* PlannerEngine.swift */,
+				E6D9EBDAE410E52DD829623B /* RolloverEngine.swift */,
 			);
 			path = Engines;
 			sourceTree = "<group>";
@@ -510,12 +518,12 @@
 				6D6F37FE60B39347DEBAF9C6 /* PasteTasksSheet.swift in Sources */,
 				DFB4F98EE48E3D45D3CE3E4F /* PhotoPickerView.swift in Sources */,
 				EE6AF0E1F419DEDA70E1A551 /* PlanView.swift in Sources */,
-				3AAB1CD1DD0456DD73061792 /* PlannerEngine.swift in Sources */,
+				271EEBAE1F95198799E82AAD /* PlannerEngine.swift in Sources */,
 				A4338A6534BCDAACCB6435EC /* PreviewContainer.swift in Sources */,
 				AA027595E9EAAED2E8CE1E5B /* PrivacyPolicyView.swift in Sources */,
 				DAA8E64D4872EF36D4AEDF19 /* RecurringRule.swift in Sources */,
 				CB98969E140ABC2E2D625114 /* ReviewManager.swift in Sources */,
-				3968C06BDE378CB1050EB99C /* RolloverEngine.swift in Sources */,
+				90B83668ED9CD916D38A0F3B /* RolloverEngine.swift in Sources */,
 				CC40CB8D39B6E1A306DC475D /* RolloverSheet.swift in Sources */,
 				BA61F0F0C90B89EE87E85631 /* RootView.swift in Sources */,
 				3569F589DFF4BB8CD0FCB8BA /* SettingsView.swift in Sources */,
