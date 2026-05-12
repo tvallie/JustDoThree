@@ -19,6 +19,8 @@
 		1A3DE22830B5093F12C1806A /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92026E8C28F211B998A8D82E /* RootView.swift */; };
 		1AFAB69303ADB7A2BFBDBC8C /* WorkContextPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E069FE3E539274087C3285 /* WorkContextPicker.swift */; };
 		1B62173C7949977F687F02B8 /* AddToCalendarSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A18CF8B31A2FD5943E8AE24 /* AddToCalendarSheet.swift */; };
+		1CA355283678CF9C5CFB0383 /* SyncMessagesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BDC98DC4C8FD6265EA320C /* SyncMessagesTests.swift */; };
+		21F5ADE3C6CAA3B09FA91F96 /* SyncMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1D12BF49B335535FADB79C /* SyncMessages.swift */; };
 		25E22C20BAA01CD8D678B476 /* FakeSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11628E60851069EE66ECAD3B /* FakeSpeechRecognizer.swift */; };
 		271EEBAE1F95198799E82AAD /* PlannerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE21D9D2A79CA1A4FE85CE1 /* PlannerEngine.swift */; };
 		2BAF2D82BB2B1A08149B8C59 /* SpeechRecognizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBE7EDADCF5313FCF1B4148 /* SpeechRecognizing.swift */; };
@@ -30,6 +32,7 @@
 		367DBEF10FCF389C0989AE2D /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B76C173D328083435B6A3 /* TodayView.swift */; };
 		36E3C62447CDDE0407B3EFB4 /* JustDoThreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE5D6690047093E4F38B2ED /* JustDoThreeApp.swift */; };
 		38DA9C93646DCE5E513B0D9B /* JDTModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F60632A478FEEEA9EBF1661 /* JDTModelContainer.swift */; };
+		3F7AC43233791768207F2800 /* SyncMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1D12BF49B335535FADB79C /* SyncMessages.swift */; };
 		49086379DF713ADD2DFA0CDD /* TaskOCREngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB78204D3C1EDDC2B15B97F /* TaskOCREngine.swift */; };
 		4D8234778C8DB87FD84A7796 /* BragCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9FDF090C318BD5125F23C8 /* BragCardView.swift */; };
 		551A96132FF1FAFC785FC84D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626E0E7798EB25E07D13923B /* OnboardingView.swift */; };
@@ -121,6 +124,7 @@
 		46ABFD6DCA24AEC8A551D1CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4809D5B4FDF66DB78EDF82F9 /* AppLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogoView.swift; sourceTree = "<group>"; };
 		48B577A258EF0DBDD29DAC2A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4F1D12BF49B335535FADB79C /* SyncMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncMessages.swift; sourceTree = "<group>"; };
 		4FB78204D3C1EDDC2B15B97F /* TaskOCREngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskOCREngine.swift; sourceTree = "<group>"; };
 		558CABE5A57DCE84BABD826A /* BragSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BragSheet.swift; sourceTree = "<group>"; };
 		5A615306C65920167575D1CE /* AddWorkTaskIntentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkTaskIntentTests.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 		790C50203D55B07B2A540621 /* SmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeTests.swift; sourceTree = "<group>"; };
 		7A18CF8B31A2FD5943E8AE24 /* AddToCalendarSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCalendarSheet.swift; sourceTree = "<group>"; };
 		7FE5D6690047093E4F38B2ED /* JustDoThreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustDoThreeApp.swift; sourceTree = "<group>"; };
+		80BDC98DC4C8FD6265EA320C /* SyncMessagesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncMessagesTests.swift; sourceTree = "<group>"; };
 		879DA5726DDC85F8DD76A40D /* AppleSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeechRecognizer.swift; sourceTree = "<group>"; };
 		87EAA9DA701464716E53954A /* AddTaskIntentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskIntentTests.swift; sourceTree = "<group>"; };
 		8B44FFF7B964066A5B4140F2 /* JustDoThreeWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustDoThreeWatchApp.swift; sourceTree = "<group>"; };
@@ -205,6 +210,7 @@
 				AF0F8DDDDD516399605CF647 /* Intents */,
 				E8F252750B49B20C63741D4E /* Models */,
 				FBFEAD51DBF58D6BDFB19D85 /* State */,
+				802F3517F972E86044F62AC3 /* Sync */,
 			);
 			path = JustDoThreeShared;
 			sourceTree = "<group>";
@@ -238,6 +244,7 @@
 				790C50203D55B07B2A540621 /* SmokeTests.swift */,
 				9091FF4C0FE4A21D05674C4D /* SpeechDictationControllerTests.swift */,
 				FF1FD56AAB0CD9FBAE52306D /* Fakes */,
+				252A2358F948B800462C8E94 /* Sync */,
 			);
 			path = JustDoThreeTests;
 			sourceTree = "<group>";
@@ -257,6 +264,14 @@
 				F1EB60C431BF2FA2AD3B716A /* ReviewManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		252A2358F948B800462C8E94 /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				80BDC98DC4C8FD6265EA320C /* SyncMessagesTests.swift */,
+			);
+			path = Sync;
 			sourceTree = "<group>";
 		};
 		3327F7B8E4633BD752149030 /* Settings */ = {
@@ -336,6 +351,14 @@
 				E6D9EBDAE410E52DD829623B /* RolloverEngine.swift */,
 			);
 			path = Engines;
+			sourceTree = "<group>";
+		};
+		802F3517F972E86044F62AC3 /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				4F1D12BF49B335535FADB79C /* SyncMessages.swift */,
+			);
+			path = Sync;
 			sourceTree = "<group>";
 		};
 		830FE1D7AE7DA8C34B02F27A /* Speech */ = {
@@ -587,6 +610,7 @@
 				C2645EAAD6D08D05E66F1909 /* RecurringRule.swift in Sources */,
 				139B3927A10105D903F638C7 /* RolloverEngine.swift in Sources */,
 				1A3DE22830B5093F12C1806A /* RootView.swift in Sources */,
+				3F7AC43233791768207F2800 /* SyncMessages.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,6 +659,7 @@
 				736FAEB035B47AB9D40114A9 /* SpeechDictationController.swift in Sources */,
 				2BAF2D82BB2B1A08149B8C59 /* SpeechRecognizing.swift in Sources */,
 				001E75D01EF4BE41E0F863B6 /* SplashView.swift in Sources */,
+				21F5ADE3C6CAA3B09FA91F96 /* SyncMessages.swift in Sources */,
 				49086379DF713ADD2DFA0CDD /* TaskOCREngine.swift in Sources */,
 				DDCB9536EE872234D6653659 /* TermsOfUseView.swift in Sources */,
 				367DBEF10FCF389C0989AE2D /* TodayView.swift in Sources */,
@@ -651,6 +676,7 @@
 				25E22C20BAA01CD8D678B476 /* FakeSpeechRecognizer.swift in Sources */,
 				CA8C0706E7635133F694A705 /* SmokeTests.swift in Sources */,
 				9F7593E9B47F1F9A7EED1763 /* SpeechDictationControllerTests.swift in Sources */,
+				1CA355283678CF9C5CFB0383 /* SyncMessagesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
