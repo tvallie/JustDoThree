@@ -54,7 +54,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.todd.justdothree
         DEVELOPMENT_TEAM: 3ZAS78KQUH
-        MARKETING_VERSION: "2.0"
+        MARKETING_VERSION: "3"
         CURRENT_PROJECT_VERSION: "1"
         SWIFT_VERSION: "5.9"
         TARGETED_DEVICE_FAMILY: "1"
