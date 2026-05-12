@@ -26,6 +26,14 @@ schemes:
         - JustDoThreeTests
     archive:
       config: Release
+  JustDoThreeWatch:
+    build:
+      targets:
+        JustDoThreeWatch: all
+    run:
+      config: Debug
+    archive:
+      config: Release
 
 targets:
   JustDoThree:
@@ -51,6 +59,10 @@ targets:
         NSMicrophoneUsageDescription: "Just Do Three uses the microphone so you can dictate tasks instead of typing."
         NSSpeechRecognitionUsageDescription: "Just Do Three uses speech recognition to turn your dictation into task text."
         ITSAppUsesNonExemptEncryption: false
+    dependencies:
+      - target: JustDoThreeWatch
+        embed: true
+        link: false
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.todd.justdothree
@@ -89,3 +101,40 @@ targets:
         SWIFT_VERSION: "5.9"
         TARGETED_DEVICE_FAMILY: "1"
         GENERATE_INFOPLIST_FILE: YES
+
+  JustDoThreeWatch:
+    type: application
+    platform: watchOS
+    deploymentTarget: "10.0"
+    sources:
+      - path: JustDoThreeWatch
+      - path: JustDoThreeShared
+    info:
+      path: JustDoThreeWatch/Info.plist
+      properties:
+        CFBundleDisplayName: Just Do Three
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        WKApplication: true
+        WKCompanionAppBundleIdentifier: com.todd.justdothree
+        ITSAppUsesNonExemptEncryption: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.todd.justdothree.watchkitapp
+        DEVELOPMENT_TEAM: 3ZAS78KQUH
+        MARKETING_VERSION: "3"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "5.9"
+        TARGETED_DEVICE_FAMILY: "4"
+        INFOPLIST_FILE: JustDoThreeWatch/Info.plist
+        CODE_SIGN_STYLE: Automatic
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: "NO"
+      configs:
+        Debug:
+          DEBUG_INFORMATION_FORMAT: dwarf
+          SWIFT_OPTIMIZATION_LEVEL: "-Onone"
+          SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+        Release:
+          DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+          SWIFT_OPTIMIZATION_LEVEL: "-O"
+          DEAD_CODE_STRIPPING: YES

@@ -9,26 +9,35 @@
 /* Begin PBXBuildFile section */
 		001E75D01EF4BE41E0F863B6 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D48D7FDEB9FF164F6C51DD4 /* SplashView.swift */; };
 		0A1BB9E08C8CB03731223D7B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */; };
+		0DD88576FEDC8827EA6FAF0C /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288CC223615662F0CF8383E /* Date+Helpers.swift */; };
 		0E7521C5F132CE0736D95EEC /* ExportTasksSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566033A465FE0CF18103DDA /* ExportTasksSheet.swift */; };
-		102BDFA9DD64CAF27D61BD8F /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A50918BD04B398D5D467190 /* Date+Helpers.swift */; };
 		10F847104475B478835610E6 /* CameraPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DDC91FF776B108ACFA0B96 /* CameraPickerView.swift */; };
 		13443B978C2153A6C99EE44D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F11214952D339BF6C1FF1DF6 /* LaunchScreen.storyboard */; };
+		139B3927A10105D903F638C7 /* RolloverEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9EBDAE410E52DD829623B /* RolloverEngine.swift */; };
+		14B4627FEAFB120F4DA313CA /* JustDoThreeWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B44FFF7B964066A5B4140F2 /* JustDoThreeWatchApp.swift */; };
 		15DBCD5E8DF67C2A92CDF423 /* AddWorkTaskIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB347BB4A78D996500C9BF /* AddWorkTaskIntent.swift */; };
+		1A3DE22830B5093F12C1806A /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92026E8C28F211B998A8D82E /* RootView.swift */; };
 		1AFAB69303ADB7A2BFBDBC8C /* WorkContextPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E069FE3E539274087C3285 /* WorkContextPicker.swift */; };
 		1B62173C7949977F687F02B8 /* AddToCalendarSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A18CF8B31A2FD5943E8AE24 /* AddToCalendarSheet.swift */; };
 		25E22C20BAA01CD8D678B476 /* FakeSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11628E60851069EE66ECAD3B /* FakeSpeechRecognizer.swift */; };
 		271EEBAE1F95198799E82AAD /* PlannerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE21D9D2A79CA1A4FE85CE1 /* PlannerEngine.swift */; };
 		2BAF2D82BB2B1A08149B8C59 /* SpeechRecognizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBE7EDADCF5313FCF1B4148 /* SpeechRecognizing.swift */; };
+		2D9958AF849EE605DE01E715 /* PlannerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE21D9D2A79CA1A4FE85CE1 /* PlannerEngine.swift */; };
+		2E5235FDC61AAB84F8D0D9D7 /* AddTaskIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2268AF875B5FFFE8D0CA3C81 /* AddTaskIntent.swift */; };
 		32BBABAC71A877B7A338AB8C /* JDTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C4B8083DB9B51FA84FC60C /* JDTask.swift */; };
 		33829380BFE55FA51B44124C /* BacklogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CCAFC9BADC343232127109 /* BacklogView.swift */; };
 		3569F589DFF4BB8CD0FCB8BA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B577A258EF0DBDD29DAC2A /* SettingsView.swift */; };
 		367DBEF10FCF389C0989AE2D /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B76C173D328083435B6A3 /* TodayView.swift */; };
 		36E3C62447CDDE0407B3EFB4 /* JustDoThreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE5D6690047093E4F38B2ED /* JustDoThreeApp.swift */; };
+		38DA9C93646DCE5E513B0D9B /* JDTModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F60632A478FEEEA9EBF1661 /* JDTModelContainer.swift */; };
 		49086379DF713ADD2DFA0CDD /* TaskOCREngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB78204D3C1EDDC2B15B97F /* TaskOCREngine.swift */; };
 		4D8234778C8DB87FD84A7796 /* BragCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9FDF090C318BD5125F23C8 /* BragCardView.swift */; };
 		551A96132FF1FAFC785FC84D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626E0E7798EB25E07D13923B /* OnboardingView.swift */; };
 		55DAB6253E5EFDA204FF73E9 /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D65449D1F9B4161A5E6712 /* CalendarService.swift */; };
+		5BA577316D92EEE884C8C77C /* AddWorkTaskIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB347BB4A78D996500C9BF /* AddWorkTaskIntent.swift */; };
 		5EB9B2718B99036A1024CB3E /* BragSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558CABE5A57DCE84BABD826A /* BragSheet.swift */; };
+		6384EDCB4CDC0385196115C5 /* CompletionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A358B7024FB891989E9FC225 /* CompletionLog.swift */; };
+		67D19FD3756523E3EE3B5A8F /* JustDoThreeWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 93BA489F0189EDD409D37DE6 /* JustDoThreeWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6D6F37FE60B39347DEBAF9C6 /* PasteTasksSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44CF2DAF0A82BF20E9F1F37 /* PasteTasksSheet.swift */; };
 		6DBB4B75E35DEFF8BF84925A /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA8508B7B12A648EC90F634 /* EmptyStateView.swift */; };
 		70E90151395EDF7AD00C826B /* AddWorkTaskIntentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A615306C65920167575D1CE /* AddWorkTaskIntentTests.swift */; };
@@ -37,6 +46,8 @@
 		854C597F9F49B35926E7F4A3 /* JDTModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F60632A478FEEEA9EBF1661 /* JDTModelContainer.swift */; };
 		8A70E6AD6A12DA0C5364BC1B /* AddTaskIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2268AF875B5FFFE8D0CA3C81 /* AddTaskIntent.swift */; };
 		90B83668ED9CD916D38A0F3B /* RolloverEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9EBDAE410E52DD829623B /* RolloverEngine.swift */; };
+		938C2B7F8B00332ED66A9AD7 /* DailyPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3733A0D922C57C9E52F2CA /* DailyPlan.swift */; };
+		9CBCEA799745FA3D316D3354 /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288CC223615662F0CF8383E /* Date+Helpers.swift */; };
 		9F7593E9B47F1F9A7EED1763 /* SpeechDictationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091FF4C0FE4A21D05674C4D /* SpeechDictationControllerTests.swift */; };
 		A4338A6534BCDAACCB6435EC /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC06642F4BD10ED917C1C813 /* PreviewContainer.swift */; };
 		AA027595E9EAAED2E8CE1E5B /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B67C8C0DEBF1F209E23D49D /* PrivacyPolicyView.swift */; };
@@ -45,15 +56,19 @@
 		BA61F0F0C90B89EE87E85631 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74FB303A18EEE20516FC52AE /* RootView.swift */; };
 		BD6BB681E176F7DE47050348 /* CompletionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A358B7024FB891989E9FC225 /* CompletionLog.swift */; };
 		C1922061DBBD5E7F38A5E45C /* AddTaskSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED09558AE6E393CC3C82A644 /* AddTaskSheet.swift */; };
+		C2645EAAD6D08D05E66F1909 /* RecurringRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C625CCF1C6758DC6E2D0B597 /* RecurringRule.swift */; };
 		CA8C0706E7635133F694A705 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C50203D55B07B2A540621 /* SmokeTests.swift */; };
 		CB98969E140ABC2E2D625114 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB60C431BF2FA2AD3B716A /* ReviewManager.swift */; };
 		CC40CB8D39B6E1A306DC475D /* RolloverSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE15746757A5C3EE27834EB /* RolloverSheet.swift */; };
 		CCA14A0EE8CA27BCAC98783A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084EB54D11EE6B0F1D53B735 /* AppState.swift */; };
 		D1C31CF2079F9513F1EDAD73 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDE404626CBC00AE4E4CE8E /* HistoryView.swift */; };
 		DAA8E64D4872EF36D4AEDF19 /* RecurringRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C625CCF1C6758DC6E2D0B597 /* RecurringRule.swift */; };
+		DB5152619B2EE1EFFF62209C /* JDTAppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA76DD243AC2DE54217FE5A /* JDTAppShortcuts.swift */; };
 		DDCB9536EE872234D6653659 /* TermsOfUseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D1C067F49CCE195EC61C92 /* TermsOfUseView.swift */; };
 		DFB4F98EE48E3D45D3CE3E4F /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B11E4BEB45375548FECF1E /* PhotoPickerView.swift */; };
 		DFE3D86AAA6332D7DFF3DCC2 /* AppLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4809D5B4FDF66DB78EDF82F9 /* AppLogoView.swift */; };
+		EB4FFD26BC26F114D218383D /* JDTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C4B8083DB9B51FA84FC60C /* JDTask.swift */; };
+		ED5807B1A8D57CDD43BC588A /* BacklogInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B5215E98334FBF86A04BD3 /* BacklogInsert.swift */; };
 		EE6AF0E1F419DEDA70E1A551 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A97212AC99E4DB48E549 /* PlanView.swift */; };
 		F0A342876C27CD9120368088 /* BacklogInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B5215E98334FBF86A04BD3 /* BacklogInsert.swift */; };
 		F89F3DF97F9396FDD4A13DAB /* MicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA9F194F91FB07FFB82B45 /* MicButton.swift */; };
@@ -70,7 +85,28 @@
 			remoteGlobalIDString = 9B11DE67A5195782FC798767;
 			remoteInfo = JustDoThree;
 		};
+		70B192CB1B2D8F6B16FEB04F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A1CF9C4F297D857F2C38F2E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C63419380D5FF328A2B4CA3C;
+			remoteInfo = JustDoThreeWatch;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E87AE1D68A88615E75FC9678 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				67D19FD3756523E3EE3B5A8F /* JustDoThreeWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		084EB54D11EE6B0F1D53B735 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -82,6 +118,7 @@
 		23DDC91FF776B108ACFA0B96 /* CameraPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerView.swift; sourceTree = "<group>"; };
 		3854F531D88F2596847BE463 /* JustDoThree.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = JustDoThree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD3A97212AC99E4DB48E549 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
+		46ABFD6DCA24AEC8A551D1CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4809D5B4FDF66DB78EDF82F9 /* AppLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogoView.swift; sourceTree = "<group>"; };
 		48B577A258EF0DBDD29DAC2A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4FB78204D3C1EDDC2B15B97F /* TaskOCREngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskOCREngine.swift; sourceTree = "<group>"; };
@@ -105,10 +142,13 @@
 		7FE5D6690047093E4F38B2ED /* JustDoThreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustDoThreeApp.swift; sourceTree = "<group>"; };
 		879DA5726DDC85F8DD76A40D /* AppleSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeechRecognizer.swift; sourceTree = "<group>"; };
 		87EAA9DA701464716E53954A /* AddTaskIntentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskIntentTests.swift; sourceTree = "<group>"; };
-		8A50918BD04B398D5D467190 /* Date+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
+		8B44FFF7B964066A5B4140F2 /* JustDoThreeWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustDoThreeWatchApp.swift; sourceTree = "<group>"; };
 		8B67C8C0DEBF1F209E23D49D /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		8DA8508B7B12A648EC90F634 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		9091FF4C0FE4A21D05674C4D /* SpeechDictationControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechDictationControllerTests.swift; sourceTree = "<group>"; };
+		92026E8C28F211B998A8D82E /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		9288CC223615662F0CF8383E /* Date+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
+		93BA489F0189EDD409D37DE6 /* JustDoThreeWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustDoThreeWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9F60632A478FEEEA9EBF1661 /* JDTModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDTModelContainer.swift; sourceTree = "<group>"; };
 		A358B7024FB891989E9FC225 /* CompletionLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionLog.swift; sourceTree = "<group>"; };
@@ -161,11 +201,22 @@
 			isa = PBXGroup;
 			children = (
 				6A2837D6BC96C2B9C5B506B6 /* Engines */,
+				F248672068CCDB78A528398B /* Extensions */,
 				AF0F8DDDDD516399605CF647 /* Intents */,
 				E8F252750B49B20C63741D4E /* Models */,
 				FBFEAD51DBF58D6BDFB19D85 /* State */,
 			);
 			path = JustDoThreeShared;
+			sourceTree = "<group>";
+		};
+		1052B136CD026D8945024E48 /* JustDoThreeWatch */ = {
+			isa = PBXGroup;
+			children = (
+				46ABFD6DCA24AEC8A551D1CB /* Info.plist */,
+				8B44FFF7B964066A5B4140F2 /* JustDoThreeWatchApp.swift */,
+				92026E8C28F211B998A8D82E /* RootView.swift */,
+			);
+			path = JustDoThreeWatch;
 			sourceTree = "<group>";
 		};
 		13B081FFF4101A0580F4FBF7 = {
@@ -174,6 +225,7 @@
 				4E7B741D069B8FC3B34BBA70 /* JustDoThree */,
 				06E0B03CA63365316F8C71DC /* JustDoThreeShared */,
 				157BFE4D4631C9B538EA4340 /* JustDoThreeTests */,
+				1052B136CD026D8945024E48 /* JustDoThreeWatch */,
 				E6F71FE0CFFE275AFAAA87A7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -233,7 +285,6 @@
 				F11214952D339BF6C1FF1DF6 /* LaunchScreen.storyboard */,
 				200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */,
 				63F44908A86AD512B6113950 /* Engines */,
-				75B1A75FB58FA02AAFD989FD /* Extensions */,
 				24AD9CC2272CFB85324116FB /* Managers */,
 				1E4D7B143F368BCA68781F7E /* Preview */,
 				E04EBF2E6EBEF16C0D373FD1 /* Services */,
@@ -285,14 +336,6 @@
 				E6D9EBDAE410E52DD829623B /* RolloverEngine.swift */,
 			);
 			path = Engines;
-			sourceTree = "<group>";
-		};
-		75B1A75FB58FA02AAFD989FD /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				8A50918BD04B398D5D467190 /* Date+Helpers.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		830FE1D7AE7DA8C34B02F27A /* Speech */ = {
@@ -353,6 +396,7 @@
 			children = (
 				3854F531D88F2596847BE463 /* JustDoThree.app */,
 				701DA5BB3B2495FCD3716916 /* JustDoThreeTests.xctest */,
+				93BA489F0189EDD409D37DE6 /* JustDoThreeWatch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -366,6 +410,14 @@
 				C625CCF1C6758DC6E2D0B597 /* RecurringRule.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		F248672068CCDB78A528398B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9288CC223615662F0CF8383E /* Date+Helpers.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		F9F4770F2C5FE18D17447C06 /* Legal */ = {
@@ -411,16 +463,35 @@
 			buildPhases = (
 				372CAB35799513776904C820 /* Sources */,
 				742F956D9A6034305CD9A1A0 /* Resources */,
+				E87AE1D68A88615E75FC9678 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EAC7E8DDA4D4867770E86726 /* PBXTargetDependency */,
 			);
 			name = JustDoThree;
 			packageProductDependencies = (
 			);
 			productName = JustDoThree;
 			productReference = 3854F531D88F2596847BE463 /* JustDoThree.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C63419380D5FF328A2B4CA3C /* JustDoThreeWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFDB62CFF0046747A4FD2396 /* Build configuration list for PBXNativeTarget "JustDoThreeWatch" */;
+			buildPhases = (
+				07D7A695FD6B5819CEFAAA47 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JustDoThreeWatch;
+			packageProductDependencies = (
+			);
+			productName = JustDoThreeWatch;
+			productReference = 93BA489F0189EDD409D37DE6 /* JustDoThreeWatch.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CB7EDCAA181BB7049960AEC7 /* JustDoThreeTests */ = {
@@ -454,6 +525,10 @@
 						DevelopmentTeam = 3ZAS78KQUH;
 						ProvisioningStyle = Automatic;
 					};
+					C63419380D5FF328A2B4CA3C = {
+						DevelopmentTeam = 3ZAS78KQUH;
+						ProvisioningStyle = Automatic;
+					};
 					CB7EDCAA181BB7049960AEC7 = {
 						DevelopmentTeam = 3ZAS78KQUH;
 					};
@@ -475,6 +550,7 @@
 			targets = (
 				9B11DE67A5195782FC798767 /* JustDoThree */,
 				CB7EDCAA181BB7049960AEC7 /* JustDoThreeTests */,
+				C63419380D5FF328A2B4CA3C /* JustDoThreeWatch */,
 			);
 		};
 /* End PBXProject section */
@@ -493,6 +569,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		07D7A695FD6B5819CEFAAA47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E5235FDC61AAB84F8D0D9D7 /* AddTaskIntent.swift in Sources */,
+				5BA577316D92EEE884C8C77C /* AddWorkTaskIntent.swift in Sources */,
+				ED5807B1A8D57CDD43BC588A /* BacklogInsert.swift in Sources */,
+				6384EDCB4CDC0385196115C5 /* CompletionLog.swift in Sources */,
+				938C2B7F8B00332ED66A9AD7 /* DailyPlan.swift in Sources */,
+				9CBCEA799745FA3D316D3354 /* Date+Helpers.swift in Sources */,
+				DB5152619B2EE1EFFF62209C /* JDTAppShortcuts.swift in Sources */,
+				38DA9C93646DCE5E513B0D9B /* JDTModelContainer.swift in Sources */,
+				EB4FFD26BC26F114D218383D /* JDTask.swift in Sources */,
+				14B4627FEAFB120F4DA313CA /* JustDoThreeWatchApp.swift in Sources */,
+				2D9958AF849EE605DE01E715 /* PlannerEngine.swift in Sources */,
+				C2645EAAD6D08D05E66F1909 /* RecurringRule.swift in Sources */,
+				139B3927A10105D903F638C7 /* RolloverEngine.swift in Sources */,
+				1A3DE22830B5093F12C1806A /* RootView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		372CAB35799513776904C820 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -512,7 +609,7 @@
 				10F847104475B478835610E6 /* CameraPickerView.swift in Sources */,
 				BD6BB681E176F7DE47050348 /* CompletionLog.swift in Sources */,
 				FA8F7AF812CD6DA471132DA6 /* DailyPlan.swift in Sources */,
-				102BDFA9DD64CAF27D61BD8F /* Date+Helpers.swift in Sources */,
+				0DD88576FEDC8827EA6FAF0C /* Date+Helpers.swift in Sources */,
 				6DBB4B75E35DEFF8BF84925A /* EmptyStateView.swift in Sources */,
 				0E7521C5F132CE0736D95EEC /* ExportTasksSheet.swift in Sources */,
 				D1C31CF2079F9513F1EDAD73 /* HistoryView.swift in Sources */,
@@ -564,6 +661,11 @@
 			isa = PBXTargetDependency;
 			target = 9B11DE67A5195782FC798767 /* JustDoThree */;
 			targetProxy = 3A1AB695A6AA52B5A351B27E /* PBXContainerItemProxy */;
+		};
+		EAC7E8DDA4D4867770E86726 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C63419380D5FF328A2B4CA3C /* JustDoThreeWatch */;
+			targetProxy = 70B192CB1B2D8F6B16FEB04F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -617,7 +719,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -625,6 +726,28 @@
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
+		};
+		32033018CC0D0772D22858AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3ZAS78KQUH;
+				INFOPLIST_FILE = JustDoThreeWatch/Info.plist;
+				MARKETING_VERSION = 3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.todd.justdothree.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
 		};
 		37AFBDD4B4874866DF6EDA5F /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -682,7 +805,6 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -744,6 +866,28 @@
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
+		};
+		7F18DD87AAF40036D1F72771 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3ZAS78KQUH;
+				INFOPLIST_FILE = JustDoThreeWatch/Info.plist;
+				MARKETING_VERSION = 3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.todd.justdothree.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
 		};
 		93D72358D2C69256F503FBE5 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -811,6 +955,15 @@
 			buildConfigurations = (
 				E4CF0FAE8221919905F059B9 /* Debug */,
 				93D72358D2C69256F503FBE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DFDB62CFF0046747A4FD2396 /* Build configuration list for PBXNativeTarget "JustDoThreeWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32033018CC0D0772D22858AD /* Debug */,
+				7F18DD87AAF40036D1F72771 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
