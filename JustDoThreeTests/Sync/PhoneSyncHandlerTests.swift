@@ -201,6 +201,76 @@ final class PhoneSyncHandlerTests: XCTestCase {
         XCTAssertTrue(tasks.isEmpty, "Empty/whitespace title should not insert")
     }
 
+    // MARK: - buildSnapshot
+
+    func test_buildSnapshot_includes_today_primary_and_stretch_rows() throws {
+        let primary1 = JDTask(title: "P1")
+        let primary2 = JDTask(title: "P2")
+        let stretch  = JDTask(title: "S1")
+        let work     = JDTask(title: "W1", isWork: true)
+        [primary1, primary2, stretch, work].forEach { context.insert($0) }
+
+        let plan = DailyPlan(date: Date(), isWork: false)
+        plan.taskIDs = [primary1.id, primary2.id]
+        plan.completedTaskIDs = [primary1.id]
+        plan.stretchTaskIDs = [stretch.id]
+        plan.completedStretchIDs = []
+
+        let workPlan = DailyPlan(date: Date(), isWork: true)
+        workPlan.taskIDs = [work.id]
+
+        context.insert(plan)
+        context.insert(workPlan)
+        try context.save()
+
+        let snap = try handler.buildSnapshot()
+
+        XCTAssertEqual(snap.schemaVersion, SyncSchema.current)
+        XCTAssertEqual(snap.today.count, 3, "Primary + stretch = 3 rows on today page")
+        XCTAssertEqual(snap.work.count, 1)
+
+        // P1 (completed primary)
+        let p1Row = try XCTUnwrap(snap.today.first { $0.id == primary1.id })
+        XCTAssertTrue(p1Row.isCompleted)
+        XCTAssertFalse(p1Row.isStretch)
+
+        // P2 (incomplete primary)
+        let p2Row = try XCTUnwrap(snap.today.first { $0.id == primary2.id })
+        XCTAssertFalse(p2Row.isCompleted)
+        XCTAssertFalse(p2Row.isStretch)
+
+        // S1 (incomplete stretch)
+        let sRow = try XCTUnwrap(snap.today.first { $0.id == stretch.id })
+        XCTAssertFalse(sRow.isCompleted)
+        XCTAssertTrue(sRow.isStretch)
+
+        // Work
+        let wRow = try XCTUnwrap(snap.work.first)
+        XCTAssertEqual(wRow.id, work.id)
+        XCTAssertFalse(wRow.isStretch)
+    }
+
+    func test_buildSnapshot_handles_missing_plans() throws {
+        // No plans seeded at all — should produce an empty snapshot, not throw.
+        let snap = try handler.buildSnapshot()
+        XCTAssertEqual(snap.today, [])
+        XCTAssertEqual(snap.work, [])
+    }
+
+    func test_buildSnapshot_preserves_taskID_order_within_plan() throws {
+        let t1 = JDTask(title: "A")
+        let t2 = JDTask(title: "B")
+        let t3 = JDTask(title: "C")
+        [t1, t2, t3].forEach { context.insert($0) }
+        let plan = DailyPlan(date: Date())
+        plan.taskIDs = [t3.id, t1.id, t2.id]  // intentional non-alpha order
+        context.insert(plan)
+        try context.save()
+
+        let snap = try handler.buildSnapshot()
+        XCTAssertEqual(snap.today.map(\.id), [t3.id, t1.id, t2.id])
+    }
+
     // MARK: - unknown task
 
     func test_apply_unknown_taskID_is_a_noop() throws {

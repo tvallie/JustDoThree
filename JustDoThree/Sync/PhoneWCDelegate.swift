@@ -13,9 +13,17 @@ final class PhoneWCDelegate: NSObject, WCSessionDelegate {
 
     private let queue = DispatchQueue(label: "com.todd.justdothree.wc-phone")
     private var handler: PhoneSyncHandler?
+    private var didSaveObserver: NSObjectProtocol?
+    private var pushScheduled = false
 
     private override init() {
         super.init()
+    }
+
+    deinit {
+        if let didSaveObserver {
+            NotificationCenter.default.removeObserver(didSaveObserver)
+        }
     }
 
     /// Activates the session if WatchConnectivity is supported on this device.
@@ -29,7 +37,54 @@ final class PhoneWCDelegate: NSObject, WCSessionDelegate {
         session.activate()
 
         Task { @MainActor in
-            self.handler = PhoneSyncHandler(container: containerProvider())
+            let container = containerProvider()
+            self.handler = PhoneSyncHandler(container: container)
+            self.subscribeToSaves()
+            // Push an initial snapshot once we're ready so the watch has
+            // current state on its next foreground.
+            self.schedulePushSnapshot()
+        }
+    }
+
+    @MainActor
+    private func subscribeToSaves() {
+        guard didSaveObserver == nil else { return }
+        // SwiftData posts ModelContext.didSave (NSNotification.Name) on any
+        // save. Coalesce bursts via schedulePushSnapshot's debounce flag.
+        didSaveObserver = NotificationCenter.default.addObserver(
+            forName: ModelContext.didSave,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.schedulePushSnapshot()
+            }
+        }
+    }
+
+    /// Debounce pushes — if a save fires during an in-flight schedule we still
+    /// only send one snapshot per run loop tick.
+    @MainActor
+    private func schedulePushSnapshot() {
+        guard !pushScheduled else { return }
+        pushScheduled = true
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.pushScheduled = false
+            self.pushCurrentSnapshot()
+        }
+    }
+
+    @MainActor
+    private func pushCurrentSnapshot() {
+        guard let handler else { return }
+        do {
+            let snap = try handler.buildSnapshot()
+            push(snapshot: snap)
+        } catch {
+            #if DEBUG
+            print("[PhoneWCDelegate] Failed to build snapshot: \(error)")
+            #endif
         }
     }
 

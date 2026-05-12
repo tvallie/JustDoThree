@@ -45,6 +45,59 @@ final class PhoneSyncHandler {
         }
     }
 
+    /// Build a TodaySnapshot reflecting today's personal + work plans.
+    /// Rows are ordered as the plan stores them (primary first, then stretch
+    /// for the personal/today page). Returns empty arrays if no plan exists
+    /// for today — the watch renders an "Open on iPhone" empty state in that
+    /// case rather than guessing.
+    func buildSnapshot() throws -> TodaySnapshot {
+        let ctx = ModelContext(container)
+        let today = Calendar.current.startOfDay(for: Date())
+        let allPlans = try ctx.fetch(FetchDescriptor<DailyPlan>())
+        let allTasks = try ctx.fetch(FetchDescriptor<JDTask>())
+
+        let personalPlan = allPlans.first { $0.date.isSameDay(as: today) && !$0.isWork }
+        let workPlan     = allPlans.first { $0.date.isSameDay(as: today) &&  $0.isWork }
+
+        let todayRows = (personalPlan.map { plan in
+            rows(for: plan.taskIDs, completed: plan.completedTaskIDs,
+                 isStretch: false, tasks: allTasks) +
+            rows(for: plan.stretchTaskIDs, completed: plan.completedStretchIDs,
+                 isStretch: true, tasks: allTasks)
+        }) ?? []
+
+        let workRows = (workPlan.map { plan in
+            rows(for: plan.taskIDs, completed: plan.completedTaskIDs,
+                 isStretch: false, tasks: allTasks) +
+            rows(for: plan.stretchTaskIDs, completed: plan.completedStretchIDs,
+                 isStretch: true, tasks: allTasks)
+        }) ?? []
+
+        return TodaySnapshot(
+            schemaVersion: SyncSchema.current,
+            planDate: today,
+            today: todayRows,
+            work: workRows,
+            generatedAt: Date()
+        )
+    }
+
+    private func rows(for ids: [UUID],
+                      completed: [UUID],
+                      isStretch: Bool,
+                      tasks: [JDTask]) -> [TodaySnapshot.Row] {
+        let completedSet = Set(completed)
+        return ids.compactMap { id in
+            guard let task = tasks.first(where: { $0.id == id }) else { return nil }
+            return TodaySnapshot.Row(
+                id: id,
+                title: task.title,
+                isCompleted: completedSet.contains(id),
+                isStretch: isStretch
+            )
+        }
+    }
+
     /// Apply a WatchIntentResult by inserting a new backlog task whose `id`
     /// matches the watch-supplied `clientID`. Idempotent: re-applying the
     /// same result is a no-op. Empty/whitespace titles are silently dropped.
