@@ -6,6 +6,10 @@ struct JustDoThreeApp: App {
     @State private var appState = AppState()
     @State private var showSplash = true
 
+    init() {
+        PhoneWCDelegate.shared.activate(containerProvider: { JDTModelContainer.shared })
+    }
+
     var body: some Scene {
         WindowGroup {
             ZStack {
