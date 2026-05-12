@@ -34,6 +34,7 @@ targets:
     deploymentTarget: "17.0"
     sources:
       - path: JustDoThree
+      - path: JustDoThreeShared
     info:
       path: JustDoThree/Info.plist
       properties:
