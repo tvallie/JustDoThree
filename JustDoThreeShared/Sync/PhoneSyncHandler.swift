@@ -1,0 +1,47 @@
+import Foundation
+import SwiftData
+
+/// Phone-side handler that turns sync messages from the watch into
+/// SwiftData mutations. Routes completion commands through `PlannerEngine`
+/// so recurring / stretch rules stay in one place.
+@MainActor
+final class PhoneSyncHandler {
+    private let container: ModelContainer
+
+    init(container: ModelContainer) {
+        self.container = container
+    }
+
+    /// Apply a CompletionCommand by finding the task, locating its plan
+    /// (today's plan in personal or work context), and calling the
+    /// appropriate PlannerEngine entry point. Unknown task IDs no-op.
+    func apply(_ cmd: CompletionCommand) throws {
+        let ctx = ModelContext(container)
+        guard let task = try ctx.fetch(FetchDescriptor<JDTask>())
+            .first(where: { $0.id == cmd.taskID })
+        else { return }
+
+        // Find the plan that references this task. Watch only ever issues
+        // completion against today's plan(s), so prefer those, but fall back
+        // to any plan that contains the task to handle clock-skew at the
+        // day boundary.
+        let plans = try ctx.fetch(FetchDescriptor<DailyPlan>())
+        let owningPlan = plans.first(where: { plan in
+            plan.taskIDs.contains(task.id) || plan.stretchTaskIDs.contains(task.id)
+        })
+        guard let plan = owningPlan else { return }
+
+        let isStretch = plan.stretchTaskIDs.contains(task.id)
+
+        switch cmd.action {
+        case .complete:
+            if isStretch {
+                PlannerEngine.completeStretch(task: task, plan: plan, context: ctx)
+            } else {
+                PlannerEngine.complete(task: task, plan: plan, context: ctx)
+            }
+        case .uncomplete:
+            PlannerEngine.uncomplete(task: task, plan: plan, context: ctx)
+        }
+    }
+}

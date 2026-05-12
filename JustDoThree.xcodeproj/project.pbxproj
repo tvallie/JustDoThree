@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		001E75D01EF4BE41E0F863B6 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D48D7FDEB9FF164F6C51DD4 /* SplashView.swift */; };
 		0A1BB9E08C8CB03731223D7B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */; };
+		0D2137487625E15B0778E277 /* PhoneSyncHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C28250CC38D6D8975A1BA3 /* PhoneSyncHandler.swift */; };
 		0DD88576FEDC8827EA6FAF0C /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288CC223615662F0CF8383E /* Date+Helpers.swift */; };
 		0E7521C5F132CE0736D95EEC /* ExportTasksSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566033A465FE0CF18103DDA /* ExportTasksSheet.swift */; };
 		10F847104475B478835610E6 /* CameraPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DDC91FF776B108ACFA0B96 /* CameraPickerView.swift */; };
@@ -28,6 +29,7 @@
 		2E5235FDC61AAB84F8D0D9D7 /* AddTaskIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2268AF875B5FFFE8D0CA3C81 /* AddTaskIntent.swift */; };
 		32BBABAC71A877B7A338AB8C /* JDTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C4B8083DB9B51FA84FC60C /* JDTask.swift */; };
 		33829380BFE55FA51B44124C /* BacklogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CCAFC9BADC343232127109 /* BacklogView.swift */; };
+		3486761FCDF8AAFC605411A6 /* PhoneSyncHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB90FD3F02ED3D81A2048FAC /* PhoneSyncHandlerTests.swift */; };
 		3569F589DFF4BB8CD0FCB8BA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B577A258EF0DBDD29DAC2A /* SettingsView.swift */; };
 		367DBEF10FCF389C0989AE2D /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B76C173D328083435B6A3 /* TodayView.swift */; };
 		36E3C62447CDDE0407B3EFB4 /* JustDoThreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE5D6690047093E4F38B2ED /* JustDoThreeApp.swift */; };
@@ -37,6 +39,7 @@
 		4D8234778C8DB87FD84A7796 /* BragCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9FDF090C318BD5125F23C8 /* BragCardView.swift */; };
 		551A96132FF1FAFC785FC84D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626E0E7798EB25E07D13923B /* OnboardingView.swift */; };
 		55DAB6253E5EFDA204FF73E9 /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D65449D1F9B4161A5E6712 /* CalendarService.swift */; };
+		5B3CCE1D901BCB304288DB91 /* PhoneSyncHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C28250CC38D6D8975A1BA3 /* PhoneSyncHandler.swift */; };
 		5BA577316D92EEE884C8C77C /* AddWorkTaskIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB347BB4A78D996500C9BF /* AddWorkTaskIntent.swift */; };
 		5EB9B2718B99036A1024CB3E /* BragSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558CABE5A57DCE84BABD826A /* BragSheet.swift */; };
 		6384EDCB4CDC0385196115C5 /* CompletionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A358B7024FB891989E9FC225 /* CompletionLog.swift */; };
@@ -116,6 +119,7 @@
 		0907822FE5FC342A97C4C987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0ABA9F194F91FB07FFB82B45 /* MicButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicButton.swift; sourceTree = "<group>"; };
 		11628E60851069EE66ECAD3B /* FakeSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSpeechRecognizer.swift; sourceTree = "<group>"; };
+		11C28250CC38D6D8975A1BA3 /* PhoneSyncHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneSyncHandler.swift; sourceTree = "<group>"; };
 		200961C4AA2393C732D99EBB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		2268AF875B5FFFE8D0CA3C81 /* AddTaskIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskIntent.swift; sourceTree = "<group>"; };
 		23DDC91FF776B108ACFA0B96 /* CameraPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerView.swift; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 		F4B11E4BEB45375548FECF1E /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		F8D1C067F49CCE195EC61C92 /* TermsOfUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseView.swift; sourceTree = "<group>"; };
 		FA9FDF090C318BD5125F23C8 /* BragCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BragCardView.swift; sourceTree = "<group>"; };
+		FB90FD3F02ED3D81A2048FAC /* PhoneSyncHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneSyncHandlerTests.swift; sourceTree = "<group>"; };
 		FCCB347BB4A78D996500C9BF /* AddWorkTaskIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkTaskIntent.swift; sourceTree = "<group>"; };
 		FEA76DD243AC2DE54217FE5A /* JDTAppShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDTAppShortcuts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -269,6 +274,7 @@
 		252A2358F948B800462C8E94 /* Sync */ = {
 			isa = PBXGroup;
 			children = (
+				FB90FD3F02ED3D81A2048FAC /* PhoneSyncHandlerTests.swift */,
 				80BDC98DC4C8FD6265EA320C /* SyncMessagesTests.swift */,
 			);
 			path = Sync;
@@ -356,6 +362,7 @@
 		802F3517F972E86044F62AC3 /* Sync */ = {
 			isa = PBXGroup;
 			children = (
+				11C28250CC38D6D8975A1BA3 /* PhoneSyncHandler.swift */,
 				4F1D12BF49B335535FADB79C /* SyncMessages.swift */,
 			);
 			path = Sync;
@@ -606,6 +613,7 @@
 				38DA9C93646DCE5E513B0D9B /* JDTModelContainer.swift in Sources */,
 				EB4FFD26BC26F114D218383D /* JDTask.swift in Sources */,
 				14B4627FEAFB120F4DA313CA /* JustDoThreeWatchApp.swift in Sources */,
+				0D2137487625E15B0778E277 /* PhoneSyncHandler.swift in Sources */,
 				2D9958AF849EE605DE01E715 /* PlannerEngine.swift in Sources */,
 				C2645EAAD6D08D05E66F1909 /* RecurringRule.swift in Sources */,
 				139B3927A10105D903F638C7 /* RolloverEngine.swift in Sources */,
@@ -645,6 +653,7 @@
 				FDAD673500A62507C045EC31 /* NotificationManager.swift in Sources */,
 				551A96132FF1FAFC785FC84D /* OnboardingView.swift in Sources */,
 				6D6F37FE60B39347DEBAF9C6 /* PasteTasksSheet.swift in Sources */,
+				5B3CCE1D901BCB304288DB91 /* PhoneSyncHandler.swift in Sources */,
 				DFB4F98EE48E3D45D3CE3E4F /* PhotoPickerView.swift in Sources */,
 				EE6AF0E1F419DEDA70E1A551 /* PlanView.swift in Sources */,
 				271EEBAE1F95198799E82AAD /* PlannerEngine.swift in Sources */,
@@ -674,6 +683,7 @@
 				AAC534CD7D94F367BDC231C3 /* AddTaskIntentTests.swift in Sources */,
 				70E90151395EDF7AD00C826B /* AddWorkTaskIntentTests.swift in Sources */,
 				25E22C20BAA01CD8D678B476 /* FakeSpeechRecognizer.swift in Sources */,
+				3486761FCDF8AAFC605411A6 /* PhoneSyncHandlerTests.swift in Sources */,
 				CA8C0706E7635133F694A705 /* SmokeTests.swift in Sources */,
 				9F7593E9B47F1F9A7EED1763 /* SpeechDictationControllerTests.swift in Sources */,
 				1CA355283678CF9C5CFB0383 /* SyncMessagesTests.swift in Sources */,
