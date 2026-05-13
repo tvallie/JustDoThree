@@ -81,6 +81,7 @@
 		ED5807B1A8D57CDD43BC588A /* BacklogInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B5215E98334FBF86A04BD3 /* BacklogInsert.swift */; };
 		EE6AF0E1F419DEDA70E1A551 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A97212AC99E4DB48E549 /* PlanView.swift */; };
 		F0A342876C27CD9120368088 /* BacklogInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B5215E98334FBF86A04BD3 /* BacklogInsert.swift */; };
+		F38CDFC0A67ADF3F59604BEE /* WatchWCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BB29CB4C39076D493B35B7 /* WatchWCDelegate.swift */; };
 		F89F3DF97F9396FDD4A13DAB /* MicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA9F194F91FB07FFB82B45 /* MicButton.swift */; };
 		FA8F7AF812CD6DA471132DA6 /* DailyPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3733A0D922C57C9E52F2CA /* DailyPlan.swift */; };
 		FDAD673500A62507C045EC31 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */; };
@@ -181,6 +182,7 @@
 		F1EB60C431BF2FA2AD3B716A /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		F4B11E4BEB45375548FECF1E /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		F53686C5EB0C8A2E3EB72473 /* WatchSyncStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSyncStore.swift; sourceTree = "<group>"; };
+		F7BB29CB4C39076D493B35B7 /* WatchWCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWCDelegate.swift; sourceTree = "<group>"; };
 		F8D1C067F49CCE195EC61C92 /* TermsOfUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseView.swift; sourceTree = "<group>"; };
 		FA9FDF090C318BD5125F23C8 /* BragCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BragCardView.swift; sourceTree = "<group>"; };
 		FB90FD3F02ED3D81A2048FAC /* PhoneSyncHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneSyncHandlerTests.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				46ABFD6DCA24AEC8A551D1CB /* Info.plist */,
 				8B44FFF7B964066A5B4140F2 /* JustDoThreeWatchApp.swift */,
 				92026E8C28F211B998A8D82E /* RootView.swift */,
+				9C99B8732FCED429C0478E86 /* Sync */,
 			);
 			path = JustDoThreeWatch;
 			sourceTree = "<group>";
@@ -402,6 +405,14 @@
 				626E0E7798EB25E07D13923B /* OnboardingView.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		9C99B8732FCED429C0478E86 /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				F7BB29CB4C39076D493B35B7 /* WatchWCDelegate.swift */,
+			);
+			path = Sync;
 			sourceTree = "<group>";
 		};
 		AF0F8DDDDD516399605CF647 /* Intents */ = {
@@ -638,6 +649,7 @@
 				1A3DE22830B5093F12C1806A /* RootView.swift in Sources */,
 				3F7AC43233791768207F2800 /* SyncMessages.swift in Sources */,
 				767F0F20A9FB7B712D2C697A /* WatchSyncStore.swift in Sources */,
+				F38CDFC0A67ADF3F59604BEE /* WatchWCDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

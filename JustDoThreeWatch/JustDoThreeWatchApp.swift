@@ -10,6 +10,13 @@ struct JustDoThreeWatchApp: App {
         return JDTModelContainer.make(url: url)
     }()
 
+    init() {
+        let container = self.container
+        WatchWCDelegate.shared.activate(storeProvider: {
+            WatchSyncStore(container: container)
+        })
+    }
+
     var body: some Scene {
         WindowGroup {
             RootView()
