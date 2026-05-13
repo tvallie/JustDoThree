@@ -8,7 +8,12 @@ import WatchConnectivity
 /// incoming watch messages to PhoneSyncHandler. Phone push-side (snapshot
 /// delivery via updateApplicationContext) is also funneled here so callers
 /// don't need to know about WCSession directly.
-final class PhoneWCDelegate: NSObject, WCSessionDelegate {
+/// Sendable conformance is asserted: mutable state (`handler`,
+/// `didSaveObserver`, `pushScheduled`) is only mutated from the
+/// MainActor, and Apple frameworks (WCSession, NotificationCenter)
+/// invoke our delegate methods from their own queues which we
+/// immediately hop back to MainActor in.
+final class PhoneWCDelegate: NSObject, WCSessionDelegate, @unchecked Sendable {
     static let shared = PhoneWCDelegate()
 
     private let queue = DispatchQueue(label: "com.todd.justdothree.wc-phone")
@@ -56,7 +61,10 @@ final class PhoneWCDelegate: NSObject, WCSessionDelegate {
             object: nil,
             queue: .main
         ) { [weak self] _ in
-            Task { @MainActor [weak self] in
+            // queue: .main guarantees we're on the main thread, so the
+            // MainActor-isolated method can be called directly without
+            // capturing self in a @Sendable Task closure.
+            MainActor.assumeIsolated {
                 self?.schedulePushSnapshot()
             }
         }
