@@ -61,6 +61,7 @@
 		A4338A6534BCDAACCB6435EC /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC06642F4BD10ED917C1C813 /* PreviewContainer.swift */; };
 		AA027595E9EAAED2E8CE1E5B /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B67C8C0DEBF1F209E23D49D /* PrivacyPolicyView.swift */; };
 		AAC534CD7D94F367BDC231C3 /* AddTaskIntentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EAA9DA701464716E53954A /* AddTaskIntentTests.swift */; };
+		B0DB49B047109B9F66AE62C9 /* TodayPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A885248E8981DCAF681FDBD /* TodayPage.swift */; };
 		B2918E9C78BA897EC9CB9066 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0907822FE5FC342A97C4C987 /* Assets.xcassets */; };
 		BA61F0F0C90B89EE87E85631 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74FB303A18EEE20516FC52AE /* RootView.swift */; };
 		BD6BB681E176F7DE47050348 /* CompletionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A358B7024FB891989E9FC225 /* CompletionLog.swift */; };
@@ -134,6 +135,7 @@
 		46ABFD6DCA24AEC8A551D1CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4809D5B4FDF66DB78EDF82F9 /* AppLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogoView.swift; sourceTree = "<group>"; };
 		48B577A258EF0DBDD29DAC2A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4A885248E8981DCAF681FDBD /* TodayPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayPage.swift; sourceTree = "<group>"; };
 		4F1D12BF49B335535FADB79C /* SyncMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncMessages.swift; sourceTree = "<group>"; };
 		4FB78204D3C1EDDC2B15B97F /* TaskOCREngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskOCREngine.swift; sourceTree = "<group>"; };
 		558CABE5A57DCE84BABD826A /* BragSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BragSheet.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				8B44FFF7B964066A5B4140F2 /* JustDoThreeWatchApp.swift */,
 				92026E8C28F211B998A8D82E /* RootView.swift */,
 				9C99B8732FCED429C0478E86 /* Sync */,
+				F81E137C67321B3D42DED684 /* Views */,
 			);
 			path = JustDoThreeWatch;
 			sourceTree = "<group>";
@@ -479,6 +482,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		F81E137C67321B3D42DED684 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4A885248E8981DCAF681FDBD /* TodayPage.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		F9F4770F2C5FE18D17447C06 /* Legal */ = {
 			isa = PBXGroup;
 			children = (
@@ -648,6 +659,7 @@
 				139B3927A10105D903F638C7 /* RolloverEngine.swift in Sources */,
 				1A3DE22830B5093F12C1806A /* RootView.swift in Sources */,
 				3F7AC43233791768207F2800 /* SyncMessages.swift in Sources */,
+				B0DB49B047109B9F66AE62C9 /* TodayPage.swift in Sources */,
 				767F0F20A9FB7B712D2C697A /* WatchSyncStore.swift in Sources */,
 				F38CDFC0A67ADF3F59604BEE /* WatchWCDelegate.swift in Sources */,
 			);
