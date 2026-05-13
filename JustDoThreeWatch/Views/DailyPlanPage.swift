@@ -2,19 +2,25 @@ import SwiftUI
 import SwiftData
 import WatchKit
 
-/// Watch page showing today's primary + stretch tasks with tap-to-complete.
-/// Reads from the watch's local SwiftData store (populated by snapshots from
-/// the phone). Tap toggles completion locally and forwards a
-/// CompletionCommand to the phone.
-struct TodayPage: View {
+/// Watch page showing today's primary + stretch tasks for one context
+/// (personal or work). Reads from the watch's local SwiftData store.
+/// Tap toggles completion locally and forwards a CompletionCommand to
+/// the phone.
+struct DailyPlanPage: View {
+    /// Personal (`false`) or work (`true`) context. Determines which plan
+    /// to display and the navigation title.
+    let isWork: Bool
+
     @Environment(\.modelContext) private var context
     @Query private var plans: [DailyPlan]
     @Query private var allTasks: [JDTask]
 
     private var todayPlan: DailyPlan? {
         let today = Date()
-        return plans.first { $0.date.isSameDay(as: today) && !$0.isWork }
+        return plans.first { $0.date.isSameDay(as: today) && $0.isWork == isWork }
     }
+
+    private var navTitle: String { isWork ? "Work" : "Today" }
 
     var body: some View {
         if let plan = todayPlan,
@@ -48,9 +54,10 @@ struct TodayPage: View {
                 }
                 .padding(.horizontal, 4)
             }
-            .navigationTitle("Today")
+            .navigationTitle(navTitle)
         } else {
             EmptyStateView()
+                .navigationTitle(navTitle)
         }
     }
 
