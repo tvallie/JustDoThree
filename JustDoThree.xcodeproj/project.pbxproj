@@ -57,6 +57,7 @@
 		8A70E6AD6A12DA0C5364BC1B /* AddTaskIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2268AF875B5FFFE8D0CA3C81 /* AddTaskIntent.swift */; };
 		90B83668ED9CD916D38A0F3B /* RolloverEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9EBDAE410E52DD829623B /* RolloverEngine.swift */; };
 		938C2B7F8B00332ED66A9AD7 /* DailyPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3733A0D922C57C9E52F2CA /* DailyPlan.swift */; };
+		9C863EAF74EC3FB5C5546BDD /* IntentForwarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FB3AE5AA290AAB7AB75B1 /* IntentForwarding.swift */; };
 		9CBCEA799745FA3D316D3354 /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288CC223615662F0CF8383E /* Date+Helpers.swift */; };
 		9F7593E9B47F1F9A7EED1763 /* SpeechDictationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091FF4C0FE4A21D05674C4D /* SpeechDictationControllerTests.swift */; };
 		A4338A6534BCDAACCB6435EC /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC06642F4BD10ED917C1C813 /* PreviewContainer.swift */; };
@@ -85,6 +86,7 @@
 		F38CDFC0A67ADF3F59604BEE /* WatchWCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BB29CB4C39076D493B35B7 /* WatchWCDelegate.swift */; };
 		F89F3DF97F9396FDD4A13DAB /* MicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA9F194F91FB07FFB82B45 /* MicButton.swift */; };
 		FA8F7AF812CD6DA471132DA6 /* DailyPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3733A0D922C57C9E52F2CA /* DailyPlan.swift */; };
+		FBA4810039DBE81A81B5CD9B /* IntentForwarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FB3AE5AA290AAB7AB75B1 /* IntentForwarding.swift */; };
 		FDAD673500A62507C045EC31 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A6FB52DD2D41F7CB19CD17 /* NotificationManager.swift */; };
 		FE4D46E258286F2ED0D73873 /* AppleSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879DA5726DDC85F8DD76A40D /* AppleSpeechRecognizer.swift */; };
 /* End PBXBuildFile section */
@@ -132,6 +134,7 @@
 		23DDC91FF776B108ACFA0B96 /* CameraPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerView.swift; sourceTree = "<group>"; };
 		3854F531D88F2596847BE463 /* JustDoThree.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = JustDoThree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD3A97212AC99E4DB48E549 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
+		424FB3AE5AA290AAB7AB75B1 /* IntentForwarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentForwarding.swift; sourceTree = "<group>"; };
 		46ABFD6DCA24AEC8A551D1CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4809D5B4FDF66DB78EDF82F9 /* AppLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogoView.swift; sourceTree = "<group>"; };
 		48B577A258EF0DBDD29DAC2A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -424,6 +427,7 @@
 				2268AF875B5FFFE8D0CA3C81 /* AddTaskIntent.swift */,
 				FCCB347BB4A78D996500C9BF /* AddWorkTaskIntent.swift */,
 				69B5215E98334FBF86A04BD3 /* BacklogInsert.swift */,
+				424FB3AE5AA290AAB7AB75B1 /* IntentForwarding.swift */,
 				FEA76DD243AC2DE54217FE5A /* JDTAppShortcuts.swift */,
 			);
 			path = Intents;
@@ -650,6 +654,7 @@
 				938C2B7F8B00332ED66A9AD7 /* DailyPlan.swift in Sources */,
 				144BDC8C42DF78174E32A60E /* DailyPlanPage.swift in Sources */,
 				9CBCEA799745FA3D316D3354 /* Date+Helpers.swift in Sources */,
+				9C863EAF74EC3FB5C5546BDD /* IntentForwarding.swift in Sources */,
 				DB5152619B2EE1EFFF62209C /* JDTAppShortcuts.swift in Sources */,
 				38DA9C93646DCE5E513B0D9B /* JDTModelContainer.swift in Sources */,
 				EB4FFD26BC26F114D218383D /* JDTask.swift in Sources */,
@@ -688,6 +693,7 @@
 				6DBB4B75E35DEFF8BF84925A /* EmptyStateView.swift in Sources */,
 				0E7521C5F132CE0736D95EEC /* ExportTasksSheet.swift in Sources */,
 				D1C31CF2079F9513F1EDAD73 /* HistoryView.swift in Sources */,
+				FBA4810039DBE81A81B5CD9B /* IntentForwarding.swift in Sources */,
 				751AB9F7AF18431CFDDF60BB /* JDTAppShortcuts.swift in Sources */,
 				854C597F9F49B35926E7F4A3 /* JDTModelContainer.swift in Sources */,
 				32BBABAC71A877B7A338AB8C /* JDTask.swift in Sources */,

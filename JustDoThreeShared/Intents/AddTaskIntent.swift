@@ -29,13 +29,14 @@ struct AddTaskIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        try await perform(in: JDTModelContainer.shared)
+        try await perform(in: JDTModelContainer.current)
     }
 
     /// Test seam: lets tests inject an in-memory container.
     @MainActor
     func perform(in container: ModelContainer) async throws -> some IntentResult & ProvidesDialog {
-        let trimmed = try insertAtTopOfBacklog(title: title, isWork: false, in: container)
-        return .result(dialog: IntentDialog("Added '\(trimmed)' to your backlog."))
+        let inserted = try insertAtTopOfBacklog(title: title, isWork: false, in: container)
+        forwardToPhoneIfOnWatch(inserted: inserted, list: .personalBacklog)
+        return .result(dialog: IntentDialog("Added '\(inserted.title)' to your backlog."))
     }
 }

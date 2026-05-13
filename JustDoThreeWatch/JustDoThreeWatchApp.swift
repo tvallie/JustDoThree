@@ -12,6 +12,9 @@ struct JustDoThreeWatchApp: App {
 
     init() {
         let container = self.container
+        // Route shared-code paths (App Intents, BacklogInsert) to the
+        // watch's own store rather than the framework default.
+        JDTModelContainer.current = container
         WatchWCDelegate.shared.activate(storeProvider: {
             WatchSyncStore(container: container)
         })
