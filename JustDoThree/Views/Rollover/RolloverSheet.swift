@@ -10,7 +10,10 @@ struct RolloverSheet: View {
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
 
     private var todayPlan: DailyPlan? {
-        plans.first { $0.date.isSameDay(as: Date()) }
+        // Match the rollover items' mode — there can be one personal and one work
+        // plan for today, and we need the one this rollover sheet belongs to.
+        let isWork = appState.rolloverItems.first?.fromPlan.isWork ?? false
+        return plans.first { $0.date.isSameDay(as: Date()) && $0.isWork == isWork }
     }
 
     private var todayTasks: [JDTask] {

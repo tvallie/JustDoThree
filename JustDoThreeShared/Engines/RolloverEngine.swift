@@ -46,6 +46,7 @@ enum RolloverEngine {
                 seen.insert(taskID)
                 guard
                     let task = allTasks.first(where: { $0.id == taskID }),
+                    task.isWork == todayPlan.isWork,
                     !task.isCompleted,
                     !todayPlan.taskIDs.contains(taskID),
                     !todayPlan.stretchTaskIDs.contains(taskID)
@@ -107,24 +108,58 @@ enum RolloverEngine {
                 item.task.rolloverCount += 1
 
             case .scheduleFor(let date):
-                let plan = PlannerEngine.fetchOrCreatePlan(
+                let destination = PlannerEngine.fetchOrCreatePlan(
                     for: date,
                     isWork: item.fromPlan.isWork,
                     context: context
                 )
-                if plan.taskIDs.count < 3, !plan.taskIDs.contains(item.task.id) {
-                    plan.taskIDs.append(item.task.id)
+                // Strip the task from every previous same-mode plan before adding it
+                // to the destination — keeps it from resurfacing on future rollovers.
+                stripFromPreviousPlans(
+                    taskID: item.task.id,
+                    isWork: item.fromPlan.isWork,
+                    except: destination,
+                    context: context
+                )
+                if destination.taskIDs.count < 3, !destination.taskIDs.contains(item.task.id) {
+                    destination.taskIDs.append(item.task.id)
                 }
                 item.task.rolloverCount += 1
 
             case .backlog:
+                // Remove from every previous same-mode plan so it can't resurface from
+                // an older accumulated rollover entry.
+                stripFromPreviousPlans(
+                    taskID: item.task.id,
+                    isWork: item.fromPlan.isWork,
+                    except: nil,
+                    context: context
+                )
                 item.task.rolloverCount += 1
             }
         }
         save(context: context)
     }
 
-    // MARK: - Save helper
+    // MARK: - Helpers
+
+    /// Removes a task ID from every previous-day plan of the given mode,
+    /// optionally excluding one destination plan (used by `.scheduleFor`).
+    /// Strips from `taskIDs` and `completedTaskIDs`; leaves stretch lists alone.
+    private static func stripFromPreviousPlans(
+        taskID: UUID,
+        isWork: Bool,
+        except destination: DailyPlan?,
+        context: ModelContext
+    ) {
+        let today = Date().startOfDay
+        let plans = PlannerEngine.allPlans(context: context)
+            .filter { $0.date < today && $0.isWork == isWork }
+        for plan in plans where plan !== destination {
+            plan.taskIDs.removeAll { $0 == taskID }
+            plan.completedTaskIDs.removeAll { $0 == taskID }
+        }
+    }
 
     private static func save(context: ModelContext) {
         do {
