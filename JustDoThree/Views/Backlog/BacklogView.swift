@@ -328,21 +328,35 @@ private struct ImportResult {
 
 struct BacklogRow: View {
     @AppStorage("jdt_enableTaskDates") private var enableTaskDates = false
+    @AppStorage("jdt_enableNotes") private var enableNotes = false
 
     let task: JDTask
     let futurePlanLabel: String?
     let onEdit: () -> Void
     let onDelete: () -> Void
 
+    private var hasNote: Bool {
+        guard enableNotes, let n = task.note else { return false }
+        return !n.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
     var body: some View {
         HStack(spacing: 12) {
             // Tap the text area to edit
             Button(action: onEdit) {
                 VStack(alignment: .leading, spacing: 3) {
-                    Text(task.title)
-                        .font(.body)
-                        .foregroundStyle(.primary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    HStack(spacing: 6) {
+                        Text(task.title)
+                            .font(.body)
+                            .foregroundStyle(.primary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        if hasNote {
+                            Image(systemName: "note.text")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                                .accessibilityLabel("Has note")
+                        }
+                    }
                     if enableTaskDates, let taskDate = task.taskDate {
                         Text(taskDate.backlogTaskDateString)
                             .font(.caption)

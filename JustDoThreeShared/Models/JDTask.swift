@@ -19,6 +19,8 @@ final class JDTask {
     var recurringRuleData: Data?
     /// True for work-context tasks; false (default) for personal tasks.
     var isWork: Bool = false
+    /// Optional free-form note attached to this task. Nil when no note is set.
+    var note: String? = nil
 
     init(title: String, sortOrder: Int = 0, isWork: Bool = false) {
         self.id = UUID()
@@ -31,6 +33,7 @@ final class JDTask {
         self.isCompleted = false
         self.completionDate = nil
         self.recurringRuleData = nil
+        self.note = nil
     }
 
     /// Transient cache so `recurringRule` doesn't allocate a JSONDecoder on every access.
