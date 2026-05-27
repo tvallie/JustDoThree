@@ -15,6 +15,7 @@ struct AddTaskSheet: View {
     @Environment(AppState.self) private var appState
 
     @AppStorage("jdt_enableTaskDates") private var enableTaskDates = false
+    @AppStorage("jdt_enableNotes") private var enableNotes = false
 
     /// Pass nil to create a new task; pass an existing task to edit its title.
     var existingTask: JDTask? = nil
@@ -24,7 +25,7 @@ struct AddTaskSheet: View {
 
     @State private var title: String = ""
     @FocusState private var focus: Field?
-    private enum Field: Hashable { case title, save }
+    private enum Field: Hashable { case title, note, save }
     @State private var showImportInfo = false
     @State private var showPasteSheet = false
     @State private var recurringPattern: RecurringRule.Pattern? = nil
@@ -32,6 +33,7 @@ struct AddTaskSheet: View {
     @State private var recurringDayOfMonth: Int = 1
     @State private var taskDateEnabled = false
     @State private var selectedTaskDate: Date? = nil
+    @State private var note: String = ""
     @State private var showAddToCalendar = false
     @Query(sort: \JDTask.sortOrder) private var allTasks: [JDTask]
 
@@ -113,6 +115,14 @@ struct AddTaskSheet: View {
                     .id(existing.id)
                 }
 
+                if enableNotes {
+                    Section("Note") {
+                        TextField("Add a note", text: $note, axis: .vertical)
+                            .lineLimit(2...6)
+                            .focused($focus, equals: .note)
+                    }
+                }
+
                 if enableTaskDates {
                     Section("Task Date") {
                         if taskDateEnabled {
@@ -183,11 +193,17 @@ struct AddTaskSheet: View {
     }
 
     private var sheetDetents: Set<PresentationDetent> {
-        if recurringPattern != nil || (enableTaskDates && taskDateEnabled) {
+        if recurringPattern != nil || (enableTaskDates && taskDateEnabled) || enableNotes {
             return [.medium]
         }
 
         return [.height(isEditing ? 300 : 340)]
+    }
+
+    private var normalizedNote: String? {
+        guard enableNotes else { return existingTask?.note }
+        let trimmed = note.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? nil : trimmed
     }
 
     private func loadExistingState() {
@@ -202,6 +218,7 @@ struct AddTaskSheet: View {
             taskDateEnabled = true
             selectedTaskDate = taskDate.startOfDay
         }
+        note = existing.note ?? ""
     }
 
     private func save() {
@@ -210,12 +227,14 @@ struct AddTaskSheet: View {
             task.title = trimmedTitle
             task.recurringRule = builtRecurringRule
             task.taskDate = normalizedTaskDate
+            task.note = normalizedNote
             try? modelContext.save()
         } else {
             let startOrder = PlannerEngine.topInsertionStartOrder(existingTasks: allTasks, count: 1)
             let task = JDTask(title: trimmedTitle, sortOrder: startOrder, isWork: appState.activeContext)
             task.recurringRule = builtRecurringRule
             task.taskDate = normalizedTaskDate
+            task.note = normalizedNote
             modelContext.insert(task)
             try? modelContext.save()
             onCreated?(task)

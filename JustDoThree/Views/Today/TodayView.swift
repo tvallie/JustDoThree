@@ -415,6 +415,8 @@ private final class TodayHaptics {
 // MARK: - TaskCard
 
 struct TaskCard: View {
+    @AppStorage("jdt_enableNotes") private var enableNotes = false
+
     let task: JDTask
     let isCompleted: Bool
     var isStretch: Bool = false
@@ -425,6 +427,11 @@ struct TaskCard: View {
     /// Provide this to show a "Replace Task" option in the menu (today primary tasks only).
     var onReplace: (() -> Void)? = nil
     var onAddToCalendar: (() -> Void)? = nil
+
+    private var hasNote: Bool {
+        guard enableNotes, let n = task.note else { return false }
+        return !n.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
 
     var body: some View {
         HStack(spacing: 14) {
@@ -452,6 +459,13 @@ struct TaskCard: View {
                 }
             }
             .buttonStyle(.plain)
+
+            if hasNote {
+                Image(systemName: "note.text")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .accessibilityLabel("Has note")
+            }
 
             if task.recurringRule != nil {
                 Image(systemName: "repeat")

@@ -6,6 +6,7 @@ struct SettingsView: View {
     @State private var notifManager = NotificationManager.shared
     @AppStorage("jdt_autoScheduleRecurring") private var autoScheduleRecurring = false
     @AppStorage("jdt_enableTaskDates") private var enableTaskDates = false
+    @AppStorage("jdt_enableNotes") private var enableNotes = false
 
     @State private var showExportSheet = false
 
@@ -75,6 +76,15 @@ struct SettingsView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text("Enable Task Dates")
                             Text("Shows an optional date field in backlog task details.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+
+                    Toggle(isOn: $enableNotes) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Enable Task Notes")
+                            Text("Shows an optional note field when creating or editing a task.")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
